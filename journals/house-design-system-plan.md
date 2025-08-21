@@ -388,3 +388,38 @@ Repo Structure
 **Current Status**: Foundation complete! Design system is live and interactive. Ready for component expansion and Figma integration.
 
 ---
+
+## Can I start with a Figma Design plugin and expand later?
+
+✅ Yes. You can begin as a **Figma Design–only plugin** and later expand into a **multi-product plugin** without losing your existing users.
+
+### How the upgrade works
+1. **Keep the same plugin ID** – publish as an update so installs carry over.
+2. **Refactor logic** – separate shared code from product-specific code.
+3. **Gate behavior by editor type:**
+   ```ts
+   if (figma.editorType === 'figma') {
+     // Design-specific logic
+   } else if (figma.editorType === 'figjam') {
+     // FigJam-specific logic
+   }
+
+   	4.	Update the manifest – add new editorType values and permissions only as needed.
+	5.	Test in each surface – ensure the plugin either works or gracefully explains limitations.
+
+Things to watch for
+	•	API differences – nodes in Design (FRAME, COMPONENT) don’t exist in FigJam (STICKY, SHAPE).
+	•	User expectations – make sure users don’t encounter “dead” functionality in other surfaces.
+	•	Review process – adding scopes/surfaces may trigger Figma’s plugin review.
+	•	UI entry points – provide product-relevant commands only where they apply.
+
+Pro tip
+
+Structure your code from the start to make expansion easy:
+
+/core   → shared logic (parsing, networking, settings)
+/design → Figma Design adapter
+/figjam → FigJam adapter (add later)
+/ui     → shared UI with product-specific toggles
+
+This way, expanding to multi-product later is mostly a matter of adding adapters and updating the manifest.
