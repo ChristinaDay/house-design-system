@@ -462,13 +462,13 @@ function RadiusDemo() {
             <div className="flex space-x-16">
               <div className="flex-1 space-y-4">
                 <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Sharp (none)</h6>
-                <button className="px-5 py-3 bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors" style={{ borderRadius: 'var(--radius-none)' }}>
+                <button className="px-8 py-4 bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors" style={{ borderRadius: 'var(--radius-none)' }}>
                   Sharp Button
                 </button>
               </div>
               <div className="flex-1 space-y-4">
                 <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Subtle (sm)</h6>
-                <button className="px-5 py-3 bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors" style={{ borderRadius: 'var(--radius-sm)' }}>
+                <button className="px-8 py-4 bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors" style={{ borderRadius: 'var(--radius-sm)' }}>
                   Subtle Button
                 </button>
               </div>
@@ -477,13 +477,13 @@ function RadiusDemo() {
             <div className="flex space-x-16">
               <div className="flex-1 space-y-4">
                 <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Standard (base)</h6>
-                <button className="px-5 py-3 bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors" style={{ borderRadius: 'var(--radius-base)' }}>
+                <button className="px-8 py-4 bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors" style={{ borderRadius: 'var(--radius-base)' }}>
                   Standard Button
                 </button>
               </div>
               <div className="flex-1 space-y-4">
                 <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Rounded (lg)</h6>
-                <button className="px-5 py-3 bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors" style={{ borderRadius: 'var(--radius-lg)' }}>
+                <button className="px-8 py-4 bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors" style={{ borderRadius: 'var(--radius-lg)' }}>
                   Rounded Button
                 </button>
               </div>
@@ -492,7 +492,7 @@ function RadiusDemo() {
             <div className="flex space-x-16">
               <div className="flex-1 space-y-4">
                 <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Pill (full)</h6>
-                <button className="px-5 py-3 bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors" style={{ borderRadius: 'var(--radius-full)' }}>
+                <button className="px-8 py-4 bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors" style={{ borderRadius: 'var(--radius-full)' }}>
                   Pill Button
                 </button>
               </div>
