@@ -457,32 +457,32 @@ function RadiusDemo() {
         {/* Buttons with different radius */}
         <div className="space-y-6">
           <h5 className="text-sm font-medium text-gray-700">Buttons</h5>
-          <div className="grid grid-cols-2 gap-6">
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+          <div className="grid grid-cols-2 gap-8">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Sharp (none)</h6>
               <button className="px-5 py-3 bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors" style={{ borderRadius: 'var(--radius-none)' }}>
                 Sharp Button
               </button>
             </div>
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Subtle (sm)</h6>
               <button className="px-5 py-3 bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors" style={{ borderRadius: 'var(--radius-sm)' }}>
                 Subtle Button
               </button>
             </div>
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Standard (base)</h6>
               <button className="px-5 py-3 bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors" style={{ borderRadius: 'var(--radius-base)' }}>
                 Standard Button
               </button>
             </div>
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Rounded (lg)</h6>
               <button className="px-5 py-3 bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors" style={{ borderRadius: 'var(--radius-lg)' }}>
                 Rounded Button
               </button>
             </div>
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Pill (full)</h6>
               <button className="px-5 py-3 bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors" style={{ borderRadius: 'var(--radius-full)' }}>
                 Pill Button
@@ -494,29 +494,29 @@ function RadiusDemo() {
         {/* Cards with different radius */}
         <div className="space-y-6">
           <h5 className="text-sm font-medium text-gray-700">Cards</h5>
-          <div className="grid grid-cols-2 gap-6">
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+          <div className="grid grid-cols-2 gap-8">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Sharp Card (none)</h6>
               <div className="p-6 bg-white border border-gray-200 shadow-sm" style={{ borderRadius: 'var(--radius-none)' }}>
                 <h6 className="font-semibold text-gray-900 mb-3 text-base">Sharp Card</h6>
                 <p className="text-sm text-gray-600 leading-relaxed">This card has sharp corners for a technical, precise feel.</p>
               </div>
             </div>
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Standard Card (base)</h6>
               <div className="p-6 bg-white border border-gray-200 shadow-sm" style={{ borderRadius: 'var(--radius-base)' }}>
                 <h6 className="font-semibold text-gray-900 mb-3 text-base">Standard Card</h6>
                 <p className="text-sm text-gray-600 leading-relaxed">This card has standard rounded corners for general use.</p>
               </div>
             </div>
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Rounded Card (lg)</h6>
               <div className="p-6 bg-white border border-gray-200 shadow-sm" style={{ borderRadius: 'var(--radius-lg)' }}>
                 <h6 className="font-semibold text-gray-900 mb-3 text-base">Rounded Card</h6>
                 <p className="text-sm text-gray-600 leading-relaxed">This card has larger rounded corners for a softer feel.</p>
               </div>
             </div>
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Organic Card (3xl)</h6>
               <div className="p-6 bg-white border border-gray-200 shadow-sm" style={{ borderRadius: 'var(--radius-3xl)' }}>
                 <h6 className="font-semibold text-gray-900 mb-3 text-base">Organic Card</h6>
@@ -529,8 +529,8 @@ function RadiusDemo() {
         {/* Form inputs with different radius */}
         <div className="space-y-6">
           <h5 className="text-sm font-medium text-gray-700">Form Inputs</h5>
-          <div className="grid grid-cols-2 gap-6">
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+          <div className="grid grid-cols-2 gap-8">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Sharp Input (none)</h6>
               <input 
                 type="text" 
@@ -539,7 +539,7 @@ function RadiusDemo() {
                 style={{ borderRadius: 'var(--radius-none)' }}
               />
             </div>
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Standard Input (base)</h6>
               <input 
                 type="text" 
@@ -548,7 +548,7 @@ function RadiusDemo() {
                 style={{ borderRadius: 'var(--radius-base)' }}
               />
             </div>
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Rounded Input (lg)</h6>
               <input 
                 type="text" 
@@ -557,7 +557,7 @@ function RadiusDemo() {
                 style={{ borderRadius: 'var(--radius-lg)' }}
               />
             </div>
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Pill Input (full)</h6>
               <input 
                 type="text" 
@@ -572,8 +572,8 @@ function RadiusDemo() {
         {/* Avatars with different radius */}
         <div className="space-y-6">
           <h5 className="text-sm font-medium text-gray-700">Avatars</h5>
-          <div className="grid grid-cols-2 gap-6">
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+          <div className="grid grid-cols-2 gap-8">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Square Avatar (none)</h6>
               <div className="flex items-center space-x-4">
                 <div className="w-14 h-14 bg-blue-500 flex items-center justify-center text-white font-bold text-lg" style={{ borderRadius: 'var(--radius-none)' }}>
@@ -582,7 +582,7 @@ function RadiusDemo() {
                 <span className="text-sm font-medium text-gray-700">Square Avatar</span>
               </div>
             </div>
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Rounded Avatar (base)</h6>
               <div className="flex items-center space-x-4">
                 <div className="w-14 h-14 bg-blue-500 flex items-center justify-center text-white font-bold text-lg" style={{ borderRadius: 'var(--radius-base)' }}>
@@ -591,7 +591,7 @@ function RadiusDemo() {
                 <span className="text-sm font-medium text-gray-700">Rounded Avatar</span>
               </div>
             </div>
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Circle Avatar (full)</h6>
               <div className="flex items-center space-x-4">
                 <div className="w-14 h-14 bg-blue-500 flex items-center justify-center text-white font-bold text-lg" style={{ borderRadius: 'var(--radius-full)' }}>
@@ -606,8 +606,8 @@ function RadiusDemo() {
         {/* Badges with different radius */}
         <div className="space-y-6">
           <h5 className="text-sm font-medium text-gray-700">Badges & Tags</h5>
-          <div className="grid grid-cols-2 gap-6">
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+          <div className="grid grid-cols-2 gap-8">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Sharp Badge (none)</h6>
               <div className="flex space-x-3">
                 <span className="px-3 py-2 bg-gray-100 text-gray-800 text-xs font-medium" style={{ borderRadius: 'var(--radius-none)' }}>
@@ -618,7 +618,7 @@ function RadiusDemo() {
                 </span>
               </div>
             </div>
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Standard Badge (base)</h6>
               <div className="flex space-x-3">
                 <span className="px-3 py-2 bg-gray-100 text-gray-800 text-xs font-medium" style={{ borderRadius: 'var(--radius-base)' }}>
@@ -629,7 +629,7 @@ function RadiusDemo() {
                 </span>
               </div>
             </div>
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Rounded Badge (lg)</h6>
               <div className="flex space-x-3">
                 <span className="px-3 py-2 bg-gray-100 text-gray-800 text-xs font-medium" style={{ borderRadius: 'var(--radius-lg)' }}>
@@ -640,7 +640,7 @@ function RadiusDemo() {
                 </span>
               </div>
             </div>
-            <div className="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+            <div className="space-y-3">
               <h6 className="text-xs font-medium text-gray-700 uppercase tracking-wide">Pill Badge (full)</h6>
               <div className="flex space-x-3">
                 <span className="px-3 py-2 bg-gray-100 text-gray-800 text-xs font-medium" style={{ borderRadius: 'var(--radius-full)' }}>
