@@ -1,0 +1,11 @@
+<!doctype html>
+<html>
+  <body>
+    <button id="insert">Insert Button</button>
+    <script>
+      document.getElementById("insert").onclick = () => {
+        parent.postMessage({ pluginMessage: { type: "insert", component: "button" } }, "*");
+      };
+    </script>
+  </body>
+</html>

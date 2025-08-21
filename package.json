@@ -1,0 +1,9 @@
+{
+  "name": "house-design-system",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "build:tokens": "node packages/tokens/build.js"
+  }
+}
