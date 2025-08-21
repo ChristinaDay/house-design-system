@@ -450,33 +450,7 @@ function RadiusDemo() {
     <div className="space-y-8">
       <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Border Radius Scale</h3>
       
-      {/* Basic Radius Values */}
-      <div className="space-y-4">
-        <h4 className="text-md font-medium text-gray-800">Basic Radius Values</h4>
-        <div className="grid grid-cols-3 gap-6">
-          {radiusValues.map((radius) => (
-            <div key={radius} className="p-6 border border-gray-200 rounded-lg bg-white shadow-sm">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-lg font-bold text-gray-700 bg-orange-100 text-orange-800 px-3 py-1 rounded-full">{radius}</span>
-                <code className="text-xs bg-gray-100 px-3 py-1 rounded font-mono text-gray-700">
-                  var(--radius-{radius})
-                </code>
-              </div>
-              <div
-                className="h-20 w-full bg-blue-200 flex items-center justify-center"
-                style={{ borderRadius: `var(--radius-${radius})` }}
-              >
-                <span className="text-sm text-gray-700">Radius Preview</span>
-              </div>
-              <p className="text-sm text-gray-600 mt-3 text-center">
-                {getRadiusUsage(radius)}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Real Component Examples */}
+      {/* Real Component Examples - Now at the top! */}
       <div className="space-y-6">
         <h4 className="text-md font-medium text-gray-800">Real Component Examples</h4>
         
@@ -702,6 +676,32 @@ function RadiusDemo() {
                 <p className="text-xs text-gray-600">Perfect for modern, organic designs, hero sections, and when you want maximum visual impact.</p>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Basic Radius Values - Now at the bottom for reference */}
+        <div className="space-y-4">
+          <h4 className="text-md font-medium text-gray-800">Basic Radius Values</h4>
+          <div className="grid grid-cols-3 gap-6">
+            {radiusValues.map((radius) => (
+              <div key={radius} className="p-6 border border-gray-200 rounded-lg bg-white shadow-sm">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-lg font-bold text-gray-700 bg-orange-100 text-orange-800 px-3 py-1 rounded-full">{radius}</span>
+                  <code className="text-xs bg-gray-100 px-3 py-1 rounded font-mono text-gray-700">
+                    var(--radius-{radius})
+                  </code>
+                </div>
+                <div
+                  className="h-20 w-full bg-blue-200 flex items-center justify-center"
+                  style={{ borderRadius: `var(--radius-${radius})` }}
+                >
+                  <span className="text-sm text-gray-700">Radius Preview</span>
+                </div>
+                <p className="text-sm text-gray-600 mt-3 text-center">
+                  {getRadiusUsage(radius)}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
