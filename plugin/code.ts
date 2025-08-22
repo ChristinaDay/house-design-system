@@ -30,14 +30,14 @@ figma.ui.onmessage = async (msg) => {
 };
 
 async function createButton() {
-  // Create a button frame with proper sizing
+  // Create a button frame with shadcn-style sizing
   const frame = figma.createFrame();
   frame.name = "Button";
-  frame.resize(120, 48);
-  frame.cornerRadius = 8; // This will be our --radius-base token
+  frame.resize(120, 40); // shadcn standard height
+  frame.cornerRadius = 6; // shadcn standard radius
   
-  // Set background color (our brand blue)
-  frame.fills = [{ type: 'SOLID', color: { r: 0.427, g: 0.369, b: 0.953 } }]; // #6D5EF3
+  // Set background color (shadcn-style primary)
+  frame.fills = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.2 } }]; // Dark gray for better contrast
   
   // Create button text
   const text = figma.createText();
@@ -48,7 +48,7 @@ async function createButton() {
   text.fontName = { family: "Inter", style: "Regular" };
   text.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }]; // White text
   
-  // Center the text in the button
+  // Center the text with shadcn-style padding
   text.x = (frame.width - text.width) / 2;
   text.y = (frame.height - text.height) / 2;
   
@@ -64,13 +64,13 @@ async function createButton() {
 }
 
 async function createInput() {
-  // Create input frame
+  // Create input frame with shadcn-style sizing
   const frame = figma.createFrame();
   frame.name = "Input Field";
-  frame.resize(200, 48);
-  frame.cornerRadius = 6; // Slightly smaller radius for inputs
+  frame.resize(200, 36); // shadcn standard height
+  frame.cornerRadius = 6; // shadcn standard radius
   
-  // Set background color (white with border)
+  // Set background color (white with shadcn-style border)
   frame.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
   frame.strokes = [{ type: 'SOLID', color: { r: 0.8, g: 0.8, b: 0.8 } }];
   frame.strokeWeight = 1;
@@ -82,7 +82,7 @@ async function createInput() {
   text.fontName = { family: "Inter", style: "Regular" };
   text.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.6, b: 0.6 } }]; // Gray placeholder
   
-  // Position text with proper padding
+  // Position text with shadcn-style padding (12px horizontal)
   text.x = 12;
   text.y = (frame.height - text.height) / 2;
   
@@ -96,13 +96,13 @@ async function createInput() {
 }
 
 async function createCard() {
-  // Create card frame
+  // Create card frame with shadcn-style sizing
   const frame = figma.createFrame();
   frame.name = "Card";
   frame.resize(240, 160);
-  frame.cornerRadius = 12; // Larger radius for cards
+  frame.cornerRadius = 8; // shadcn standard radius
   
-  // Set background color (white with shadow effect)
+  // Set background color (white with shadcn-style border)
   frame.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
   frame.strokes = [{ type: 'SOLID', color: { r: 0.9, g: 0.9, b: 0.9 } }];
   frame.strokeWeight = 1;
@@ -110,23 +110,23 @@ async function createCard() {
   // Create card title
   const title = figma.createText();
   title.characters = "Card Title";
-  title.fontSize = 18;
+  title.fontSize = 16; // shadcn standard heading size
   title.fontName = { family: "Inter", style: "Regular" };
-  title.fills = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.2 } }];
+  title.fills = [{ type: 'SOLID', color: { r: 0.1, g: 0.1, b: 0.1 } }];
   
   // Create card content
   const content = figma.createText();
   content.characters = "This is a card component with some sample content to demonstrate the design system.";
-  content.fontSize = 14;
+  content.fontSize = 14; // shadcn standard body size
   content.fontName = { family: "Inter", style: "Regular" };
   content.fills = [{ type: 'SOLID', color: { r: 0.4, g: 0.4, b: 0.4 } }];
   
-  // Position elements with proper spacing
+  // Position elements with shadcn-style spacing (16px padding)
   title.x = 16;
   title.y = 16;
   
   content.x = 16;
-  content.y = 48;
+  content.y = 48; // 16px from title + 16px spacing
   content.resize(208, 96); // Constrain width for proper text wrapping
   
   frame.appendChild(title);
@@ -140,23 +140,23 @@ async function createCard() {
 }
 
 async function createBadge() {
-  // Create badge frame
+  // Create badge frame with shadcn-style sizing
   const frame = figma.createFrame();
   frame.name = "Badge";
-  frame.resize(80, 24);
-  frame.cornerRadius = 12; // Pill shape for badges
+  frame.resize(80, 20); // shadcn standard height
+  frame.cornerRadius = 10; // Pill shape for badges
   
-  // Set background color (light blue)
-  frame.fills = [{ type: 'SOLID', color: { r: 0.9, g: 0.95, b: 1 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.7, g: 0.8, b: 1 } }];
+  // Set background color (shadcn-style secondary)
+  frame.fills = [{ type: 'SOLID', color: { r: 0.95, g: 0.95, b: 0.95 } }];
+  frame.strokes = [{ type: 'SOLID', color: { r: 0.8, g: 0.8, b: 0.8 } }];
   frame.strokeWeight = 1;
   
   // Create badge text
   const text = figma.createText();
   text.characters = "Badge";
-  text.fontSize = 12;
+  text.fontSize = 12; // shadcn standard small text
   text.fontName = { family: "Inter", style: "Regular" };
-  text.fills = [{ type: 'SOLID', color: { r: 0.2, g: 0.4, b: 0.8 } }];
+  text.fills = [{ type: 'SOLID', color: { r: 0.3, g: 0.3, b: 0.3 } }];
   
   // Center the text
   text.x = (frame.width - text.width) / 2;
