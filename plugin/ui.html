@@ -5,113 +5,283 @@
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       margin: 0;
-      padding: 20px;
-      background: #f5f5f5;
+      padding: 0;
+      background: #f8fafc;
+      color: #1e293b;
     }
     
     .container {
+      max-width: 320px;
       background: white;
-      border-radius: 8px;
+      border-radius: 12px;
+      margin: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #6D5EF3 0%, #8B5CF6 100%);
+      color: white;
       padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
     }
     
-    h2 {
-      margin: 0 0 20px 0;
-      color: #333;
-      font-size: 18px;
+    .header h1 {
+      margin: 0;
+      font-size: 20px;
       font-weight: 600;
+      letter-spacing: -0.025em;
     }
     
-    .component-section {
-      margin-bottom: 20px;
-    }
-    
-    .component-section h3 {
-      margin: 0 0 10px 0;
-      color: #666;
+    .header p {
+      margin: 8px 0 0 0;
       font-size: 14px;
+      opacity: 0.9;
+      font-weight: 400;
+    }
+    
+    .components-grid {
+      padding: 20px;
+    }
+    
+    .component-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .component-item:hover {
+      border-color: #6D5EF3;
+      box-shadow: 0 2px 8px rgba(109, 94, 243, 0.1);
+      transform: translateY(-1px);
+    }
+    
+    .component-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    
+    .component-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1e293b;
+      margin: 0;
+    }
+    
+    .component-type {
+      background: #6D5EF3;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 11px;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.05em;
     }
     
-    button {
+    .component-preview {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 60px;
+    }
+    
+    .component-description {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.4;
+      margin: 0 0 12px 0;
+    }
+    
+    .insert-button {
       background: #6D5EF3;
       color: white;
       border: none;
-      padding: 12px 20px;
+      padding: 8px 16px;
       border-radius: 6px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
       cursor: pointer;
       transition: background 0.2s;
       width: 100%;
-      margin-bottom: 8px;
     }
     
-    button:hover {
+    .insert-button:hover {
       background: #5A4FD8;
     }
     
-    .component-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
+    .insert-button:active {
+      transform: translateY(1px);
     }
     
-    .component-grid button {
-      margin-bottom: 0;
-      font-size: 12px;
-      padding: 10px 16px;
-    }
-    
-    .info {
-      background: #E8F4FD;
-      border: 1px solid #B3D9F2;
+    /* Component-specific previews */
+    .button-preview {
+      background: #6D5EF3;
+      color: white;
+      padding: 8px 16px;
       border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      border: none;
+    }
+    
+    .input-preview {
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: #64748b;
+      min-width: 120px;
+    }
+    
+    .card-preview {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
       padding: 12px;
-      margin-top: 20px;
+      min-width: 140px;
+      min-height: 40px;
+    }
+    
+    .card-preview::before {
+      content: "Title";
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+    
+    .card-preview::after {
+      content: "Content";
+      display: block;
       font-size: 12px;
-      color: #2C5AA0;
+      color: #64748b;
+    }
+    
+    .badge-preview {
+      background: #dbeafe;
+      color: #1e40af;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 500;
+      border: 1px solid #bfdbfe;
+    }
+    
+    .footer {
+      background: #f1f5f9;
+      padding: 16px 20px;
+      text-align: center;
+      border-top: 1px solid #e2e8f0;
+    }
+    
+    .footer-text {
+      font-size: 12px;
+      color: #64748b;
+      margin: 0;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>🏠 House Design System</h2>
+    <div class="header">
+      <h1>🏠 House Design System</h1>
+      <p>Professional UI components for your designs</p>
+    </div>
     
-    <div class="component-section">
-      <h3>Components</h3>
-      <div class="component-grid">
-        <button id="insert-button">Button</button>
-        <button id="insert-input">Input</button>
-        <button id="insert-card">Card</button>
-        <button id="insert-badge">Badge</button>
+    <div class="components-grid">
+      <!-- Button Component -->
+      <div class="component-item" onclick="insertComponent('button')">
+        <div class="component-header">
+          <h3 class="component-title">Button</h3>
+          <span class="component-type">Interactive</span>
+        </div>
+        <div class="component-preview">
+          <div class="button-preview">Button</div>
+        </div>
+        <p class="component-description">
+          Primary action buttons with brand colors, hover states, and consistent sizing. Perfect for CTAs and form submissions.
+        </p>
+        <button class="insert-button">Insert Button</button>
+      </div>
+      
+      <!-- Input Component -->
+      <div class="component-item" onclick="insertComponent('input')">
+        <div class="component-header">
+          <h3 class="component-title">Input Field</h3>
+          <span class="component-type">Form</span>
+        </div>
+        <div class="component-preview">
+          <div class="input-preview">Enter text...</div>
+        </div>
+        <p class="component-description">
+          Text input fields with proper spacing, borders, and placeholder text. Ideal for forms, search bars, and data entry.
+        </p>
+        <button class="insert-button">Insert Input</button>
+      </div>
+      
+      <!-- Card Component -->
+      <div class="component-item" onclick="insertComponent('card')">
+        <div class="component-header">
+          <h3 class="component-title">Card</h3>
+          <span class="component-type">Layout</span>
+        </div>
+        <div class="component-preview">
+          <div class="card-preview"></div>
+        </div>
+        <p class="component-description">
+          Content containers with titles, descriptions, and proper spacing. Great for product cards, info panels, and content organization.
+        </p>
+        <button class="insert-button">Insert Card</button>
+      </div>
+      
+      <!-- Badge Component -->
+      <div class="component-item" onclick="insertComponent('badge')">
+        <div class="component-header">
+          <h3 class="component-title">Badge</h3>
+          <span class="component-type">Status</span>
+        </div>
+        <div class="component-preview">
+          <div class="badge-preview">Badge</div>
+        </div>
+        <p class="component-description">
+          Small status indicators and labels with pill-shaped design. Perfect for tags, statuses, and small information display.
+        </p>
+        <button class="insert-button">Insert Badge</button>
       </div>
     </div>
     
-    <div class="info">
-      <strong>Tip:</strong> Inserted components will use your design system tokens for consistent styling.
+    <div class="footer">
+      <p class="footer-text">Built with your design system tokens</p>
     </div>
   </div>
 
   <script>
-    document.getElementById("insert-button").onclick = () => {
-      parent.postMessage({ pluginMessage: { type: "insert", component: "button" } }, "*");
-    };
+    function insertComponent(componentType) {
+      parent.postMessage({ pluginMessage: { type: "insert", component: componentType } }, "*");
+    }
     
-    document.getElementById("insert-input").onclick = () => {
-      parent.postMessage({ pluginMessage: { type: "insert", component: "input" } }, "*");
-    };
-    
-    document.getElementById("insert-card").onclick = () => {
-      parent.postMessage({ pluginMessage: { type: "insert", component: "card" } }, "*");
-    };
-    
-    document.getElementById("insert-badge").onclick = () => {
-      parent.postMessage({ pluginMessage: { type: "insert", component: "badge" } }, "*");
-    };
+    // Prevent double-clicking
+    document.querySelectorAll('.component-item').forEach(item => {
+      item.addEventListener('click', function(e) {
+        if (e.target.tagName === 'BUTTON') {
+          e.stopPropagation();
+        }
+      });
+    });
   </script>
 </body>
 </html>
