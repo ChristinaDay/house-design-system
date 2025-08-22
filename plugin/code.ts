@@ -1,10 +1,49 @@
 figma.showUI(__html__, { width: 352, height: 600 });
 
+// Typography System - Luxury Automotive Aesthetic
+const typography = {
+  display: {
+    family: "Eurostile",
+    fallback: "Arial Black",
+    weights: { bold: 700, medium: 500 }
+  },
+  heading: {
+    family: "Microgramma",
+    fallback: "Arial Black", 
+    weights: { bold: 700, medium: 500 }
+  },
+  body: {
+    family: "Inter",
+    fallback: "SF Pro Text",
+    weights: { regular: 400, medium: 500, semibold: 600 }
+  },
+  ui: {
+    family: "Futura",
+    fallback: "SF Pro Display",
+    weights: { medium: 500, bold: 700 }
+  }
+};
+
+// Font loading with fallbacks
+async function loadFonts() {
+  try {
+    // Try to load premium fonts first
+    await figma.loadFontAsync({ family: "Eurostile", style: "Bold" });
+    await figma.loadFontAsync({ family: "Microgramma", style: "Bold" });
+    await figma.loadFontAsync({ family: "Inter", style: "Regular" });
+    await figma.loadFontAsync({ family: "Futura", style: "Medium" });
+  } catch (error) {
+    // Fall back to system fonts
+    await figma.loadFontAsync({ family: "SF Pro Display", style: "Bold" });
+    await figma.loadFontAsync({ family: "SF Pro Text", style: "Regular" });
+  }
+}
+
 figma.ui.onmessage = async (msg) => {
   if (msg.type === "insert" && msg.component) {
     try {
-      // Load the font first
-      await figma.loadFontAsync({ family: "Inter", style: "Regular" });
+      // Load fonts first
+      await loadFonts();
       
       switch (msg.component) {
         case "button":
@@ -54,25 +93,31 @@ figma.ui.onmessage = async (msg) => {
 };
 
 async function createButton() {
-  // Create a button frame with shadcn-style sizing
+  // Create a button frame with luxury automotive styling
   const frame = figma.createFrame();
   frame.name = "Button";
-  frame.resize(120, 40); // shadcn standard height
-  frame.cornerRadius = 6; // shadcn standard radius
+  frame.resize(140, 44); // Slightly larger for luxury feel
+  frame.cornerRadius = 8; // Refined radius
   
-  // Set background color (shadcn-style primary)
-  frame.fills = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.2 } }]; // Dark gray for better contrast
+  // Set background color (deep, sophisticated)
+  frame.fills = [{ type: 'SOLID', color: { r: 0.1, g: 0.1, b: 0.15 } }]; // Deep charcoal
   
-  // Create button text
+  // Create button text with luxury typography
   const text = figma.createText();
-  text.characters = "Button";
+  text.characters = "BUTTON";
   text.fontSize = 14;
   
-  // Set font to Inter Regular (now loaded)
-  text.fontName = { family: "Inter", style: "Regular" };
-  text.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }]; // White text
+  // Use luxury automotive typography
+  try {
+    text.fontName = { family: "Eurostile", style: "Bold" };
+  } catch {
+    text.fontName = { family: "SF Pro Display", style: "Bold" };
+  }
   
-  // Center the text with shadcn-style padding
+  text.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }]; // Pure white
+  text.letterSpacing = { value: 1, unit: "PIXELS" }; // Luxury spacing
+  
+  // Center the text
   text.x = (frame.width - text.width) / 2;
   text.y = (frame.height - text.height) / 2;
   
@@ -80,34 +125,39 @@ async function createButton() {
   
   // Add to current page
   figma.currentPage.appendChild(frame);
-  
-  // Select the new button
   figma.currentPage.selection = [frame];
   
-  figma.notify("✅ Inserted Button component");
+  figma.notify("✅ Inserted Luxury Button component");
 }
 
 async function createInput() {
-  // Create input frame with shadcn-style sizing
+  // Create input frame with refined styling
   const frame = figma.createFrame();
   frame.name = "Input Field";
-  frame.resize(200, 36); // shadcn standard height
-  frame.cornerRadius = 6; // shadcn standard radius
+  frame.resize(220, 40); // Slightly larger for luxury feel
+  frame.cornerRadius = 6;
   
-  // Set background color (white with shadcn-style border)
-  frame.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.8, g: 0.8, b: 0.8 } }];
+  // Set background color (sophisticated white)
+  frame.fills = [{ type: 'SOLID', color: { r: 0.98, g: 0.98, b: 0.98 } }];
+  frame.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
   frame.strokeWeight = 1;
   
-  // Create placeholder text
+  // Create placeholder text with luxury typography
   const text = figma.createText();
-  text.characters = "Enter text...";
-  text.fontSize = 14;
-  text.fontName = { family: "Inter", style: "Regular" };
-  text.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.6, b: 0.6 } }]; // Gray placeholder
+  text.characters = "ENTER TEXT...";
+  text.fontSize = 13;
   
-  // Position text with shadcn-style padding (12px horizontal)
-  text.x = 12;
+  try {
+    text.fontName = { family: "Microgramma", style: "Medium" };
+  } catch {
+    text.fontName = { family: "SF Pro Text", style: "Medium" };
+  }
+  
+  text.fills = [{ type: 'SOLID', color: { r: 0.5, g: 0.5, b: 0.55 } }];
+  text.letterSpacing = { value: 0.5, unit: "PIXELS" };
+  
+  // Position text with luxury spacing
+  text.x = 14;
   text.y = (frame.height - text.height) / 2;
   
   frame.appendChild(text);
@@ -116,31 +166,38 @@ async function createInput() {
   figma.currentPage.appendChild(frame);
   figma.currentPage.selection = [frame];
   
-  figma.notify("✅ Inserted Input component");
+  figma.notify("✅ Inserted Luxury Input component");
 }
 
 async function createTextarea() {
-  // Create textarea frame
+  // Create textarea frame with luxury styling
   const frame = figma.createFrame();
   frame.name = "Textarea";
-  frame.resize(200, 80); // Wider and taller for multi-line
-  frame.cornerRadius = 6; // shadcn standard radius
+  frame.resize(220, 90);
+  frame.cornerRadius = 6;
   
-  // Set background color (white with shadcn-style border)
-  frame.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.8, g: 0.8, b: 0.8 } }];
+  // Set background color (sophisticated white)
+  frame.fills = [{ type: 'SOLID', color: { r: 0.98, g: 0.98, b: 0.98 } }];
+  frame.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
   frame.strokeWeight = 1;
   
-  // Create placeholder text
+  // Create placeholder text with luxury typography
   const text = figma.createText();
-  text.characters = "Enter your message here...";
-  text.fontSize = 14;
-  text.fontName = { family: "Inter", style: "Regular" };
-  text.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.6, b: 0.6 } }];
+  text.characters = "ENTER YOUR MESSAGE...";
+  text.fontSize = 13;
   
-  // Position text with shadcn-style padding
-  text.x = 12;
-  text.y = 12;
+  try {
+    text.fontName = { family: "Microgramma", style: "Medium" };
+  } catch {
+    text.fontName = { family: "SF Pro Text", style: "Medium" };
+  }
+  
+  text.fills = [{ type: 'SOLID', color: { r: 0.5, g: 0.5, b: 0.55 } }];
+  text.letterSpacing = { value: 0.5, unit: "PIXELS" };
+  
+  // Position text with luxury spacing
+  text.x = 14;
+  text.y = 14;
   
   frame.appendChild(text);
   
@@ -148,40 +205,53 @@ async function createTextarea() {
   figma.currentPage.appendChild(frame);
   figma.currentPage.selection = [frame];
   
-  figma.notify("✅ Inserted Textarea component");
+  figma.notify("✅ Inserted Luxury Textarea component");
 }
 
 async function createSelect() {
-  // Create select frame
+  // Create select frame with luxury styling
   const frame = figma.createFrame();
   frame.name = "Select Dropdown";
-  frame.resize(200, 36); // shadcn standard height
-  frame.cornerRadius = 6; // shadcn standard radius
+  frame.resize(220, 40);
+  frame.cornerRadius = 6;
   
-  // Set background color (white with shadcn-style border)
-  frame.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.8, g: 0.8, b: 0.8 } }];
+  // Set background color (sophisticated white)
+  frame.fills = [{ type: 'SOLID', color: { r: 0.98, g: 0.98, b: 0.98 } }];
+  frame.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
   frame.strokeWeight = 1;
   
-  // Create select text
+  // Create select text with luxury typography
   const text = figma.createText();
-  text.characters = "Select option...";
-  text.fontSize = 14;
-  text.fontName = { family: "Inter", style: "Regular" };
-  text.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.6, b: 0.6 } }];
+  text.characters = "SELECT OPTION...";
+  text.fontSize = 13;
   
-  // Create dropdown arrow
+  try {
+    text.fontName = { family: "Microgramma", style: "Medium" };
+  } catch {
+    text.fontName = { family: "SF Pro Text", style: "Medium" };
+  }
+  
+  text.fills = [{ type: 'SOLID', color: { r: 0.5, g: 0.5, b: 0.55 } }];
+  text.letterSpacing = { value: 0.5, unit: "PIXELS" };
+  
+  // Create dropdown arrow with luxury styling
   const arrow = figma.createText();
   arrow.characters = "▼";
   arrow.fontSize = 12;
-  arrow.fontName = { family: "Inter", style: "Regular" };
-  arrow.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.6, b: 0.6 } }];
   
-  // Position elements
-  text.x = 12;
+  try {
+    arrow.fontName = { family: "Futura", style: "Medium" };
+  } catch {
+    arrow.fontName = { family: "SF Pro Display", style: "Medium" };
+  }
+  
+  arrow.fills = [{ type: 'SOLID', color: { r: 0.3, g: 0.3, b: 0.35 } }];
+  
+  // Position elements with luxury spacing
+  text.x = 14;
   text.y = (frame.height - text.height) / 2;
   
-  arrow.x = frame.width - 24;
+  arrow.x = frame.width - 26;
   arrow.y = (frame.height - arrow.height) / 2;
   
   frame.appendChild(text);
@@ -191,80 +261,94 @@ async function createSelect() {
   figma.currentPage.appendChild(frame);
   figma.currentPage.selection = [frame];
   
-  figma.notify("✅ Inserted Select component");
+  figma.notify("✅ Inserted Luxury Select component");
 }
 
 async function createCheckbox() {
-  // Create checkbox frame
+  // Create checkbox frame with luxury styling
   const frame = figma.createFrame();
   frame.name = "Checkbox";
-  frame.resize(16, 16); // Standard checkbox size
-  frame.cornerRadius = 3; // Slightly rounded corners
+  frame.resize(18, 18);
+  frame.cornerRadius = 3;
   
-  // Set background color (white with border)
+  // Set background color (sophisticated white)
   frame.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.8, g: 0.8, b: 0.8 } }];
+  frame.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
   frame.strokeWeight = 1;
   
   // Add to current page
   figma.currentPage.appendChild(frame);
   figma.currentPage.selection = [frame];
   
-  figma.notify("✅ Inserted Checkbox component");
+  figma.notify("✅ Inserted Luxury Checkbox component");
 }
 
 async function createRadio() {
-  // Create radio frame
+  // Create radio frame with luxury styling
   const frame = figma.createFrame();
   frame.name = "Radio Button";
-  frame.resize(16, 16); // Standard radio size
-  frame.cornerRadius = 8; // Perfect circle
+  frame.resize(18, 18);
+  frame.cornerRadius = 9;
   
-  // Set background color (white with border)
+  // Set background color (sophisticated white)
   frame.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.8, g: 0.8, b: 0.8 } }];
+  frame.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
   frame.strokeWeight = 1;
   
   // Add to current page
   figma.currentPage.appendChild(frame);
   figma.currentPage.selection = [frame];
   
-  figma.notify("✅ Inserted Radio Button component");
+  figma.notify("✅ Inserted Luxury Radio Button component");
 }
 
 async function createCard() {
-  // Create card frame with shadcn-style sizing
+  // Create card frame with luxury automotive styling
   const frame = figma.createFrame();
   frame.name = "Card";
-  frame.resize(240, 160);
-  frame.cornerRadius = 8; // shadcn standard radius
+  frame.resize(260, 180);
+  frame.cornerRadius = 10;
   
-  // Set background color (white with shadcn-style border)
+  // Set background color (sophisticated white)
   frame.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.9, g: 0.9, b: 0.9 } }];
+  frame.strokes = [{ type: 'SOLID', color: { r: 0.15, g: 0.15, b: 0.2 } }];
   frame.strokeWeight = 1;
   
-  // Create card title
+  // Create card title with luxury typography
   const title = figma.createText();
-  title.characters = "Card Title";
-  title.fontSize = 16; // shadcn standard heading size
-  title.fontName = { family: "Inter", style: "Regular" };
-  title.fills = [{ type: 'SOLID', color: { r: 0.1, g: 0.1, b: 0.1 } }];
+  title.characters = "CARD TITLE";
+  title.fontSize = 18;
   
-  // Create card content
+  try {
+    title.fontName = { family: "Eurostile", style: "Bold" };
+  } catch {
+    title.fontName = { family: "SF Pro Display", style: "Bold" };
+  }
+  
+  title.fills = [{ type: 'SOLID', color: { r: 0.1, g: 0.1, b: 0.15 } }];
+  title.letterSpacing = { value: 1, unit: "PIXELS" };
+  
+  // Create card content with luxury typography
   const content = figma.createText();
-  content.characters = "This is a card component with some sample content to demonstrate the design system.";
-  content.fontSize = 14; // shadcn standard body size
-  content.fontName = { family: "Inter", style: "Regular" };
-  content.fills = [{ type: 'SOLID', color: { r: 0.4, g: 0.4, b: 0.4 } }];
+  content.characters = "This is a luxury automotive card component with sophisticated typography and refined spacing.";
+  content.fontSize = 14;
   
-  // Position elements with shadcn-style spacing (16px padding)
-  title.x = 16;
-  title.y = 16;
+  try {
+    content.fontName = { family: "Inter", style: "Regular" };
+  } catch {
+    content.fontName = { family: "SF Pro Text", style: "Regular" };
+  }
   
-  content.x = 16;
-  content.y = 48; // 16px from title + 16px spacing
-  content.resize(208, 96); // Constrain width for proper text wrapping
+  content.fills = [{ type: 'SOLID', color: { r: 0.3, g: 0.3, b: 0.35 } }];
+  content.lineHeight = { value: 20, unit: "PIXELS" };
+  
+  // Position elements with luxury spacing
+  title.x = 18;
+  title.y = 18;
+  
+  content.x = 18;
+  content.y = 52;
+  content.resize(224, 110);
   
   frame.appendChild(title);
   frame.appendChild(content);
@@ -273,27 +357,34 @@ async function createCard() {
   figma.currentPage.appendChild(frame);
   figma.currentPage.selection = [frame];
   
-  figma.notify("✅ Inserted Card component");
+  figma.notify("✅ Inserted Luxury Card component");
 }
 
 async function createBadge() {
-  // Create badge frame with shadcn-style sizing
+  // Create badge frame with luxury automotive styling
   const frame = figma.createFrame();
   frame.name = "Badge";
-  frame.resize(80, 20); // shadcn standard height
-  frame.cornerRadius = 10; // Pill shape for badges
+  frame.resize(90, 24);
+  frame.cornerRadius = 12;
   
-  // Set background color (shadcn-style secondary)
-  frame.fills = [{ type: 'SOLID', color: { r: 0.95, g: 0.95, b: 0.95 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.8, g: 0.8, b: 0.8 } }];
+  // Set background color (sophisticated accent)
+  frame.fills = [{ type: 'SOLID', color: { r: 0.95, g: 0.95, b: 0.97 } }];
+  frame.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
   frame.strokeWeight = 1;
   
-  // Create badge text
+  // Create badge text with luxury typography
   const text = figma.createText();
-  text.characters = "Badge";
-  text.fontSize = 12; // shadcn standard small text
-  text.fontName = { family: "Inter", style: "Regular" };
-  text.fills = [{ type: 'SOLID', color: { r: 0.3, g: 0.3, b: 0.3 } }];
+  text.characters = "BADGE";
+  text.fontSize = 11;
+  
+  try {
+    text.fontName = { family: "Microgramma", style: "Bold" };
+  } catch {
+    text.fontName = { family: "SF Pro Text", style: "Bold" };
+  }
+  
+  text.fills = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
+  text.letterSpacing = { value: 0.5, unit: "PIXELS" };
   
   // Center the text
   text.x = (frame.width - text.width) / 2;
@@ -305,43 +396,50 @@ async function createBadge() {
   figma.currentPage.appendChild(frame);
   figma.currentPage.selection = [frame];
   
-  figma.notify("✅ Inserted Badge component");
+  figma.notify("✅ Inserted Luxury Badge component");
 }
 
 async function createDivider() {
-  // Create divider frame
+  // Create divider frame with luxury styling
   const frame = figma.createFrame();
   frame.name = "Divider";
-  frame.resize(200, 1); // Horizontal line
+  frame.resize(220, 2);
   
-  // Set background color (subtle gray)
-  frame.fills = [{ type: 'SOLID', color: { r: 0.9, g: 0.9, b: 0.9 } }];
+  // Set background color (sophisticated gray)
+  frame.fills = [{ type: 'SOLID', color: { r: 0.85, g: 0.85, b: 0.87 } }];
   
   // Add to current page
   figma.currentPage.appendChild(frame);
   figma.currentPage.selection = [frame];
   
-  figma.notify("✅ Inserted Divider component");
+  figma.notify("✅ Inserted Luxury Divider component");
 }
 
 async function createAvatar() {
-  // Create avatar frame
+  // Create avatar frame with luxury automotive styling
   const frame = figma.createFrame();
   frame.name = "Avatar";
-  frame.resize(40, 40); // Standard avatar size
-  frame.cornerRadius = 20; // Perfect circle
+  frame.resize(44, 44);
+  frame.cornerRadius = 22;
   
-  // Set background color (shadcn-style secondary)
-  frame.fills = [{ type: 'SOLID', color: { r: 0.95, g: 0.95, b: 0.95 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.8, g: 0.8, b: 0.8 } }];
+  // Set background color (sophisticated accent)
+  frame.fills = [{ type: 'SOLID', color: { r: 0.95, g: 0.95, b: 0.97 } }];
+  frame.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
   frame.strokeWeight = 1;
   
-  // Create avatar initials
+  // Create avatar initials with luxury typography
   const text = figma.createText();
   text.characters = "JD";
-  text.fontSize = 14;
-  text.fontName = { family: "Inter", style: "Regular" };
-  text.fills = [{ type: 'SOLID', color: { r: 0.3, g: 0.3, b: 0.3 } }];
+  text.fontSize = 16;
+  
+  try {
+    text.fontName = { family: "Eurostile", style: "Bold" };
+  } catch {
+    text.fontName = { family: "SF Pro Display", style: "Bold" };
+  }
+  
+  text.fills = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
+  text.letterSpacing = { value: 0.5, unit: "PIXELS" };
   
   // Center the text
   text.x = (frame.width - text.width) / 2;
@@ -353,32 +451,39 @@ async function createAvatar() {
   figma.currentPage.appendChild(frame);
   figma.currentPage.selection = [frame];
   
-  figma.notify("✅ Inserted Avatar component");
+  figma.notify("✅ Inserted Luxury Avatar component");
 }
 
 async function createAlert() {
-  // Create alert frame
+  // Create alert frame with luxury automotive styling
   const frame = figma.createFrame();
   frame.name = "Alert";
-  frame.resize(240, 60);
-  frame.cornerRadius = 6; // shadcn standard radius
+  frame.resize(260, 70);
+  frame.cornerRadius = 8;
   
-  // Set background color (info blue)
-  frame.fills = [{ type: 'SOLID', color: { r: 0.95, g: 0.98, b: 1 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.8, g: 0.9, b: 1 } }];
+  // Set background color (sophisticated info blue)
+  frame.fills = [{ type: 'SOLID', color: { r: 0.95, g: 0.97, b: 1 } }];
+  frame.strokes = [{ type: 'SOLID', color: { r: 0.7, g: 0.8, b: 0.9 } }];
   frame.strokeWeight = 1;
   
-  // Create alert text
+  // Create alert text with luxury typography
   const text = figma.createText();
-  text.characters = "This is an informational alert message.";
+  text.characters = "This is a luxury automotive alert message with sophisticated typography.";
   text.fontSize = 14;
-  text.fontName = { family: "Inter", style: "Regular" };
-  text.fills = [{ type: 'SOLID', color: { r: 0.2, g: 0.4, b: 0.8 } }];
   
-  // Position text with padding
-  text.x = 12;
+  try {
+    text.fontName = { family: "Inter", style: "Medium" };
+  } catch {
+    text.fontName = { family: "SF Pro Text", style: "Medium" };
+  }
+  
+  text.fills = [{ type: 'SOLID', color: { r: 0.2, g: 0.3, b: 0.6 } }];
+  text.lineHeight = { value: 20, unit: "PIXELS" };
+  
+  // Position text with luxury spacing
+  text.x = 16;
   text.y = (frame.height - text.height) / 2;
-  text.resize(216, 20);
+  text.resize(228, 40);
   
   frame.appendChild(text);
   
@@ -386,68 +491,89 @@ async function createAlert() {
   figma.currentPage.appendChild(frame);
   figma.currentPage.selection = [frame];
   
-  figma.notify("✅ Inserted Alert component");
+  figma.notify("✅ Inserted Luxury Alert component");
 }
 
 async function createTabs() {
-  // Create tabs container
+  // Create tabs container with luxury automotive styling
   const frame = figma.createFrame();
   frame.name = "Tabs";
-  frame.resize(240, 40);
+  frame.resize(260, 44);
   
   // Set background color (transparent)
   frame.fills = [];
   
-  // Create tab buttons
+  // Create tab buttons with luxury styling
   const tab1 = figma.createFrame();
   tab1.name = "Tab 1";
-  tab1.resize(80, 32);
+  tab1.resize(86, 36);
   tab1.cornerRadius = 6;
-  tab1.fills = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.2 } }];
+  tab1.fills = [{ type: 'SOLID', color: { r: 0.1, g: 0.1, b: 0.15 } }];
   
   const tab2 = figma.createFrame();
   tab2.name = "Tab 2";
-  tab2.resize(80, 32);
+  tab2.resize(86, 36);
   tab2.cornerRadius = 6;
-  tab2.fills = [{ type: 'SOLID', color: { r: 0.95, g: 0.95, b: 0.95 } }];
-  tab2.strokes = [{ type: 'SOLID', color: { r: 0.8, g: 0.8, b: 0.8 } }];
+  tab2.fills = [{ type: 'SOLID', color: { r: 0.98, g: 0.98, b: 0.98 } }];
+  tab2.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
   tab2.strokeWeight = 1;
   
   const tab3 = figma.createFrame();
   tab3.name = "Tab 3";
-  tab3.resize(80, 32);
+  tab3.resize(86, 36);
   tab3.cornerRadius = 6;
-  tab3.fills = [{ type: 'SOLID', color: { r: 0.95, g: 0.95, b: 0.95 } }];
-  tab3.strokes = [{ type: 'SOLID', color: { r: 0.8, g: 0.8, b: 0.8 } }];
+  tab3.fills = [{ type: 'SOLID', color: { r: 0.98, g: 0.98, b: 0.98 } }];
+  tab3.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
   tab3.strokeWeight = 1;
   
-  // Add tab text
+  // Add tab text with luxury typography
   const text1 = figma.createText();
-  text1.characters = "Tab 1";
-  text1.fontSize = 14;
-  text1.fontName = { family: "Inter", style: "Regular" };
+  text1.characters = "TAB 1";
+  text1.fontSize = 13;
+  
+  try {
+    text1.fontName = { family: "Microgramma", style: "Bold" };
+  } catch {
+    text1.fontName = { family: "SF Pro Text", style: "Bold" };
+  }
+  
   text1.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
+  text1.letterSpacing = { value: 0.5, unit: "PIXELS" };
   
   const text2 = figma.createText();
-  text2.characters = "Tab 2";
-  text2.fontSize = 14;
-  text2.fontName = { family: "Inter", style: "Regular" };
-  text2.fills = [{ type: 'SOLID', color: { r: 0.3, g: 0.3, b: 0.3 } }];
+  text2.characters = "TAB 2";
+  text2.fontSize = 13;
+  
+  try {
+    text2.fontName = { family: "Microgramma", style: "Medium" };
+  } catch {
+    text2.fontName = { family: "SF Pro Text", style: "Medium" };
+  }
+  
+  text2.fills = [{ type: 'SOLID', color: { r: 0.3, g: 0.3, b: 0.35 } }];
+  text2.letterSpacing = { value: 0.5, unit: "PIXELS" };
   
   const text3 = figma.createText();
-  text3.characters = "Tab 3";
-  text3.fontSize = 14;
-  text3.fontName = { family: "Inter", style: "Regular" };
-  text3.fills = [{ type: 'SOLID', color: { r: 0.3, g: 0.3, b: 0.3 } }];
+  text3.characters = "TAB 3";
+  text3.fontSize = 13;
   
-  // Position tabs
+  try {
+    text3.fontName = { family: "Microgramma", style: "Medium" };
+  } catch {
+    text3.fontName = { family: "SF Pro Text", style: "Medium" };
+  }
+  
+  text3.fills = [{ type: 'SOLID', color: { r: 0.3, g: 0.3, b: 0.35 } }];
+  text3.letterSpacing = { value: 0.5, unit: "PIXELS" };
+  
+  // Position tabs with luxury spacing
   tab1.x = 0;
   tab1.y = 4;
   
-  tab2.x = 80;
+  tab2.x = 87;
   tab2.y = 4;
   
-  tab3.x = 160;
+  tab3.x = 174;
   tab3.y = 4;
   
   // Center text in tabs
@@ -473,5 +599,5 @@ async function createTabs() {
   figma.currentPage.appendChild(frame);
   figma.currentPage.selection = [frame];
   
-  figma.notify("✅ Inserted Tabs component");
+  figma.notify("✅ Inserted Luxury Tabs component");
 }

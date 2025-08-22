@@ -6,323 +6,373 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f8fafc;
-      color: #1e293b;
+      background: #0a0a0f;
+      color: #e0e0e5;
     }
     
     .container {
       max-width: 352px;
-      background: white;
+      background: linear-gradient(135deg, #1a1a1f 0%, #25252a 100%);
       border-radius: 12px;
       margin: 16px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
       overflow: hidden;
+      border: 1px solid #2a2a2f;
     }
     
     .header {
-      background: linear-gradient(135deg, #6D5EF3 0%, #8B5CF6 100%);
-      color: white;
-      padding: 20px;
+      background: linear-gradient(135deg, #1a1a1f 0%, #2a2a2f 100%);
+      color: #e0e0e5;
+      padding: 24px;
       text-align: center;
+      border-bottom: 1px solid #3a3a3f;
     }
     
     .header h1 {
       margin: 0;
-      font-size: 20px;
-      font-weight: 600;
+      font-size: 22px;
+      font-weight: 700;
       letter-spacing: -0.025em;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
     
     .header p {
       margin: 8px 0 0 0;
       font-size: 14px;
-      opacity: 0.9;
+      opacity: 0.8;
       font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     
     .components-grid {
-      padding: 20px;
+      padding: 24px;
       max-height: 500px;
       overflow-y: auto;
     }
     
     .component-category {
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
     
     .category-title {
       font-size: 14px;
-      font-weight: 600;
-      color: #475569;
+      font-weight: 700;
+      color: #c0c0c5;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin: 0 0 16px 0;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #e2e8f0;
+      letter-spacing: 2px;
+      margin: 0 0 20px 0;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #3a3a3f;
     }
     
     .component-item {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 12px;
-      transition: all 0.2s ease;
+      background: linear-gradient(135deg, #2a2a2f 0%, #3a3a3f 100%);
+      border: 1px solid #4a4a4f;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 16px;
+      transition: all 0.3s ease;
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .component-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #6D5EF3 0%, #8B5CF6 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
     
     .component-item:hover {
       border-color: #6D5EF3;
-      box-shadow: 0 2px 8px rgba(109, 94, 243, 0.1);
-      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(109, 94, 243, 0.2);
+      transform: translateY(-2px);
+    }
+    
+    .component-item:hover::before {
+      opacity: 1;
     }
     
     .component-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
     
     .component-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: #1e293b;
+      font-size: 16px;
+      font-weight: 700;
+      color: #e0e0e5;
       margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     
     .component-type {
-      background: #6D5EF3;
+      background: linear-gradient(135deg, #6D5EF3 0%, #8B5CF6 100%);
       color: white;
-      padding: 2px 6px;
-      border-radius: 8px;
+      padding: 4px 10px;
+      border-radius: 12px;
       font-size: 10px;
-      font-weight: 500;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 1px;
     }
     
     .component-preview {
-      background: white;
-      border: 1px solid #e2e8f0;
-      border-radius: 6px;
-      padding: 12px;
-      margin-bottom: 12px;
+      background: #1a1a1f;
+      border: 1px solid #4a4a4f;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 50px;
+      min-height: 60px;
     }
     
     .component-description {
-      font-size: 12px;
-      color: #64748b;
-      line-height: 1.4;
-      margin: 0 0 12px 0;
+      font-size: 13px;
+      color: #a0a0a5;
+      line-height: 1.5;
+      margin: 0 0 16px 0;
     }
     
     .insert-button {
-      background: #6D5EF3;
+      background: linear-gradient(135deg, #6D5EF3 0%, #8B5CF6 100%);
       color: white;
       border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 500;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.3s ease;
       width: 100%;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     
     .insert-button:hover {
-      background: #5A4FD8;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(109, 94, 243, 0.3);
     }
     
     .insert-button:active {
-      transform: translateY(1px);
+      transform: translateY(0);
     }
     
-    /* Component-specific previews */
+    /* Component-specific previews with luxury automotive aesthetic */
     .button-preview {
-      background: #333333;
-      color: white;
-      padding: 6px 12px;
+      background: #1a1a1f;
+      color: #e0e0e5;
+      padding: 8px 16px;
       border-radius: 6px;
       font-size: 12px;
-      font-weight: 500;
-      border: none;
-      height: 28px;
+      font-weight: 700;
+      border: 2px solid #6D5EF3;
+      height: 32px;
       display: flex;
       align-items: center;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     
     .input-preview {
-      background: white;
-      border: 1px solid #cbd5e1;
+      background: #1a1a1f;
+      border: 2px solid #4a4a4f;
       border-radius: 6px;
-      padding: 6px 10px;
+      padding: 8px 12px;
       font-size: 12px;
-      color: #64748b;
-      min-width: 100px;
-      height: 24px;
+      color: #a0a0a5;
+      min-width: 120px;
+      height: 28px;
       display: flex;
       align-items: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     
     .textarea-preview {
-      background: white;
-      border: 1px solid #cbd5e1;
+      background: #1a1a1f;
+      border: 2px solid #4a4a4f;
       border-radius: 6px;
       padding: 8px;
       font-size: 11px;
-      color: #64748b;
+      color: #a0a0a5;
       min-width: 120px;
       height: 30px;
       display: flex;
       align-items: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     
     .select-preview {
-      background: white;
-      border: 1px solid #cbd5e1;
+      background: #1a1a1f;
+      border: 2px solid #4a4a4f;
       border-radius: 6px;
-      padding: 6px 10px;
+      padding: 8px 12px;
       font-size: 12px;
-      color: #64748b;
-      min-width: 100px;
-      height: 24px;
+      color: #a0a0a5;
+      min-width: 120px;
+      height: 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     
     .select-preview::after {
       content: "▼";
       font-size: 10px;
-      color: #64748b;
+      color: #6D5EF3;
     }
     
     .checkbox-preview {
-      background: white;
-      border: 1px solid #cbd5e1;
-      border-radius: 3px;
-      width: 14px;
-      height: 14px;
+      background: #1a1a1f;
+      border: 2px solid #4a4a4f;
+      border-radius: 4px;
+      width: 16px;
+      height: 16px;
     }
     
     .radio-preview {
-      background: white;
-      border: 1px solid #cbd5e1;
-      border-radius: 7px;
-      width: 14px;
-      height: 14px;
+      background: #1a1a1f;
+      border: 2px solid #4a4a4f;
+      border-radius: 9px;
+      width: 16px;
+      height: 16px;
     }
     
     .card-preview {
-      background: white;
-      border: 1px solid #e2e8f0;
+      background: #1a1a1f;
+      border: 2px solid #4a4a4f;
       border-radius: 8px;
-      padding: 10px;
-      min-width: 120px;
-      min-height: 30px;
+      padding: 12px;
+      min-width: 140px;
+      min-height: 40px;
     }
     
     .card-preview::before {
-      content: "Title";
+      content: "TITLE";
       display: block;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 12px;
-      color: #1e293b;
-      margin-bottom: 2px;
+      color: #e0e0e5;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     
     .card-preview::after {
       content: "Content";
       display: block;
       font-size: 10px;
-      color: #64748b;
+      color: #a0a0a5;
     }
     
     .badge-preview {
-      background: #f1f5f9;
-      color: #475569;
-      padding: 3px 6px;
-      border-radius: 10px;
+      background: #2a2a2f;
+      color: #e0e0e5;
+      padding: 4px 10px;
+      border-radius: 12px;
       font-size: 10px;
-      font-weight: 500;
-      border: 1px solid #cbd5e1;
-      height: 14px;
+      font-weight: 700;
+      border: 1px solid #4a4a4f;
+      height: 18px;
       display: flex;
       align-items: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     
     .divider-preview {
-      background: #e2e8f0;
-      width: 120px;
-      height: 1px;
+      background: #4a4a4f;
+      width: 140px;
+      height: 2px;
     }
     
     .avatar-preview {
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
-      border-radius: 20px;
-      width: 32px;
-      height: 32px;
+      background: #2a2a2f;
+      border: 2px solid #4a4a4f;
+      border-radius: 22px;
+      width: 36px;
+      height: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 12px;
-      color: #475569;
-      font-weight: 500;
+      color: #e0e0e5;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     
     .alert-preview {
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      border-radius: 6px;
-      padding: 8px;
-      min-width: 120px;
-      height: 24px;
+      background: #1a2a3a;
+      border: 2px solid #4a5a6a;
+      border-radius: 8px;
+      padding: 8px 12px;
+      min-width: 140px;
+      height: 28px;
       display: flex;
       align-items: center;
       font-size: 11px;
-      color: #1e40af;
+      color: #80a0c0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     
     .tabs-preview {
       display: flex;
-      gap: 4px;
+      gap: 6px;
     }
     
     .tab-preview {
-      background: #333;
-      color: white;
-      padding: 4px 8px;
-      border-radius: 4px;
+      background: #1a1a1f;
+      color: #e0e0e5;
+      padding: 6px 10px;
+      border-radius: 6px;
       font-size: 10px;
-      font-weight: 500;
-      height: 20px;
+      font-weight: 700;
+      height: 24px;
       display: flex;
       align-items: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid #4a4a4f;
     }
     
     .tab-preview.inactive {
-      background: #f1f5f9;
-      color: #475569;
-      border: 1px solid #cbd5e1;
+      background: #2a2a2f;
+      color: #a0a0a5;
+      border: 1px solid #4a4a4f;
     }
     
     .footer {
-      background: #f1f5f9;
-      padding: 16px 20px;
+      background: #1a1a1f;
+      padding: 20px 24px;
       text-align: center;
-      border-top: 1px solid #e2e8f0;
+      border-top: 1px solid #3a3a3f;
     }
     
     .footer-text {
       font-size: 12px;
-      color: #64748b;
+      color: #808085;
       margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
   </style>
 </head>
@@ -330,7 +380,7 @@
   <div class="container">
     <div class="header">
       <h1>🏠 House Design System</h1>
-      <p>Professional UI components for your designs</p>
+      <p>Luxury Automotive Aesthetic</p>
     </div>
     
     <div class="components-grid">
@@ -344,10 +394,10 @@
             <span class="component-type">Interactive</span>
           </div>
           <div class="component-preview">
-            <div class="button-preview">Button</div>
+            <div class="button-preview">BUTTON</div>
           </div>
           <p class="component-description">
-            Primary action buttons with consistent sizing and hover states.
+            Luxury automotive buttons with sophisticated typography and refined styling.
           </p>
           <button class="insert-button">Insert Button</button>
         </div>
@@ -358,10 +408,10 @@
             <span class="component-type">Form</span>
           </div>
           <div class="component-preview">
-            <div class="input-preview">Enter text...</div>
+            <div class="input-preview">ENTER TEXT...</div>
           </div>
           <p class="component-description">
-            Single-line text input with proper borders and placeholder.
+            Premium input fields with luxury automotive typography and refined borders.
           </p>
           <button class="insert-button">Insert Input</button>
         </div>
@@ -372,10 +422,10 @@
             <span class="component-type">Form</span>
           </div>
           <div class="component-preview">
-            <div class="textarea-preview">Enter your message...</div>
+            <div class="textarea-preview">ENTER MESSAGE...</div>
           </div>
           <p class="component-description">
-            Multi-line text input for longer content and messages.
+            Multi-line text input with luxury automotive aesthetic and sophisticated styling.
           </p>
           <button class="insert-button">Insert Textarea</button>
         </div>
@@ -386,10 +436,10 @@
             <span class="component-type">Form</span>
           </div>
           <div class="component-preview">
-            <div class="select-preview">Select option...</div>
+            <div class="select-preview">SELECT OPTION...</div>
           </div>
           <p class="component-description">
-            Dropdown selection with placeholder text and arrow indicator.
+            Premium dropdown selection with luxury typography and refined arrow indicator.
           </p>
           <button class="insert-button">Insert Select</button>
         </div>
@@ -403,7 +453,7 @@
             <div class="checkbox-preview"></div>
           </div>
           <p class="component-description">
-            Standard checkbox for multiple selection options.
+            Sophisticated checkbox with luxury automotive styling and refined borders.
           </p>
           <button class="insert-button">Insert Checkbox</button>
         </div>
@@ -417,7 +467,7 @@
             <div class="radio-preview"></div>
           </div>
           <p class="component-description">
-            Radio button for single selection from multiple options.
+            Premium radio button with luxury automotive aesthetic and sophisticated styling.
           </p>
           <button class="insert-button">Insert Radio</button>
         </div>
@@ -436,7 +486,7 @@
             <div class="card-preview"></div>
           </div>
           <p class="component-description">
-            Content container with title, description, and proper spacing.
+            Luxury automotive card with sophisticated typography and refined spacing.
           </p>
           <button class="insert-button">Insert Card</button>
         </div>
@@ -447,10 +497,10 @@
             <span class="component-type">Status</span>
           </div>
           <div class="component-preview">
-            <div class="badge-preview">Badge</div>
+            <div class="badge-preview">BADGE</div>
           </div>
           <p class="component-description">
-            Small status indicator with pill-shaped design.
+            Premium status indicator with luxury automotive typography and sophisticated styling.
           </p>
           <button class="insert-button">Insert Badge</button>
         </div>
@@ -464,7 +514,7 @@
             <div class="divider-preview"></div>
           </div>
           <p class="component-description">
-            Horizontal separator line for content organization.
+            Sophisticated separator line with luxury automotive aesthetic and refined styling.
           </p>
           <button class="insert-button">Insert Divider</button>
         </div>
@@ -478,7 +528,7 @@
             <div class="avatar-preview">JD</div>
           </div>
           <p class="component-description">
-            Circular profile image with initials fallback.
+            Premium profile circle with luxury automotive typography and sophisticated styling.
           </p>
           <button class="insert-button">Insert Avatar</button>
         </div>
@@ -489,10 +539,10 @@
             <span class="component-type">Display</span>
           </div>
           <div class="component-preview">
-            <div class="alert-preview">Info message</div>
+            <div class="alert-preview">INFO MESSAGE</div>
           </div>
           <p class="component-description">
-            Informational alert with colored background and border.
+            Luxury automotive alert with sophisticated typography and refined color scheme.
           </p>
           <button class="insert-button">Insert Alert</button>
         </div>
@@ -504,13 +554,13 @@
           </div>
           <div class="component-preview">
             <div class="tabs-preview">
-              <div class="tab-preview">Tab 1</div>
-              <div class="tab-preview inactive">Tab 2</div>
-              <div class="tab-preview inactive">Tab 3</div>
+              <div class="tab-preview">TAB 1</div>
+              <div class="tab-preview inactive">TAB 2</div>
+              <div class="tab-preview inactive">TAB 3</div>
             </div>
           </div>
           <p class="component-description">
-            Tab navigation with active and inactive states.
+            Premium tab navigation with luxury automotive aesthetic and sophisticated states.
           </p>
           <button class="insert-button">Insert Tabs</button>
         </div>
@@ -518,7 +568,7 @@
     </div>
     
     <div class="footer">
-      <p class="footer-text">Built with shadcn/ui design principles</p>
+      <p class="footer-text">Bubble-era Japan Luxury Automotive Aesthetic</p>
     </div>
   </div>
 

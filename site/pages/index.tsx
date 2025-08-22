@@ -86,6 +86,76 @@ export default function Home() {
           </div>
         </div>
 
+        <div className="mb-8 p-6 border rounded-lg">
+          <h2 className="text-2xl font-semibold mb-4">Typography Showcase</h2>
+          
+          {/* Font Families */}
+          <div className="mb-6">
+            <h3 className="text-lg font-medium mb-3">Font Families</h3>
+            <div className="space-y-2">
+              <div className="font-sans text-lg">Inter (Sans) - The quick brown fox jumps over the lazy dog</div>
+              <div className="font-mono text-lg">JetBrains Mono (Mono) - The quick brown fox jumps over the lazy dog</div>
+              <div className="font-display text-lg">Inter Display (Display) - The quick brown fox jumps over the lazy dog</div>
+            </div>
+          </div>
+
+          {/* Font Sizes */}
+          <div className="mb-6">
+            <h3 className="text-lg font-medium mb-3">Font Sizes</h3>
+            <div className="space-y-2">
+              <div className="text-xs">Extra Small (xs) - The quick brown fox</div>
+              <div className="text-sm">Small (sm) - The quick brown fox</div>
+              <div className="text-base">Base (base) - The quick brown fox</div>
+              <div className="text-lg">Large (lg) - The quick brown fox</div>
+              <div className="text-xl">Extra Large (xl) - The quick brown fox</div>
+              <div className="text-2xl">2XL - The quick brown fox</div>
+              <div className="text-3xl">3XL - The quick brown fox</div>
+              <div className="text-4xl">4XL - The quick brown fox</div>
+              <div className="text-5xl">5XL - The quick brown fox</div>
+              <div className="text-6xl">6XL - The quick brown fox</div>
+            </div>
+          </div>
+
+          {/* Font Weights */}
+          <div className="mb-6">
+            <h3 className="text-lg font-medium mb-3">Font Weights</h3>
+            <div className="space-y-2">
+              <div className="font-light text-lg">Light (300) - The quick brown fox</div>
+              <div className="font-normal text-lg">Normal (400) - The quick brown fox</div>
+              <div className="font-medium text-lg">Medium (500) - The quick brown fox</div>
+              <div className="font-semibold text-lg">Semibold (600) - The quick brown fox</div>
+              <div className="font-bold text-lg">Bold (700) - The quick brown fox</div>
+              <div className="font-extrabold text-lg">Extrabold (800) - The quick brown fox</div>
+            </div>
+          </div>
+
+          {/* Line Heights */}
+          <div className="mb-6">
+            <h3 className="text-lg font-medium mb-3">Line Heights</h3>
+            <div className="space-y-2 max-w-md">
+              <div className="leading-none">None (1.0) - This is a longer text to demonstrate line height. The quick brown fox jumps over the lazy dog.</div>
+              <div className="leading-tight">Tight (1.25) - This is a longer text to demonstrate line height. The quick brown fox jumps over the lazy dog.</div>
+              <div className="leading-snug">Snug (1.375) - This is a longer text to demonstrate line height. The quick brown fox jumps over the lazy dog.</div>
+              <div className="leading-normal">Normal (1.5) - This is a longer text to demonstrate line height. The quick brown fox jumps over the lazy dog.</div>
+              <div className="leading-relaxed">Relaxed (1.625) - This is a longer text to demonstrate line height. The quick brown fox jumps over the lazy dog.</div>
+              <div className="leading-loose">Loose (2.0) - This is a longer text to demonstrate line height. The quick brown fox jumps over the lazy dog.</div>
+            </div>
+          </div>
+
+          {/* Letter Spacing */}
+          <div className="mb-6">
+            <h3 className="text-lg font-medium mb-3">Letter Spacing</h3>
+            <div className="space-y-2">
+              <div className="tracking-tighter text-lg">Tighter (-0.05em) - The quick brown fox</div>
+              <div className="tracking-tight text-lg">Tight (-0.025em) - The quick brown fox</div>
+              <div className="tracking-normal text-lg">Normal (0em) - The quick brown fox</div>
+              <div className="tracking-wide text-lg">Wide (0.025em) - The quick brown fox</div>
+              <div className="tracking-wider text-lg">Wider (0.05em) - The quick brown fox</div>
+              <div className="tracking-widest text-lg">Widest (0.1em) - The quick brown fox</div>
+            </div>
+          </div>
+        </div>
+
         <div className="p-6 border rounded-lg">
           <h2 className="text-2xl font-semibold mb-4">Current Tokens</h2>
           <div className="grid grid-cols-2 gap-4 text-sm">
