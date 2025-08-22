@@ -87,22 +87,102 @@ export default function Home() {
         </div>
 
         <div className="mb-8 p-6 border rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">Typography Showcase</h2>
+          <h2 className="text-2xl font-semibold mb-6">Typography Showcase</h2>
           
           {/* Font Families */}
-          <div className="mb-6">
-            <h3 className="text-lg font-medium mb-3">Font Families</h3>
-            <div className="space-y-2">
-              <div className="font-sans text-lg">Inter (Sans) - The quick brown fox jumps over the lazy dog</div>
-              <div className="font-mono text-lg">JetBrains Mono (Mono) - The quick brown fox jumps over the lazy dog</div>
-              <div className="font-display text-lg">Inter Display (Display) - The quick brown fox jumps over the lazy dog</div>
+          <div className="mb-12 p-6 border border-gray-200 rounded-lg bg-gray-50">
+            <h3 className="text-lg font-medium mb-4 text-gray-800">Font Families & Variants</h3>
+            <div className="space-y-6">
+              {/* Eurostile Display Fonts */}
+              <div className="p-3 border-l-4 border-purple-500 bg-white rounded-r">
+                <h4 className="text-sm font-semibold text-gray-700 mb-3">Eurostile (Display)</h4>
+                <div className="space-y-3 pl-4">
+                  <div className="font-display text-lg italic font-normal">Regular Italic - The quick brown fox jumps over the lazy dog</div>
+                  <div className="font-display text-lg italic font-medium">Medium Italic - The quick brown fox jumps over the lazy dog</div>
+                  <div className="font-display text-lg italic font-bold">Bold Italic - The quick brown fox jumps over the lazy dog</div>
+                </div>
+              </div>
+
+              {/* Microgramma Heading Fonts */}
+              <div className="p-3 border-l-4 border-blue-500 bg-white rounded-r">
+                <h4 className="text-sm font-semibold text-gray-700 mb-3">Microgramma (Heading)</h4>
+                <div className="space-y-3 pl-4">
+                  <div className="font-heading text-lg font-normal">Regular - The quick brown fox jumps over the lazy dog</div>
+                  <div className="font-heading text-lg font-medium">Medium - The quick brown fox jumps over the lazy dog</div>
+                  <div className="font-heading text-lg font-bold">Bold - The quick brown fox jumps over the lazy dog</div>
+                </div>
+              </div>
+
+              {/* Inter Body Fonts */}
+              <div className="p-3 border-l-4 border-green-500 bg-white rounded-r">
+                <h4 className="text-sm font-semibold text-gray-700 mb-3">Inter (Body)</h4>
+                <div className="space-y-3 pl-4">
+                  <div className="font-body text-lg font-light">Light - The quick brown fox jumps over the lazy dog</div>
+                  <div className="font-body text-lg font-normal">Regular - The quick brown fox jumps over the lazy dog</div>
+                  <div className="font-body text-lg font-medium">Medium - The quick brown fox jumps over the lazy dog</div>
+                </div>
+              </div>
+
+              {/* Futura UI Fonts */}
+              <div className="p-3 border-l-4 border-orange-500 bg-white rounded-r">
+                <h4 className="text-sm font-semibold text-gray-700 mb-3">Futura (UI)</h4>
+                <div className="space-y-3 pl-4">
+                  <div className="font-ui text-lg font-normal">Regular - The quick brown fox jumps over the lazy dog</div>
+                  <div className="font-ui text-lg font-medium">Medium - The quick brown fox jumps over the lazy dog</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Font Weight Showcase */}
+          <div className="mb-12 p-6 border border-gray-200 rounded-lg bg-gray-50">
+            <h3 className="text-lg font-medium mb-4 text-gray-800">Font Weight Showcase</h3>
+            <div className="space-y-6">
+              {/* Eurostile Weights */}
+              <div className="p-3 border-l-4 border-purple-500 bg-white rounded-r">
+                <h4 className="text-sm font-semibold text-gray-700 mb-3">Eurostile Weights</h4>
+                <div className="space-y-3 pl-4">
+                  <div className="font-display text-lg italic font-normal">Regular Italic (400) - The quick brown fox</div>
+                  <div className="font-display text-lg italic font-medium">Medium Italic (500) - The quick brown fox</div>
+                  <div className="font-display text-lg italic font-bold">Bold Italic (700) - The quick brown fox</div>
+                </div>
+              </div>
+
+              {/* Microgramma Weights */}
+              <div className="p-3 border-l-4 border-blue-500 bg-white rounded-r">
+                <h4 className="text-sm font-semibold text-gray-700 mb-3">Microgramma Weights</h4>
+                <div className="space-y-3 pl-4">
+                  <div className="font-heading text-lg font-normal">Regular (400) - The quick brown fox</div>
+                  <div className="font-heading text-lg font-medium">Medium (500) - The quick brown fox</div>
+                  <div className="font-heading text-lg font-bold">Bold (700) - The quick brown fox</div>
+                </div>
+              </div>
+
+              {/* Inter Weights */}
+              <div className="p-3 border-l-4 border-green-500 bg-white rounded-r">
+                <h4 className="text-sm font-semibold text-gray-700 mb-3">Inter Weights</h4>
+                <div className="space-y-3 pl-4">
+                  <div className="font-body text-lg font-light">Light (300) - The quick brown fox</div>
+                  <div className="font-body text-lg font-normal">Regular (400) - The quick brown fox</div>
+                  <div className="font-body text-lg font-medium">Medium (500) - The quick brown fox</div>
+                </div>
+              </div>
+
+              {/* Futura Weights */}
+              <div className="p-3 border-l-4 border-orange-500 bg-white rounded-r">
+                <h4 className="text-sm font-semibold text-gray-700 mb-3">Futura Weights</h4>
+                <div className="space-y-3 pl-4">
+                  <div className="font-ui text-lg font-normal">Regular (400) - The quick brown fox</div>
+                  <div className="font-ui text-lg font-medium">Medium (500) - The quick brown fox</div>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Font Sizes */}
-          <div className="mb-6">
-            <h3 className="text-lg font-medium mb-3">Font Sizes</h3>
-            <div className="space-y-2">
+          <div className="mb-12 p-6 border border-gray-200 rounded-lg bg-gray-50">
+            <h3 className="text-lg font-medium mb-4 text-gray-800">Font Sizes</h3>
+            <div className="space-y-3">
               <div className="text-xs">Extra Small (xs) - The quick brown fox</div>
               <div className="text-sm">Small (sm) - The quick brown fox</div>
               <div className="text-base">Base (base) - The quick brown fox</div>
@@ -117,9 +197,9 @@ export default function Home() {
           </div>
 
           {/* Font Weights */}
-          <div className="mb-6">
-            <h3 className="text-lg font-medium mb-3">Font Weights</h3>
-            <div className="space-y-2">
+          <div className="mb-12 p-6 border border-gray-200 rounded-lg bg-gray-50">
+            <h3 className="text-lg font-medium mb-4 text-gray-800">Font Weights</h3>
+            <div className="space-y-3">
               <div className="font-light text-lg">Light (300) - The quick brown fox</div>
               <div className="font-normal text-lg">Normal (400) - The quick brown fox</div>
               <div className="font-medium text-lg">Medium (500) - The quick brown fox</div>
@@ -130,9 +210,9 @@ export default function Home() {
           </div>
 
           {/* Line Heights */}
-          <div className="mb-6">
-            <h3 className="text-lg font-medium mb-3">Line Heights</h3>
-            <div className="space-y-2 max-w-md">
+          <div className="mb-12 p-6 border border-gray-200 rounded-lg bg-gray-50">
+            <h3 className="text-lg font-medium mb-4 text-gray-800">Line Heights</h3>
+            <div className="space-y-3 max-w-md">
               <div className="leading-none">None (1.0) - This is a longer text to demonstrate line height. The quick brown fox jumps over the lazy dog.</div>
               <div className="leading-tight">Tight (1.25) - This is a longer text to demonstrate line height. The quick brown fox jumps over the lazy dog.</div>
               <div className="leading-snug">Snug (1.375) - This is a longer text to demonstrate line height. The quick brown fox jumps over the lazy dog.</div>
@@ -143,9 +223,9 @@ export default function Home() {
           </div>
 
           {/* Letter Spacing */}
-          <div className="mb-6">
-            <h3 className="text-lg font-medium mb-3">Letter Spacing</h3>
-            <div className="space-y-2">
+          <div className="mb-12 p-6 border border-gray-200 rounded-lg bg-gray-50">
+            <h3 className="text-lg font-medium mb-4 text-gray-800">Letter Spacing</h3>
+            <div className="space-y-3">
               <div className="tracking-tighter text-lg">Tighter (-0.05em) - The quick brown fox</div>
               <div className="tracking-tight text-lg">Tight (-0.025em) - The quick brown fox</div>
               <div className="tracking-normal text-lg">Normal (0em) - The quick brown fox</div>

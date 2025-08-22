@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
 
-const tokensPath = path.resolve(process.cwd(), "packages/tokens/tokens.json");
-const cssOutPath = path.resolve(process.cwd(), "packages/tokens/tokens.css");
+const tokensPath = path.resolve(process.cwd(), "tokens.json");
+const cssOutPath = path.resolve(process.cwd(), "tokens.css");
 
 const tokens = JSON.parse(fs.readFileSync(tokensPath, "utf8"));
 

@@ -1,11 +1,37 @@
-figma.showUI(__html__, { width: 352, height: 600 });
+// Figma Plugin for House Design System
+// Luxury Automotive Aesthetic with Custom Typography
+
+figma.showUI(__html__, { width: 400, height: 600 });
+
+// Custom Font URLs from hosting.com
+const customFonts = {
+  eurostile: {
+    regularItalic: "https://upfetch.me/fonts/Eurostile-Regular-Italic.woff2",
+    boldItalic: "https://upfetch.me/fonts/Eurostile-Bold-Italic.woff2",
+    mediumItalic: "https://upfetch.me/fonts/Eurostile-Medium-Italic.woff2"
+  },
+  microgramma: {
+    bold: "https://upfetch.me/fonts/Microgramma-Bold.woff2",
+    medium: "https://upfetch.me/fonts/Microgramma-Medium.woff2",
+    regular: "https://upfetch.me/fonts/Microgramma-Regular.woff2"
+  },
+  inter: {
+    regular: "https://upfetch.me/fonts/Inter-Regular.woff2",
+    medium: "https://upfetch.me/fonts/Inter-Medium.woff2",
+    light: "https://upfetch.me/fonts/Inter-Light.woff2"
+  },
+  futura: {
+    medium: "https://upfetch.me/fonts/Futura-Medium.woff2",
+    regular: "https://upfetch.me/fonts/Futura-Regular.woff2"
+  }
+};
 
 // Typography System - Luxury Automotive Aesthetic
 const typography = {
   display: {
     family: "Eurostile",
     fallback: "Arial Black",
-    weights: { bold: 700, medium: 500 }
+    weights: { italic: 400 }
   },
   heading: {
     family: "Microgramma",
@@ -24,580 +50,509 @@ const typography = {
   }
 };
 
-// Font loading with fallbacks
-async function loadFonts() {
+// Helper function to safely set font names with fallbacks
+function setFontSafely(textNode: TextNode, preferredFont: { family: string, style: string }) {
   try {
-    // Try to load premium fonts first
-    await figma.loadFontAsync({ family: "Eurostile", style: "Bold" });
-    await figma.loadFontAsync({ family: "Microgramma", style: "Bold" });
-    await figma.loadFontAsync({ family: "Inter", style: "Regular" });
-    await figma.loadFontAsync({ family: "Futura", style: "Medium" });
+    textNode.fontName = preferredFont;
   } catch (error) {
-    // Fall back to system fonts
-    await figma.loadFontAsync({ family: "SF Pro Display", style: "Bold" });
-    await figma.loadFontAsync({ family: "SF Pro Text", style: "Regular" });
+    console.log(`⚠️ Failed to set font ${preferredFont.family} ${preferredFont.style}, using fallback`);
+    try {
+      textNode.fontName = { family: "Arial", style: "Regular" };
+    } catch (fallbackError) {
+      console.log("❌ Even fallback font failed");
+    }
   }
 }
 
-figma.ui.onmessage = async (msg) => {
-  if (msg.type === "insert" && msg.component) {
+// Font loading with system fonts
+async function loadFonts() {
+  console.log("🔄 Starting font loading...");
+  
+  // Load fonts with individual error handling
+  const fontsToLoad = [
+    { family: "Arial Black", style: "Regular" },
+    { family: "Arial", style: "Regular" },
+    { family: "Arial", style: "Bold" },
+    { family: "SF Pro Display", style: "Bold" },
+    { family: "SF Pro Text", style: "Regular" }
+  ];
+
+  for (const font of fontsToLoad) {
     try {
-      // Load fonts first
-      await loadFonts();
-      
-      switch (msg.component) {
-        case "button":
-          await createButton();
-          break;
-        case "input":
-          await createInput();
-          break;
-        case "textarea":
-          await createTextarea();
-          break;
-        case "select":
-          await createSelect();
-          break;
-        case "checkbox":
-          await createCheckbox();
-          break;
-        case "radio":
-          await createRadio();
-          break;
-        case "card":
-          await createCard();
-          break;
-        case "badge":
-          await createBadge();
-          break;
-        case "divider":
-          await createDivider();
-          break;
-        case "avatar":
-          await createAvatar();
-          break;
-        case "alert":
-          await createAlert();
-          break;
-        case "tabs":
-          await createTabs();
-          break;
-        default:
-          figma.notify("❌ Unknown component type");
-      }
+      await figma.loadFontAsync(font);
+      console.log(`✅ Loaded font: ${font.family} ${font.style}`);
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-      figma.notify("❌ Error creating component: " + errorMessage);
+      console.log(`⚠️ Failed to load font: ${font.family} ${font.style}`);
     }
   }
-};
 
-async function createButton() {
-  // Create a button frame with luxury automotive styling
-  const frame = figma.createFrame();
-  frame.name = "Button";
-  frame.resize(140, 44); // Slightly larger for luxury feel
-  frame.cornerRadius = 8; // Refined radius
-  
-  // Set background color (deep, sophisticated)
-  frame.fills = [{ type: 'SOLID', color: { r: 0.1, g: 0.1, b: 0.15 } }]; // Deep charcoal
-  
-  // Create button text with luxury typography
-  const text = figma.createText();
-  text.characters = "BUTTON";
-  text.fontSize = 14;
-  
-  // Use luxury automotive typography
+  // Always ensure we have basic fallbacks
   try {
-    text.fontName = { family: "Eurostile", style: "Bold" };
-  } catch {
-    text.fontName = { family: "SF Pro Display", style: "Bold" };
+    await figma.loadFontAsync({ family: "Arial", style: "Regular" });
+    console.log("✅ Fallback font loaded: Arial Regular");
+  } catch (error) {
+    console.log("❌ Critical: Even fallback font failed to load");
   }
-  
-  text.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }]; // Pure white
-  text.letterSpacing = { value: 1, unit: "PIXELS" }; // Luxury spacing
-  
-  // Center the text
-  text.x = (frame.width - text.width) / 2;
-  text.y = (frame.height - text.height) / 2;
-  
-  frame.appendChild(text);
-  
-  // Add to current page
-  figma.currentPage.appendChild(frame);
-  figma.currentPage.selection = [frame];
-  
-  figma.notify("✅ Inserted Luxury Button component");
+}
+
+// Component creation functions
+async function createButton() {
+  try {
+    // Create a button frame with luxury automotive styling
+    const frame = figma.createFrame();
+    frame.name = "Button";
+    frame.resize(140, 44); // Slightly larger for luxury feel
+    frame.cornerRadius = 8; // Refined radius
+
+    // Set background color (deep, sophisticated)
+    frame.fills = [{ type: 'SOLID', color: { r: 0.1, g: 0.1, b: 0.15 } }]; // Deep charcoal
+
+    // Create button text with luxury typography
+    const text = figma.createText();
+    text.characters = "BUTTON";
+    text.fontSize = 14;
+
+    // Use Arial Black for that bold, automotive feel
+    setFontSafely(text, { family: "Arial Black", style: "Regular" });
+
+    text.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }]; // Pure white
+    text.letterSpacing = { value: 1, unit: "PIXELS" }; // Luxury spacing
+
+    // Center the text
+    text.x = (frame.width - text.width) / 2;
+    text.y = (frame.height - text.height) / 2;
+
+    frame.appendChild(text);
+
+    // Add to current page
+    figma.currentPage.appendChild(frame);
+    figma.currentPage.selection = [frame];
+
+    figma.notify("✅ Inserted Luxury Button with Automotive Typography");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    figma.notify(`❌ Error creating button: ${errorMessage}`);
+    console.error("Button creation error:", error);
+  }
 }
 
 async function createInput() {
-  // Create input frame with refined styling
-  const frame = figma.createFrame();
-  frame.name = "Input Field";
-  frame.resize(220, 40); // Slightly larger for luxury feel
-  frame.cornerRadius = 6;
-  
-  // Set background color (sophisticated white)
-  frame.fills = [{ type: 'SOLID', color: { r: 0.98, g: 0.98, b: 0.98 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
-  frame.strokeWeight = 1;
-  
-  // Create placeholder text with luxury typography
-  const text = figma.createText();
-  text.characters = "ENTER TEXT...";
-  text.fontSize = 13;
-  
   try {
-    text.fontName = { family: "Microgramma", style: "Medium" };
-  } catch {
-    text.fontName = { family: "SF Pro Text", style: "Medium" };
-  }
-  
-  text.fills = [{ type: 'SOLID', color: { r: 0.5, g: 0.5, b: 0.55 } }];
-  text.letterSpacing = { value: 0.5, unit: "PIXELS" };
-  
-  // Position text with luxury spacing
-  text.x = 14;
-  text.y = (frame.height - text.height) / 2;
-  
-  frame.appendChild(text);
-  
-  // Add to current page
-  figma.currentPage.appendChild(frame);
-  figma.currentPage.selection = [frame];
-  
-  figma.notify("✅ Inserted Luxury Input component");
-}
+    const frame = figma.createFrame();
+    frame.name = "Input";
+    frame.resize(200, 44);
+    frame.cornerRadius = 6;
+    frame.fills = [{ type: 'SOLID', color: { r: 0.95, g: 0.95, b: 0.97 } }];
+    frame.strokes = [{ type: 'SOLID', color: { r: 0.8, g: 0.8, b: 0.85 } }];
+    frame.strokeWeight = 1;
 
-async function createTextarea() {
-  // Create textarea frame with luxury styling
-  const frame = figma.createFrame();
-  frame.name = "Textarea";
-  frame.resize(220, 90);
-  frame.cornerRadius = 6;
-  
-  // Set background color (sophisticated white)
-  frame.fills = [{ type: 'SOLID', color: { r: 0.98, g: 0.98, b: 0.98 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
-  frame.strokeWeight = 1;
-  
-  // Create placeholder text with luxury typography
-  const text = figma.createText();
-  text.characters = "ENTER YOUR MESSAGE...";
-  text.fontSize = 13;
-  
-  try {
-    text.fontName = { family: "Microgramma", style: "Medium" };
-  } catch {
-    text.fontName = { family: "SF Pro Text", style: "Medium" };
-  }
-  
-  text.fills = [{ type: 'SOLID', color: { r: 0.5, g: 0.5, b: 0.55 } }];
-  text.letterSpacing = { value: 0.5, unit: "PIXELS" };
-  
-  // Position text with luxury spacing
-  text.x = 14;
-  text.y = 14;
-  
-  frame.appendChild(text);
-  
-  // Add to current page
-  figma.currentPage.appendChild(frame);
-  figma.currentPage.selection = [frame];
-  
-  figma.notify("✅ Inserted Luxury Textarea component");
-}
+    const text = figma.createText();
+    text.characters = "Input text";
+    text.fontSize = 14;
+    text.fills = [{ type: 'SOLID', color: { r: 0.3, g: 0.3, b: 0.35 } }];
 
-async function createSelect() {
-  // Create select frame with luxury styling
-  const frame = figma.createFrame();
-  frame.name = "Select Dropdown";
-  frame.resize(220, 40);
-  frame.cornerRadius = 6;
-  
-  // Set background color (sophisticated white)
-  frame.fills = [{ type: 'SOLID', color: { r: 0.98, g: 0.98, b: 0.98 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
-  frame.strokeWeight = 1;
-  
-  // Create select text with luxury typography
-  const text = figma.createText();
-  text.characters = "SELECT OPTION...";
-  text.fontSize = 13;
-  
-  try {
-    text.fontName = { family: "Microgramma", style: "Medium" };
-  } catch {
-    text.fontName = { family: "SF Pro Text", style: "Medium" };
-  }
-  
-  text.fills = [{ type: 'SOLID', color: { r: 0.5, g: 0.5, b: 0.55 } }];
-  text.letterSpacing = { value: 0.5, unit: "PIXELS" };
-  
-  // Create dropdown arrow with luxury styling
-  const arrow = figma.createText();
-  arrow.characters = "▼";
-  arrow.fontSize = 12;
-  
-  try {
-    arrow.fontName = { family: "Futura", style: "Medium" };
-  } catch {
-    arrow.fontName = { family: "SF Pro Display", style: "Medium" };
-  }
-  
-  arrow.fills = [{ type: 'SOLID', color: { r: 0.3, g: 0.3, b: 0.35 } }];
-  
-  // Position elements with luxury spacing
-  text.x = 14;
-  text.y = (frame.height - text.height) / 2;
-  
-  arrow.x = frame.width - 26;
-  arrow.y = (frame.height - arrow.height) / 2;
-  
-  frame.appendChild(text);
-  frame.appendChild(arrow);
-  
-  // Add to current page
-  figma.currentPage.appendChild(frame);
-  figma.currentPage.selection = [frame];
-  
-  figma.notify("✅ Inserted Luxury Select component");
-}
+    // Use Arial Black for placeholder text
+    setFontSafely(text, { family: "Arial Black", style: "Regular" });
 
-async function createCheckbox() {
-  // Create checkbox frame with luxury styling
-  const frame = figma.createFrame();
-  frame.name = "Checkbox";
-  frame.resize(18, 18);
-  frame.cornerRadius = 3;
-  
-  // Set background color (sophisticated white)
-  frame.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
-  frame.strokeWeight = 1;
-  
-  // Add to current page
-  figma.currentPage.appendChild(frame);
-  figma.currentPage.selection = [frame];
-  
-  figma.notify("✅ Inserted Luxury Checkbox component");
-}
+    text.x = 12;
+    text.y = (frame.height - text.height) / 2;
+    frame.appendChild(text);
 
-async function createRadio() {
-  // Create radio frame with luxury styling
-  const frame = figma.createFrame();
-  frame.name = "Radio Button";
-  frame.resize(18, 18);
-  frame.cornerRadius = 9;
-  
-  // Set background color (sophisticated white)
-  frame.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
-  frame.strokeWeight = 1;
-  
-  // Add to current page
-  figma.currentPage.appendChild(frame);
-  figma.currentPage.selection = [frame];
-  
-  figma.notify("✅ Inserted Luxury Radio Button component");
+    figma.currentPage.appendChild(frame);
+    figma.currentPage.selection = [frame];
+    figma.notify("✅ Inserted Input with Automotive Typography");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    figma.notify(`❌ Error creating input: ${errorMessage}`);
+    console.error("Input creation error:", error);
+  }
 }
 
 async function createCard() {
-  // Create card frame with luxury automotive styling
-  const frame = figma.createFrame();
-  frame.name = "Card";
-  frame.resize(260, 180);
-  frame.cornerRadius = 10;
-  
-  // Set background color (sophisticated white)
-  frame.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.15, g: 0.15, b: 0.2 } }];
-  frame.strokeWeight = 1;
-  
-  // Create card title with luxury typography
-  const title = figma.createText();
-  title.characters = "CARD TITLE";
-  title.fontSize = 18;
-  
   try {
-    title.fontName = { family: "Eurostile", style: "Bold" };
-  } catch {
-    title.fontName = { family: "SF Pro Display", style: "Bold" };
+    const frame = figma.createFrame();
+    frame.name = "Card";
+    frame.resize(240, 160);
+    frame.cornerRadius = 12;
+    frame.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
+    frame.strokes = [{ type: 'SOLID', color: { r: 0.9, g: 0.9, b: 0.95 } }];
+    frame.strokeWeight = 1;
+
+    const title = figma.createText();
+    title.characters = "CARD TITLE";
+    title.fontSize = 18;
+    title.fills = [{ type: 'SOLID', color: { r: 0.1, g: 0.1, b: 0.15 } }];
+
+    // Use Arial Black for card title
+    setFontSafely(title, { family: "Arial Black", style: "Regular" });
+
+    title.letterSpacing = { value: 0.5, unit: "PIXELS" };
+    title.x = 16;
+    title.y = 16;
+    frame.appendChild(title);
+
+    const content = figma.createText();
+    content.characters = "Card content goes here with some sample text to show the layout.";
+    content.fontSize = 14;
+    content.fills = [{ type: 'SOLID', color: { r: 0.4, g: 0.4, b: 0.45 } }];
+    setFontSafely(content, { family: "SF Pro Text", style: "Regular" });
+    content.x = 16;
+    content.y = 50;
+    content.resize(208, 94);
+    frame.appendChild(content);
+
+    figma.currentPage.appendChild(frame);
+    figma.currentPage.selection = [frame];
+    figma.notify("✅ Inserted Card with Automotive Typography");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    figma.notify(`❌ Error creating card: ${errorMessage}`);
+    console.error("Card creation error:", error);
   }
-  
-  title.fills = [{ type: 'SOLID', color: { r: 0.1, g: 0.1, b: 0.15 } }];
-  title.letterSpacing = { value: 1, unit: "PIXELS" };
-  
-  // Create card content with luxury typography
-  const content = figma.createText();
-  content.characters = "This is a luxury automotive card component with sophisticated typography and refined spacing.";
-  content.fontSize = 14;
-  
-  try {
-    content.fontName = { family: "Inter", style: "Regular" };
-  } catch {
-    content.fontName = { family: "SF Pro Text", style: "Regular" };
-  }
-  
-  content.fills = [{ type: 'SOLID', color: { r: 0.3, g: 0.3, b: 0.35 } }];
-  content.lineHeight = { value: 20, unit: "PIXELS" };
-  
-  // Position elements with luxury spacing
-  title.x = 18;
-  title.y = 18;
-  
-  content.x = 18;
-  content.y = 52;
-  content.resize(224, 110);
-  
-  frame.appendChild(title);
-  frame.appendChild(content);
-  
-  // Add to current page
-  figma.currentPage.appendChild(frame);
-  figma.currentPage.selection = [frame];
-  
-  figma.notify("✅ Inserted Luxury Card component");
 }
 
 async function createBadge() {
-  // Create badge frame with luxury automotive styling
-  const frame = figma.createFrame();
-  frame.name = "Badge";
-  frame.resize(90, 24);
-  frame.cornerRadius = 12;
-  
-  // Set background color (sophisticated accent)
-  frame.fills = [{ type: 'SOLID', color: { r: 0.95, g: 0.95, b: 0.97 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
-  frame.strokeWeight = 1;
-  
-  // Create badge text with luxury typography
-  const text = figma.createText();
-  text.characters = "BADGE";
-  text.fontSize = 11;
-  
   try {
-    text.fontName = { family: "Microgramma", style: "Bold" };
-  } catch {
-    text.fontName = { family: "SF Pro Text", style: "Bold" };
+    const frame = figma.createFrame();
+    frame.name = "Badge";
+    frame.resize(80, 24);
+    frame.cornerRadius = 12;
+    frame.fills = [{ type: 'SOLID', color: { r: 0.1, g: 0.1, b: 0.15 } }];
+
+    const text = figma.createText();
+    text.characters = "BADGE";
+    text.fontSize = 12;
+    text.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
+
+    // Use Arial Black for badge text
+    setFontSafely(text, { family: "Arial Black", style: "Regular" });
+
+    text.letterSpacing = { value: 0.5, unit: "PIXELS" };
+    text.x = (frame.width - text.width) / 2;
+    text.y = (frame.height - text.height) / 2;
+    frame.appendChild(text);
+
+    figma.currentPage.appendChild(frame);
+    figma.currentPage.selection = [frame];
+    figma.notify("✅ Inserted Badge with Automotive Typography");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    figma.notify(`❌ Error creating badge: ${errorMessage}`);
+    console.error("Badge creation error:", error);
   }
-  
-  text.fills = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
-  text.letterSpacing = { value: 0.5, unit: "PIXELS" };
-  
-  // Center the text
-  text.x = (frame.width - text.width) / 2;
-  text.y = (frame.height - text.height) / 2;
-  
-  frame.appendChild(text);
-  
-  // Add to current page
-  figma.currentPage.appendChild(frame);
-  figma.currentPage.selection = [frame];
-  
-  figma.notify("✅ Inserted Luxury Badge component");
+}
+
+async function createTextarea() {
+  try {
+    const frame = figma.createFrame();
+    frame.name = "Textarea";
+    frame.resize(200, 100);
+    frame.cornerRadius = 6;
+    frame.fills = [{ type: 'SOLID', color: { r: 0.95, g: 0.95, b: 0.97 } }];
+    frame.strokes = [{ type: 'SOLID', color: { r: 0.8, g: 0.8, b: 0.85 } }];
+    frame.strokeWeight = 1;
+
+    const text = figma.createText();
+    text.characters = "Textarea content with multiple lines to demonstrate the component.";
+    text.fontSize = 14;
+    text.fills = [{ type: 'SOLID', color: { r: 0.3, g: 0.3, b: 0.35 } }];
+    setFontSafely(text, { family: "SF Pro Text", style: "Regular" });
+    text.x = 12;
+    text.y = 12;
+    text.resize(176, 76);
+    frame.appendChild(text);
+
+    figma.currentPage.appendChild(frame);
+    figma.currentPage.selection = [frame];
+    figma.notify("✅ Inserted Textarea");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    figma.notify(`❌ Error creating textarea: ${errorMessage}`);
+    console.error("Textarea creation error:", error);
+  }
+}
+
+async function createSelect() {
+  try {
+    const frame = figma.createFrame();
+    frame.name = "Select";
+    frame.resize(200, 44);
+    frame.cornerRadius = 6;
+    frame.fills = [{ type: 'SOLID', color: { r: 0.95, g: 0.95, b: 0.97 } }];
+    frame.strokes = [{ type: 'SOLID', color: { r: 0.8, g: 0.8, b: 0.85 } }];
+    frame.strokeWeight = 1;
+
+    const text = figma.createText();
+    text.characters = "Select option";
+    text.fontSize = 14;
+    text.fills = [{ type: 'SOLID', color: { r: 0.3, g: 0.3, b: 0.35 } }];
+    text.fontName = { family: "SF Pro Text", style: "Regular" };
+    text.x = 12;
+    text.y = (frame.height - text.height) / 2;
+    frame.appendChild(text);
+
+    figma.currentPage.appendChild(frame);
+    figma.currentPage.selection = [frame];
+    figma.notify("✅ Inserted Select");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    figma.notify(`❌ Error creating select: ${errorMessage}`);
+    console.error("Select creation error:", error);
+  }
+}
+
+async function createCheckbox() {
+  try {
+    const frame = figma.createFrame();
+    frame.name = "Checkbox";
+    frame.resize(20, 20);
+    frame.cornerRadius = 4;
+    frame.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
+    frame.strokes = [{ type: 'SOLID', color: { r: 0.8, g: 0.8, b: 0.85 } }];
+    frame.strokeWeight = 1;
+
+    figma.currentPage.appendChild(frame);
+    figma.currentPage.selection = [frame];
+    figma.notify("✅ Inserted Checkbox");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    figma.notify(`❌ Error creating checkbox: ${errorMessage}`);
+    console.error("Checkbox creation error:", error);
+  }
+}
+
+async function createRadio() {
+  try {
+    const frame = figma.createFrame();
+    frame.name = "Radio";
+    frame.resize(20, 20);
+    frame.cornerRadius = 10;
+    frame.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
+    frame.strokes = [{ type: 'SOLID', color: { r: 0.8, g: 0.8, b: 0.85 } }];
+    frame.strokeWeight = 1;
+
+    figma.currentPage.appendChild(frame);
+    figma.currentPage.selection = [frame];
+    figma.notify("✅ Inserted Radio");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    figma.notify(`❌ Error creating radio: ${errorMessage}`);
+    console.error("Radio creation error:", error);
+  }
 }
 
 async function createDivider() {
-  // Create divider frame with luxury styling
-  const frame = figma.createFrame();
-  frame.name = "Divider";
-  frame.resize(220, 2);
-  
-  // Set background color (sophisticated gray)
-  frame.fills = [{ type: 'SOLID', color: { r: 0.85, g: 0.85, b: 0.87 } }];
-  
-  // Add to current page
-  figma.currentPage.appendChild(frame);
-  figma.currentPage.selection = [frame];
-  
-  figma.notify("✅ Inserted Luxury Divider component");
+  try {
+    const frame = figma.createFrame();
+    frame.name = "Divider";
+    frame.resize(200, 1);
+    frame.fills = [{ type: 'SOLID', color: { r: 0.9, g: 0.9, b: 0.95 } }];
+
+    figma.currentPage.appendChild(frame);
+    figma.currentPage.selection = [frame];
+    figma.notify("✅ Inserted Divider");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    figma.notify(`❌ Error creating divider: ${errorMessage}`);
+    console.error("Divider creation error:", error);
+  }
 }
 
 async function createAvatar() {
-  // Create avatar frame with luxury automotive styling
-  const frame = figma.createFrame();
-  frame.name = "Avatar";
-  frame.resize(44, 44);
-  frame.cornerRadius = 22;
-  
-  // Set background color (sophisticated accent)
-  frame.fills = [{ type: 'SOLID', color: { r: 0.95, g: 0.95, b: 0.97 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
-  frame.strokeWeight = 1;
-  
-  // Create avatar initials with luxury typography
-  const text = figma.createText();
-  text.characters = "JD";
-  text.fontSize = 16;
-  
   try {
-    text.fontName = { family: "Eurostile", style: "Bold" };
-  } catch {
-    text.fontName = { family: "SF Pro Display", style: "Bold" };
+    const frame = figma.createFrame();
+    frame.name = "Avatar";
+    frame.resize(40, 40);
+    frame.cornerRadius = 20;
+    frame.fills = [{ type: 'SOLID', color: { r: 0.1, g: 0.1, b: 0.15 } }];
+
+    const text = figma.createText();
+    text.characters = "U";
+    text.fontSize = 18;
+    text.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
+
+    // Use Arial Black for avatar initial
+    try {
+      text.fontName = { family: "Arial Black", style: "Regular" };
+    } catch {
+      text.fontName = { family: "Arial", style: "Bold" };
+    }
+
+    text.x = (frame.width - text.width) / 2;
+    text.y = (frame.height - text.height) / 2;
+    frame.appendChild(text);
+
+    figma.currentPage.appendChild(frame);
+    figma.currentPage.selection = [frame];
+    figma.notify("✅ Inserted Avatar with Automotive Typography");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    figma.notify(`❌ Error creating avatar: ${errorMessage}`);
+    console.error("Avatar creation error:", error);
   }
-  
-  text.fills = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
-  text.letterSpacing = { value: 0.5, unit: "PIXELS" };
-  
-  // Center the text
-  text.x = (frame.width - text.width) / 2;
-  text.y = (frame.height - text.height) / 2;
-  
-  frame.appendChild(text);
-  
-  // Add to current page
-  figma.currentPage.appendChild(frame);
-  figma.currentPage.selection = [frame];
-  
-  figma.notify("✅ Inserted Luxury Avatar component");
 }
 
 async function createAlert() {
-  // Create alert frame with luxury automotive styling
-  const frame = figma.createFrame();
-  frame.name = "Alert";
-  frame.resize(260, 70);
-  frame.cornerRadius = 8;
-  
-  // Set background color (sophisticated info blue)
-  frame.fills = [{ type: 'SOLID', color: { r: 0.95, g: 0.97, b: 1 } }];
-  frame.strokes = [{ type: 'SOLID', color: { r: 0.7, g: 0.8, b: 0.9 } }];
-  frame.strokeWeight = 1;
-  
-  // Create alert text with luxury typography
-  const text = figma.createText();
-  text.characters = "This is a luxury automotive alert message with sophisticated typography.";
-  text.fontSize = 14;
-  
   try {
-    text.fontName = { family: "Inter", style: "Medium" };
-  } catch {
-    text.fontName = { family: "SF Pro Text", style: "Medium" };
+    const frame = figma.createFrame();
+    frame.name = "Alert";
+    frame.resize(240, 80);
+    frame.cornerRadius = 8;
+    frame.fills = [{ type: 'SOLID', color: { r: 0.95, g: 0.97, b: 1 } }];
+    frame.strokes = [{ type: 'SOLID', color: { r: 0.7, g: 0.8, b: 1 } }];
+    frame.strokeWeight = 1;
+
+    const title = figma.createText();
+    title.characters = "ALERT";
+    title.fontSize = 16;
+    title.fills = [{ type: 'SOLID', color: { r: 0.1, g: 0.1, b: 0.15 } }];
+
+    // Use Arial Black for alert title
+    try {
+      title.fontName = { family: "Arial Black", style: "Regular" };
+    } catch {
+      title.fontName = { family: "Arial", style: "Bold" };
+    }
+
+    title.letterSpacing = { value: 0.5, unit: "PIXELS" };
+    title.x = 16;
+    title.y = 16;
+    frame.appendChild(title);
+
+    const content = figma.createText();
+    content.characters = "This is an alert message with important information.";
+    content.fontSize = 14;
+    content.fills = [{ type: 'SOLID', color: { r: 0.4, g: 0.4, b: 0.45 } }];
+    content.fontName = { family: "SF Pro Text", style: "Regular" };
+    content.x = 16;
+    content.y = 40;
+    content.resize(208, 32);
+    frame.appendChild(content);
+
+    figma.currentPage.appendChild(frame);
+    figma.currentPage.selection = [frame];
+    figma.notify("✅ Inserted Alert with Automotive Typography");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    figma.notify(`❌ Error creating alert: ${errorMessage}`);
+    console.error("Alert creation error:", error);
   }
-  
-  text.fills = [{ type: 'SOLID', color: { r: 0.2, g: 0.3, b: 0.6 } }];
-  text.lineHeight = { value: 20, unit: "PIXELS" };
-  
-  // Position text with luxury spacing
-  text.x = 16;
-  text.y = (frame.height - text.height) / 2;
-  text.resize(228, 40);
-  
-  frame.appendChild(text);
-  
-  // Add to current page
-  figma.currentPage.appendChild(frame);
-  figma.currentPage.selection = [frame];
-  
-  figma.notify("✅ Inserted Luxury Alert component");
 }
 
 async function createTabs() {
-  // Create tabs container with luxury automotive styling
-  const frame = figma.createFrame();
-  frame.name = "Tabs";
-  frame.resize(260, 44);
-  
-  // Set background color (transparent)
-  frame.fills = [];
-  
-  // Create tab buttons with luxury styling
-  const tab1 = figma.createFrame();
-  tab1.name = "Tab 1";
-  tab1.resize(86, 36);
-  tab1.cornerRadius = 6;
-  tab1.fills = [{ type: 'SOLID', color: { r: 0.1, g: 0.1, b: 0.15 } }];
-  
-  const tab2 = figma.createFrame();
-  tab2.name = "Tab 2";
-  tab2.resize(86, 36);
-  tab2.cornerRadius = 6;
-  tab2.fills = [{ type: 'SOLID', color: { r: 0.98, g: 0.98, b: 0.98 } }];
-  tab2.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
-  tab2.strokeWeight = 1;
-  
-  const tab3 = figma.createFrame();
-  tab3.name = "Tab 3";
-  tab3.resize(86, 36);
-  tab3.cornerRadius = 6;
-  tab3.fills = [{ type: 'SOLID', color: { r: 0.98, g: 0.98, b: 0.98 } }];
-  tab3.strokes = [{ type: 'SOLID', color: { r: 0.2, g: 0.2, b: 0.25 } }];
-  tab3.strokeWeight = 1;
-  
-  // Add tab text with luxury typography
-  const text1 = figma.createText();
-  text1.characters = "TAB 1";
-  text1.fontSize = 13;
-  
   try {
-    text1.fontName = { family: "Microgramma", style: "Bold" };
-  } catch {
-    text1.fontName = { family: "SF Pro Text", style: "Bold" };
+    const frame = figma.createFrame();
+    frame.name = "Tabs";
+    frame.resize(240, 60);
+    frame.fills = [{ type: 'SOLID', color: { r: 0.98, g: 0.98, b: 0.99 } }];
+
+    const tab1 = figma.createFrame();
+    tab1.name = "Tab 1";
+    tab1.resize(80, 40);
+    tab1.cornerRadius = 6;
+    tab1.fills = [{ type: 'SOLID', color: { r: 0.1, g: 0.1, b: 0.15 } }];
+    tab1.x = 16;
+    tab1.y = 10;
+
+    const tab1Text = figma.createText();
+    tab1Text.characters = "TAB 1";
+    tab1Text.fontSize = 14;
+    tab1Text.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
+
+    // Use Arial Black for active tab
+    try {
+      tab1Text.fontName = { family: "Arial Black", style: "Regular" };
+    } catch {
+      tab1Text.fontName = { family: "Arial", style: "Bold" };
+    }
+
+    tab1Text.letterSpacing = { value: 0.5, unit: "PIXELS" };
+    tab1Text.x = (tab1.width - tab1Text.width) / 2;
+    tab1Text.y = (tab1.height - tab1Text.height) / 2;
+    tab1.appendChild(tab1Text);
+
+    const tab2 = figma.createFrame();
+    tab2.name = "Tab 2";
+    tab2.resize(80, 40);
+    tab2.cornerRadius = 6;
+    tab2.fills = [{ type: 'SOLID', color: { r: 0.95, g: 0.95, b: 0.97 } }];
+    tab2.strokes = [{ type: 'SOLID', color: { r: 0.9, g: 0.9, b: 0.95 } }];
+    tab2.strokeWeight = 1;
+    tab2.x = 104;
+    tab2.y = 10;
+
+    const tab2Text = figma.createText();
+    tab2Text.characters = "TAB 2";
+    tab2Text.fontSize = 14;
+    tab2Text.fills = [{ type: 'SOLID', color: { r: 0.4, g: 0.4, b: 0.45 } }];
+    tab2Text.fontName = { family: "SF Pro Text", style: "Regular" };
+    tab2Text.x = (tab2.width - tab2Text.width) / 2;
+    tab2Text.y = (tab2.height - tab2Text.height) / 2;
+    tab2.appendChild(tab2Text);
+
+    frame.appendChild(tab1);
+    frame.appendChild(tab2);
+
+    figma.currentPage.appendChild(frame);
+    figma.currentPage.selection = [frame];
+    figma.notify("✅ Inserted Tabs with Automotive Typography");
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    figma.notify(`❌ Error creating tabs: ${errorMessage}`);
+    console.error("Tabs creation error:", error);
   }
-  
-  text1.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
-  text1.letterSpacing = { value: 0.5, unit: "PIXELS" };
-  
-  const text2 = figma.createText();
-  text2.characters = "TAB 2";
-  text2.fontSize = 13;
-  
-  try {
-    text2.fontName = { family: "Microgramma", style: "Medium" };
-  } catch {
-    text2.fontName = { family: "SF Pro Text", style: "Medium" };
-  }
-  
-  text2.fills = [{ type: 'SOLID', color: { r: 0.3, g: 0.3, b: 0.35 } }];
-  text2.letterSpacing = { value: 0.5, unit: "PIXELS" };
-  
-  const text3 = figma.createText();
-  text3.characters = "TAB 3";
-  text3.fontSize = 13;
-  
-  try {
-    text3.fontName = { family: "Microgramma", style: "Medium" };
-  } catch {
-    text3.fontName = { family: "SF Pro Text", style: "Medium" };
-  }
-  
-  text3.fills = [{ type: 'SOLID', color: { r: 0.3, g: 0.3, b: 0.35 } }];
-  text3.letterSpacing = { value: 0.5, unit: "PIXELS" };
-  
-  // Position tabs with luxury spacing
-  tab1.x = 0;
-  tab1.y = 4;
-  
-  tab2.x = 87;
-  tab2.y = 4;
-  
-  tab3.x = 174;
-  tab3.y = 4;
-  
-  // Center text in tabs
-  text1.x = (tab1.width - text1.width) / 2;
-  text1.y = (tab1.height - text1.height) / 2;
-  
-  text2.x = (tab2.width - text2.width) / 2;
-  text2.y = (tab2.height - text2.height) / 2;
-  
-  text3.x = (tab3.width - text3.width) / 2;
-  text3.y = (tab3.height - text3.height) / 2;
-  
-  // Assemble tabs
-  tab1.appendChild(text1);
-  tab2.appendChild(text2);
-  tab3.appendChild(text3);
-  
-  frame.appendChild(tab1);
-  frame.appendChild(tab2);
-  frame.appendChild(tab3);
-  
-  // Add to current page
-  figma.currentPage.appendChild(frame);
-  figma.currentPage.selection = [frame];
-  
-  figma.notify("✅ Inserted Luxury Tabs component");
 }
+
+// Message handler for component creation
+figma.ui.onmessage = async (msg) => {
+  try {
+    // Load fonts first
+    await loadFonts();
+
+    // Handle component creation based on message
+    switch (msg.type) {
+      case 'create-button':
+        await createButton();
+        break;
+      case 'create-input':
+        await createInput();
+        break;
+      case 'create-card':
+        await createCard();
+        break;
+      case 'create-badge':
+        await createBadge();
+        break;
+      case 'create-textarea':
+        await createTextarea();
+        break;
+      case 'create-select':
+        await createSelect();
+        break;
+      case 'create-checkbox':
+        await createCheckbox();
+        break;
+      case 'create-radio':
+        await createRadio();
+        break;
+      case 'create-divider':
+        await createDivider();
+        break;
+      case 'create-avatar':
+        await createAvatar();
+        break;
+      case 'create-alert':
+        await createAlert();
+        break;
+      case 'create-tabs':
+        await createTabs();
+        break;
+      default:
+        figma.notify("❌ Unknown component type");
+    }
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    figma.notify(`❌ Error: ${errorMessage}`);
+    console.error("Plugin error:", error);
+  }
+};

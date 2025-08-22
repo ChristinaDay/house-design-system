@@ -331,10 +331,72 @@ function SpacingDemo() {
 function TypographyDemo() {
   return (
     <div className="space-y-6">
+      {/* Custom Luxury Automotive Fonts - NEW SECTION */}
+      <div className="space-y-6">
+        <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Custom Luxury Automotive Typography</h3>
+        <div className="grid grid-cols-2 gap-8">
+          <div className="p-6 border border-gray-200 rounded-lg bg-purple-50 shadow-sm">
+            <h4 className="text-lg font-bold text-purple-900 mb-3">Eurostile Italic</h4>
+            <p className="text-xl text-gray-900 mb-3 italic" style={{ fontFamily: 'Eurostile, Arial Black, sans-serif' }}>
+              The quick brown fox jumps over the lazy dog
+            </p>
+            <p className="text-sm text-purple-700 font-mono bg-white p-2 rounded border mb-3">
+              Eurostile Italic - Luxury Automotive Display
+            </p>
+            <p className="text-sm text-gray-700 font-medium">Hero headlines, magazine covers, speed aesthetic</p>
+            <div className="mt-3 p-2 bg-gray-100 rounded text-xs">
+              <strong>URL:</strong> upfetch.me/fonts/Eurostile-Regular-Italic.woff2
+            </div>
+          </div>
+          
+          <div className="p-6 border border-gray-200 rounded-lg bg-orange-50 shadow-sm">
+            <h4 className="text-lg font-bold text-orange-900 mb-3">Microgramma Bold</h4>
+            <p className="text-xl text-gray-900 mb-3 font-bold" style={{ fontFamily: 'Microgramma, Arial Black, sans-serif' }}>
+              THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
+            </p>
+            <p className="text-sm text-orange-700 font-mono bg-white p-2 rounded border mb-3">
+              Microgramma Bold - Architectural Strength
+            </p>
+            <p className="text-sm text-gray-700 font-medium">Strong subheadings, reliable contrast, solid foundation</p>
+            <div className="mt-3 p-2 bg-gray-100 rounded text-xs">
+              <strong>URL:</strong> upfetch.me/fonts/Microgramma-Bold.woff2
+            </div>
+          </div>
+
+          <div className="p-6 border border-gray-200 rounded-lg bg-teal-50 shadow-sm">
+            <h4 className="text-lg font-bold text-teal-900 mb-3">Inter Regular</h4>
+            <p className="text-xl text-gray-900 mb-3" style={{ fontFamily: 'Inter, SF Pro Text, sans-serif' }}>
+              The quick brown fox jumps over the lazy dog
+            </p>
+            <p className="text-sm text-teal-700 font-mono bg-white p-2 rounded border mb-3">
+              Inter Regular - Body Text & Readability
+            </p>
+            <p className="text-sm text-gray-700 font-medium">Body text, UI content, optimal readability</p>
+            <div className="mt-3 p-2 bg-gray-100 rounded text-xs">
+              <strong>URL:</strong> upfetch.me/fonts/Inter-Regular.woff2
+            </div>
+          </div>
+
+          <div className="p-6 border border-gray-200 rounded-lg bg-indigo-50 shadow-sm">
+            <h4 className="text-lg font-bold text-indigo-900 mb-3">Futura Medium</h4>
+            <p className="text-xl text-gray-900 mb-3" style={{ fontFamily: 'Futura, SF Pro Display, sans-serif' }}>
+              The quick brown fox jumps over the lazy dog
+            </p>
+            <p className="text-sm text-indigo-700 font-mono bg-white p-2 rounded border mb-3">
+              Futura Medium - Clean UI Elements
+            </p>
+            <p className="text-sm text-gray-700 font-medium">UI labels, clean interfaces, modern aesthetic</p>
+            <div className="mt-3 p-2 bg-gray-100 rounded text-xs">
+              <strong>URL:</strong> upfetch.me/fonts/Futura-Medium.woff2
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Font Family Overview - At the TOP for immediate visibility */}
       <div className="space-y-6">
-        <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Font Families</h3>
-        <div className="grid grid-cols-2 gap-6">
+        <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">System Font Families</h3>
+        <div className="grid grid-cols-2 gap-8">
           <div className="p-6 border border-gray-200 rounded-lg bg-blue-50 shadow-sm">
             <h4 className="text-lg font-bold text-blue-900 mb-3">Default Font</h4>
             <p className="text-xl text-gray-900 mb-3">

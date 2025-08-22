@@ -1,590 +1,257 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #0a0a0f;
-      color: #e0e0e5;
-    }
-    
-    .container {
-      max-width: 352px;
-      background: linear-gradient(135deg, #1a1a1f 0%, #25252a 100%);
-      border-radius: 12px;
-      margin: 16px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-      overflow: hidden;
-      border: 1px solid #2a2a2f;
-    }
-    
-    .header {
-      background: linear-gradient(135deg, #1a1a1f 0%, #2a2a2f 100%);
-      color: #e0e0e5;
-      padding: 24px;
-      text-align: center;
-      border-bottom: 1px solid #3a3a3f;
-    }
-    
-    .header h1 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-    
-    .header p {
-      margin: 8px 0 0 0;
-      font-size: 14px;
-      opacity: 0.8;
-      font-weight: 400;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .components-grid {
-      padding: 24px;
-      max-height: 500px;
-      overflow-y: auto;
-    }
-    
-    .component-category {
-      margin-bottom: 32px;
-    }
-    
-    .category-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #c0c0c5;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin: 0 0 20px 0;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #3a3a3f;
-    }
-    
-    .component-item {
-      background: linear-gradient(135deg, #2a2a2f 0%, #3a3a3f 100%);
-      border: 1px solid #4a4a4f;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 16px;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .component-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #6D5EF3 0%, #8B5CF6 100%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    
-    .component-item:hover {
-      border-color: #6D5EF3;
-      box-shadow: 0 4px 20px rgba(109, 94, 243, 0.2);
-      transform: translateY(-2px);
-    }
-    
-    .component-item:hover::before {
-      opacity: 1;
-    }
-    
-    .component-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-    
-    .component-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #e0e0e5;
-      margin: 0;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .component-type {
-      background: linear-gradient(135deg, #6D5EF3 0%, #8B5CF6 100%);
-      color: white;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .component-preview {
-      background: #1a1a1f;
-      border: 1px solid #4a4a4f;
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 60px;
-    }
-    
-    .component-description {
-      font-size: 13px;
-      color: #a0a0a5;
-      line-height: 1.5;
-      margin: 0 0 16px 0;
-    }
-    
-    .insert-button {
-      background: linear-gradient(135deg, #6D5EF3 0%, #8B5CF6 100%);
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      width: 100%;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .insert-button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(109, 94, 243, 0.3);
-    }
-    
-    .insert-button:active {
-      transform: translateY(0);
-    }
-    
-    /* Component-specific previews with luxury automotive aesthetic */
-    .button-preview {
-      background: #1a1a1f;
-      color: #e0e0e5;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 700;
-      border: 2px solid #6D5EF3;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .input-preview {
-      background: #1a1a1f;
-      border: 2px solid #4a4a4f;
-      border-radius: 6px;
-      padding: 8px 12px;
-      font-size: 12px;
-      color: #a0a0a5;
-      min-width: 120px;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .textarea-preview {
-      background: #1a1a1f;
-      border: 2px solid #4a4a4f;
-      border-radius: 6px;
-      padding: 8px;
-      font-size: 11px;
-      color: #a0a0a5;
-      min-width: 120px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .select-preview {
-      background: #1a1a1f;
-      border: 2px solid #4a4a4f;
-      border-radius: 6px;
-      padding: 8px 12px;
-      font-size: 12px;
-      color: #a0a0a5;
-      min-width: 120px;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .select-preview::after {
-      content: "▼";
-      font-size: 10px;
-      color: #6D5EF3;
-    }
-    
-    .checkbox-preview {
-      background: #1a1a1f;
-      border: 2px solid #4a4a4f;
-      border-radius: 4px;
-      width: 16px;
-      height: 16px;
-    }
-    
-    .radio-preview {
-      background: #1a1a1f;
-      border: 2px solid #4a4a4f;
-      border-radius: 9px;
-      width: 16px;
-      height: 16px;
-    }
-    
-    .card-preview {
-      background: #1a1a1f;
-      border: 2px solid #4a4a4f;
-      border-radius: 8px;
-      padding: 12px;
-      min-width: 140px;
-      min-height: 40px;
-    }
-    
-    .card-preview::before {
-      content: "TITLE";
-      display: block;
-      font-weight: 700;
-      font-size: 12px;
-      color: #e0e0e5;
-      margin-bottom: 4px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .card-preview::after {
-      content: "Content";
-      display: block;
-      font-size: 10px;
-      color: #a0a0a5;
-    }
-    
-    .badge-preview {
-      background: #2a2a2f;
-      color: #e0e0e5;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 10px;
-      font-weight: 700;
-      border: 1px solid #4a4a4f;
-      height: 18px;
-      display: flex;
-      align-items: center;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .divider-preview {
-      background: #4a4a4f;
-      width: 140px;
-      height: 2px;
-    }
-    
-    .avatar-preview {
-      background: #2a2a2f;
-      border: 2px solid #4a4a4f;
-      border-radius: 22px;
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      color: #e0e0e5;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .alert-preview {
-      background: #1a2a3a;
-      border: 2px solid #4a5a6a;
-      border-radius: 8px;
-      padding: 8px 12px;
-      min-width: 140px;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      font-size: 11px;
-      color: #80a0c0;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .tabs-preview {
-      display: flex;
-      gap: 6px;
-    }
-    
-    .tab-preview {
-      background: #1a1a1f;
-      color: #e0e0e5;
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 10px;
-      font-weight: 700;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border: 1px solid #4a4a4f;
-    }
-    
-    .tab-preview.inactive {
-      background: #2a2a2f;
-      color: #a0a0a5;
-      border: 1px solid #4a4a4f;
-    }
-    
-    .footer {
-      background: #1a1a1f;
-      padding: 20px 24px;
-      text-align: center;
-      border-top: 1px solid #3a3a3f;
-    }
-    
-    .footer-text {
-      font-size: 12px;
-      color: #808085;
-      margin: 0;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-  </style>
+    <meta charset="utf-8">
+    <title>House Design System Plugin</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #00d4ff;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            margin: 8px 0 0 0;
+            font-size: 12px;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        .components-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .component-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .component-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.15);
+        }
+
+        .component-item:active {
+            transform: translateY(0);
+        }
+
+        .component-preview {
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 6px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .component-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .component-name {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .component-description {
+            font-size: 10px;
+            opacity: 0.7;
+            line-height: 1.3;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 212, 255, 0.3);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 212, 255, 0.5);
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
     <div class="header">
-      <h1>🏠 House Design System</h1>
-      <p>Luxury Automotive Aesthetic</p>
+        <h1>House Design System</h1>
+        <p>Luxury Automotive Components</p>
     </div>
-    
-    <div class="components-grid">
-      <!-- Form Components -->
-      <div class="component-category">
-        <h3 class="category-title">Form Elements</h3>
-        
-        <div class="component-item" onclick="insertComponent('button')">
-          <div class="component-header">
-            <h4 class="component-title">Button</h4>
-            <span class="component-type">Interactive</span>
-          </div>
-          <div class="component-preview">
-            <div class="button-preview">BUTTON</div>
-          </div>
-          <p class="component-description">
-            Luxury automotive buttons with sophisticated typography and refined styling.
-          </p>
-          <button class="insert-button">Insert Button</button>
-        </div>
-        
-        <div class="component-item" onclick="insertComponent('input')">
-          <div class="component-header">
-            <h4 class="component-title">Input Field</h4>
-            <span class="component-type">Form</span>
-          </div>
-          <div class="component-preview">
-            <div class="input-preview">ENTER TEXT...</div>
-          </div>
-          <p class="component-description">
-            Premium input fields with luxury automotive typography and refined borders.
-          </p>
-          <button class="insert-button">Insert Input</button>
-        </div>
-        
-        <div class="component-item" onclick="insertComponent('textarea')">
-          <div class="component-header">
-            <h4 class="component-title">Textarea</h4>
-            <span class="component-type">Form</span>
-          </div>
-          <div class="component-preview">
-            <div class="textarea-preview">ENTER MESSAGE...</div>
-          </div>
-          <p class="component-description">
-            Multi-line text input with luxury automotive aesthetic and sophisticated styling.
-          </p>
-          <button class="insert-button">Insert Textarea</button>
-        </div>
-        
-        <div class="component-item" onclick="insertComponent('select')">
-          <div class="component-header">
-            <h4 class="component-title">Select Dropdown</h4>
-            <span class="component-type">Form</span>
-          </div>
-          <div class="component-preview">
-            <div class="select-preview">SELECT OPTION...</div>
-          </div>
-          <p class="component-description">
-            Premium dropdown selection with luxury typography and refined arrow indicator.
-          </p>
-          <button class="insert-button">Insert Select</button>
-        </div>
-        
-        <div class="component-item" onclick="insertComponent('checkbox')">
-          <div class="component-header">
-            <h4 class="component-title">Checkbox</h4>
-            <span class="component-type">Form</span>
-          </div>
-          <div class="component-preview">
-            <div class="checkbox-preview"></div>
-          </div>
-          <p class="component-description">
-            Sophisticated checkbox with luxury automotive styling and refined borders.
-          </p>
-          <button class="insert-button">Insert Checkbox</button>
-        </div>
-        
-        <div class="component-item" onclick="insertComponent('radio')">
-          <div class="component-header">
-            <h4 class="component-title">Radio Button</h4>
-            <span class="component-type">Form</span>
-          </div>
-          <div class="component-preview">
-            <div class="radio-preview"></div>
-          </div>
-          <p class="component-description">
-            Premium radio button with luxury automotive aesthetic and sophisticated styling.
-          </p>
-          <button class="insert-button">Insert Radio</button>
-        </div>
-      </div>
-      
-      <!-- Layout Components -->
-      <div class="component-category">
-        <h3 class="category-title">Layout & Display</h3>
-        
-        <div class="component-item" onclick="insertComponent('card')">
-          <div class="component-header">
-            <h4 class="component-title">Card</h4>
-            <span class="component-type">Layout</span>
-          </div>
-          <div class="component-preview">
-            <div class="card-preview"></div>
-          </div>
-          <p class="component-description">
-            Luxury automotive card with sophisticated typography and refined spacing.
-          </p>
-          <button class="insert-button">Insert Card</button>
-        </div>
-        
-        <div class="component-item" onclick="insertComponent('badge')">
-          <div class="component-header">
-            <h4 class="component-title">Badge</h4>
-            <span class="component-type">Status</span>
-          </div>
-          <div class="component-preview">
-            <div class="badge-preview">BADGE</div>
-          </div>
-          <p class="component-description">
-            Premium status indicator with luxury automotive typography and sophisticated styling.
-          </p>
-          <button class="insert-button">Insert Badge</button>
-        </div>
-        
-        <div class="component-item" onclick="insertComponent('divider')">
-          <div class="component-header">
-            <h4 class="component-title">Divider</h4>
-            <span class="component-type">Layout</span>
-          </div>
-          <div class="component-preview">
-            <div class="divider-preview"></div>
-          </div>
-          <p class="component-description">
-            Sophisticated separator line with luxury automotive aesthetic and refined styling.
-          </p>
-          <button class="insert-button">Insert Divider</button>
-        </div>
-        
-        <div class="component-item" onclick="insertComponent('avatar')">
-          <div class="component-header">
-            <h4 class="component-title">Avatar</h4>
-            <span class="component-type">Display</span>
-          </div>
-          <div class="component-preview">
-            <div class="avatar-preview">JD</div>
-          </div>
-          <p class="component-description">
-            Premium profile circle with luxury automotive typography and sophisticated styling.
-          </p>
-          <button class="insert-button">Insert Avatar</button>
-        </div>
-        
-        <div class="component-item" onclick="insertComponent('alert')">
-          <div class="component-header">
-            <h4 class="component-title">Alert</h4>
-            <span class="component-type">Display</span>
-          </div>
-          <div class="component-preview">
-            <div class="alert-preview">INFO MESSAGE</div>
-          </div>
-          <p class="component-description">
-            Luxury automotive alert with sophisticated typography and refined color scheme.
-          </p>
-          <button class="insert-button">Insert Alert</button>
-        </div>
-        
-        <div class="component-item" onclick="insertComponent('tabs')">
-          <div class="component-header">
-            <h4 class="component-title">Tabs</h4>
-            <span class="component-type">Navigation</span>
-          </div>
-          <div class="component-preview">
-            <div class="tabs-preview">
-              <div class="tab-preview">TAB 1</div>
-              <div class="tab-preview inactive">TAB 2</div>
-              <div class="tab-preview inactive">TAB 3</div>
-            </div>
-          </div>
-          <p class="component-description">
-            Premium tab navigation with luxury automotive aesthetic and sophisticated states.
-          </p>
-          <button class="insert-button">Insert Tabs</button>
-        </div>
-      </div>
-    </div>
-    
-    <div class="footer">
-      <p class="footer-text">Bubble-era Japan Luxury Automotive Aesthetic</p>
-    </div>
-  </div>
 
-  <script>
-    function insertComponent(componentType) {
-      parent.postMessage({ pluginMessage: { type: "insert", component: componentType } }, "*");
-    }
-    
-    // Prevent double-clicking
-    document.querySelectorAll('.component-item').forEach(item => {
-      item.addEventListener('click', function(e) {
-        if (e.target.tagName === 'BUTTON') {
-          e.stopPropagation();
+    <div class="components-grid">
+        <div class="component-item" onclick="createComponent('create-button')">
+            <div class="component-preview">
+                <div style="background: #0a0a0f; color: white; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: bold; letter-spacing: 0.5px;">BUTTON</div>
+            </div>
+            <div class="component-name">Button</div>
+            <div class="component-description">Primary action component with luxury styling</div>
+        </div>
+
+        <div class="component-item" onclick="createComponent('create-input')">
+            <div class="component-preview">
+                <div style="background: #f5f5f7; color: #666; padding: 8px 12px; border-radius: 4px; font-size: 12px; border: 1px solid #e0e0e5;">Input text</div>
+            </div>
+            <div class="component-name">Input</div>
+            <div class="component-description">Text input field with refined borders</div>
+        </div>
+
+        <div class="component-item" onclick="createComponent('create-card')">
+            <div class="component-preview">
+                <div style="background: white; color: #333; padding: 8px; border-radius: 6px; font-size: 10px; border: 1px solid #e0e0e5;">
+                    <div style="font-weight: bold; margin-bottom: 4px;">CARD TITLE</div>
+                    <div style="font-size: 9px; opacity: 0.7;">Card content...</div>
+                </div>
+            </div>
+            <div class="component-name">Card</div>
+            <div class="component-description">Content container with elegant shadows</div>
+        </div>
+
+        <div class="component-item" onclick="createComponent('create-badge')">
+            <div class="component-preview">
+                <div style="background: #0a0a0f; color: white; padding: 4px 8px; border-radius: 12px; font-size: 10px; font-weight: bold;">BADGE</div>
+            </div>
+            <div class="component-name">Badge</div>
+            <div class="component-description">Status indicator with rounded design</div>
+        </div>
+
+        <div class="component-item" onclick="createComponent('create-textarea')">
+            <div class="component-preview">
+                <div style="background: #f5f5f7; color: #666; padding: 8px; border-radius: 4px; font-size: 10px; border: 1px solid #e0e0e5; height: 40px;">
+                    Textarea content with multiple lines...
+                </div>
+            </div>
+            <div class="component-name">Textarea</div>
+            <div class="component-description">Multi-line text input area</div>
+        </div>
+
+        <div class="component-item" onclick="createComponent('create-select')">
+            <div class="component-preview">
+                <div style="background: #f5f5f7; color: #666; padding: 8px 12px; border-radius: 4px; font-size: 12px; border: 1px solid #e0e0e5;">Select option</div>
+            </div>
+            <div class="component-name">Select</div>
+            <div class="component-description">Dropdown selection component</div>
+        </div>
+
+        <div class="component-item" onclick="createComponent('create-checkbox')">
+            <div class="component-preview">
+                <div style="background: white; border: 1px solid #e0e0e5; width: 16px; height: 16px; border-radius: 3px; margin: 0 auto;"></div>
+            </div>
+            <div class="component-name">Checkbox</div>
+            <div class="component-description">Selection control with square design</div>
+        </div>
+
+        <div class="component-item" onclick="createComponent('create-radio')">
+            <div class="component-preview">
+                <div style="background: white; border: 1px solid #e0e0e5; width: 16px; height: 16px; border-radius: 50%; margin: 0 auto;"></div>
+            </div>
+            <div class="component-name">Radio</div>
+            <div class="component-description">Single choice selection control</div>
+        </div>
+
+        <div class="component-item" onclick="createComponent('create-divider')">
+            <div class="component-preview">
+                <div style="background: #e0e0e5; height: 1px; width: 100%; margin: 0 auto;"></div>
+            </div>
+            <div class="component-name">Divider</div>
+            <div class="component-description">Visual separation element</div>
+        </div>
+
+        <div class="component-item" onclick="createComponent('create-avatar')">
+            <div class="component-preview">
+                <div style="background: #0a0a0f; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; margin: 0 auto;">U</div>
+            </div>
+            <div class="component-name">Avatar</div>
+            <div class="component-description">User profile representation</div>
+        </div>
+
+        <div class="component-item" onclick="createComponent('create-alert')">
+            <div class="component-preview">
+                <div style="background: #f0f8ff; color: #333; padding: 8px; border-radius: 4px; font-size: 10px; border: 1px solid #b3d9ff;">
+                    <div style="font-weight: bold; margin-bottom: 2px;">ALERT</div>
+                    <div style="font-size: 9px; opacity: 0.8;">Alert message...</div>
+                </div>
+            </div>
+            <div class="component-name">Alert</div>
+            <div class="component-description">Notification and warning display</div>
+        </div>
+
+        <div class="component-item" onclick="createComponent('create-tabs')">
+            <div class="component-preview">
+                <div style="display: flex; gap: 8px; justify-content: center;">
+                    <div style="background: #0a0a0f; color: white; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold;">TAB 1</div>
+                    <div style="background: #f5f5f7; color: #666; padding: 4px 8px; border-radius: 4px; font-size: 10px; border: 1px solid #e0e0e5;">TAB 2</div>
+                </div>
+            </div>
+            <div class="component-name">Tabs</div>
+            <div class="component-description">Content organization interface</div>
+        </div>
+    </div>
+
+    <script>
+        function createComponent(type) {
+            parent.postMessage({ pluginMessage: { type: type } }, '*');
         }
-      });
-    });
-  </script>
+    </script>
 </body>
 </html>
