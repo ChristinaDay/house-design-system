@@ -666,6 +666,259 @@ function TypographyDemo() {
               </div>
             </div>
           </div>
+
+          {/* CSS Variable Reference - NEW SECTION */}
+          <div className="space-y-6">
+            <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">CSS Variable Reference</h3>
+            <div className="space-y-6">
+              {/* Font Family Variables */}
+              <div className="p-6 border border-gray-200 rounded-lg bg-white shadow-sm">
+                <h4 className="text-md font-medium text-gray-800 mb-4">Font Family Variables</h4>
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="space-y-3">
+                    <h5 className="text-sm font-semibold text-gray-700">Display & Heading Fonts</h5>
+                    <div className="space-y-2">
+                      <div className="p-3 bg-purple-50 rounded border">
+                        <code className="text-xs font-mono text-purple-700 block mb-1">--typography-fontFamily-display</code>
+                        <p className="text-sm text-gray-600 mb-1">Eurostile, Arial Black, sans-serif</p>
+                        <p className="text-lg" style={{ fontFamily: 'var(--typography-fontFamily-display)' }}>
+                          Luxury Automotive
+                        </p>
+                      </div>
+                      <div className="p-3 bg-orange-50 rounded border">
+                        <code className="text-xs font-mono text-orange-700 block mb-1">--typography-fontFamily-heading</code>
+                        <p className="text-sm text-gray-600 mb-1">Microgramma, Arial Black, sans-serif</p>
+                        <p className="text-lg font-bold" style={{ fontFamily: 'var(--typography-fontFamily-heading)' }}>
+                          ARCHITECTURAL STRENGTH
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <h5 className="text-sm font-semibold text-gray-700">Body & UI Fonts</h5>
+                    <div className="space-y-2">
+                      <div className="p-3 bg-teal-50 rounded border">
+                        <code className="text-xs font-mono text-teal-700 block mb-1">--typography-fontFamily-body</code>
+                        <p className="text-sm text-gray-600 mb-1">Inter, SF Pro Text, system-ui, sans-serif</p>
+                        <p className="text-lg" style={{ fontFamily: 'var(--typography-fontFamily-body)' }}>
+                          Optimal Readability
+                        </p>
+                      </div>
+                      <div className="p-3 bg-indigo-50 rounded border">
+                        <code className="text-xs font-mono text-indigo-700 block mb-1">--typography-fontFamily-ui</code>
+                        <p className="text-sm text-gray-600 mb-1">Futura, SF Pro Display, system-ui, sans-serif</p>
+                        <p className="text-lg" style={{ fontFamily: 'var(--typography-fontFamily-ui)' }}>
+                          Clean Interface
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Complete Variable Reference Table */}
+              <div className="p-6 border border-gray-200 rounded-lg bg-white shadow-sm">
+                <h4 className="text-md font-medium text-gray-800 mb-4">Complete Typography Variable Reference</h4>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-gray-200">
+                        <th className="text-left py-2 px-3 font-semibold text-gray-700">CSS Variable</th>
+                        <th className="text-left py-2 px-3 font-semibold text-gray-700">Value</th>
+                        <th className="text-left py-2 px-3 font-semibold text-gray-700">Usage Example</th>
+                        <th className="text-left py-2 px-3 font-semibold text-gray-700">Preview</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                      {/* Font Sizes */}
+                      <tr className="bg-blue-50">
+                        <td className="py-2 px-3 font-mono text-xs text-blue-800" colSpan={4}>
+                          <strong>Font Sizes</strong>
+                        </td>
+                      </tr>
+                      {fontSizes.map((size) => (
+                        <tr key={size} className="hover:bg-gray-50">
+                          <td className="py-2 px-3 font-mono text-xs text-gray-700">
+                            --typography-fontSize-{size}
+                          </td>
+                          <td className="py-2 px-3 text-xs text-gray-600">
+                            {size === 'xs' ? '0.75rem' : 
+                             size === 'sm' ? '0.875rem' : 
+                             size === 'base' ? '1rem' : 
+                             size === 'lg' ? '1.125rem' : 
+                             size === 'xl' ? '1.25rem' : 
+                             size === '2xl' ? '1.5rem' : 
+                             size === '3xl' ? '1.875rem' : 
+                             size === '4xl' ? '2.25rem' : 
+                             size === '5xl' ? '3rem' : '3.75rem'}
+                          </td>
+                          <td className="py-2 px-3 text-xs text-gray-600">
+                            font-size: var(--typography-fontSize-{size});
+                          </td>
+                          <td className="py-2 px-3">
+                            <span
+                              className="text-gray-900"
+                              style={{ fontSize: `var(--typography-fontSize-${size})` }}
+                            >
+                              {size}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                      
+                      {/* Font Weights */}
+                      <tr className="bg-green-50">
+                        <td className="py-2 px-3 font-mono text-xs text-green-800" colSpan={4}>
+                          <strong>Font Weights</strong>
+                        </td>
+                      </tr>
+                      {fontWeights.map((weight) => (
+                        <tr key={weight} className="hover:bg-gray-50">
+                          <td className="py-2 px-3 font-mono text-xs text-gray-700">
+                            --typography-fontWeight-{weight}
+                          </td>
+                          <td className="py-2 px-3 text-xs text-gray-600">
+                            {weight === 'light' ? '300' : 
+                             weight === 'normal' ? '400' : 
+                             weight === 'medium' ? '500' : 
+                             weight === 'semibold' ? '600' : 
+                             weight === 'bold' ? '700' : '800'}
+                          </td>
+                          <td className="py-2 px-3 text-xs text-gray-600">
+                            font-weight: var(--typography-fontWeight-{weight});
+                          </td>
+                          <td className="py-2 px-3">
+                            <span
+                              className="text-gray-900"
+                              style={{ fontWeight: `var(--typography-fontWeight-${weight})` }}
+                            >
+                              {weight}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+
+                      {/* Line Heights */}
+                      <tr className="bg-yellow-50">
+                        <td className="py-2 px-3 font-mono text-xs text-yellow-800" colSpan={4}>
+                          <strong>Line Heights</strong>
+                        </td>
+                      </tr>
+                      {[
+                        { key: 'none', value: '1', desc: 'Single line' },
+                        { key: 'tight', value: '1.25', desc: 'Compact' },
+                        { key: 'snug', value: '1.375', desc: 'Slightly compact' },
+                        { key: 'normal', value: '1.5', desc: 'Standard' },
+                        { key: 'relaxed', value: '1.625', desc: 'Comfortable' },
+                        { key: 'loose', value: '2', desc: 'Generous' }
+                      ].map((item) => (
+                        <tr key={item.key} className="hover:bg-gray-50">
+                          <td className="py-2 px-3 font-mono text-xs text-gray-700">
+                            --typography-lineHeight-{item.key}
+                          </td>
+                          <td className="py-2 px-3 text-xs text-gray-600">
+                            {item.value}
+                          </td>
+                          <td className="py-2 px-3 text-xs text-gray-600">
+                            line-height: var(--typography-lineHeight-{item.key});
+                          </td>
+                          <td className="py-2 px-3">
+                            <div
+                              className="text-xs text-gray-900 w-16"
+                              style={{ lineHeight: `var(--typography-lineHeight-${item.key})` }}
+                            >
+                              {item.desc}
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+
+                      {/* Letter Spacing */}
+                      <tr className="bg-pink-50">
+                        <td className="py-2 px-3 font-mono text-xs text-pink-800" colSpan={4}>
+                          <strong>Letter Spacing</strong>
+                        </td>
+                      </tr>
+                      {[
+                        { key: 'tighter', value: '-0.05em', desc: 'Closer' },
+                        { key: 'tight', value: '-0.025em', desc: 'Slightly closer' },
+                        { key: 'normal', value: '0em', desc: 'Standard' },
+                        { key: 'wide', value: '0.025em', desc: 'Slightly expanded' },
+                        { key: 'wider', value: '0.05em', desc: 'Expanded' },
+                        { key: 'widest', value: '0.1em', desc: 'Maximum' }
+                      ].map((item) => (
+                        <tr key={item.key} className="hover:bg-gray-50">
+                          <td className="py-2 px-3 font-mono text-xs text-gray-700">
+                            --typography-letterSpacing-{item.key}
+                          </td>
+                          <td className="py-2 px-3 text-xs text-gray-600">
+                            {item.value}
+                          </td>
+                          <td className="py-2 px-3 text-xs text-gray-600">
+                            letter-spacing: var(--typography-letterSpacing-{item.key});
+                          </td>
+                          <td className="py-2 px-3">
+                            <span
+                              className="text-xs text-gray-900 font-bold"
+                              style={{ letterSpacing: `var(--typography-letterSpacing-${item.key})` }}
+                            >
+                              {item.desc}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Quick Copy Section */}
+              <div className="p-6 border border-gray-200 rounded-lg bg-gray-50 shadow-sm">
+                <h4 className="text-md font-medium text-gray-800 mb-4">Quick Copy CSS</h4>
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="space-y-3">
+                    <h5 className="text-sm font-semibold text-gray-700">Common Typography Combinations</h5>
+                    <div className="space-y-2">
+                      <div className="p-3 bg-white rounded border">
+                        <p className="text-xs text-gray-600 mb-1">Hero Heading</p>
+                        <code className="text-xs font-mono text-gray-700 block">
+                          font-family: var(--typography-fontFamily-display);<br/>
+                          font-size: var(--typography-fontSize-4xl);<br/>
+                          font-weight: var(--typography-fontWeight-bold);<br/>
+                          line-height: var(--typography-lineHeight-tight);
+                        </code>
+                      </div>
+                      <div className="p-3 bg-white rounded border">
+                        <p className="text-xs text-gray-600 mb-1">Body Text</p>
+                        <code className="text-xs font-mono text-gray-700 block">
+                          font-family: var(--typography-fontFamily-body);<br/>
+                          font-size: var(--typography-fontSize-base);<br/>
+                          font-weight: var(--typography-fontWeight-normal);<br/>
+                          line-height: var(--typography-lineHeight-normal);
+                        </code>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <h5 className="text-sm font-semibold text-gray-700">CSS Classes You Can Use</h5>
+                    <div className="space-y-2">
+                      <div className="p-3 bg-white rounded border">
+                        <p className="text-xs text-gray-600 mb-1">Available Utility Classes</p>
+                        <code className="text-xs font-mono text-gray-700 block">
+                          .font-display<br/>
+                          .font-heading<br/>
+                          .font-body<br/>
+                          .font-ui<br/>
+                          .text-xs, .text-sm, .text-base, etc.<br/>
+                          .font-light, .font-normal, .font-medium, etc.
+                        </code>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
