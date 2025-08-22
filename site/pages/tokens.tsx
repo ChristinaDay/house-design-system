@@ -473,6 +473,202 @@ function TypographyDemo() {
         </div>
       </div>
 
+      {/* Line Heights showcase */}
+      <div className="space-y-6">
+        <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Line Heights</h3>
+        <div className="space-y-4">
+          {[
+            { key: 'none', label: 'None', description: 'Single line, no spacing' },
+            { key: 'tight', label: 'Tight', description: 'Compact, dense text' },
+            { key: 'snug', label: 'Snug', description: 'Slightly compact' },
+            { key: 'normal', label: 'Normal', description: 'Standard reading line height' },
+            { key: 'relaxed', label: 'Relaxed', description: 'Comfortable reading' },
+            { key: 'loose', label: 'Loose', description: 'Generous spacing' }
+          ].map((item) => (
+            <div key={item.key} className="p-4 border border-gray-200 rounded-lg bg-white shadow-sm">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center space-x-4">
+                  <span className="text-sm font-bold text-gray-700 w-20 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full">{item.label}</span>
+                  <span className="text-sm text-gray-600">{item.description}</span>
+                </div>
+                <code className="text-xs bg-gray-100 px-3 py-1 rounded font-mono text-gray-700">
+                  var(--typography-lineHeight-{item.key})
+                </code>
+              </div>
+              <div className="border-l-4 border-yellow-400 pl-4 py-2 bg-yellow-50 rounded-r">
+                <p
+                  className="text-lg text-gray-900"
+                  style={{ lineHeight: `var(--typography-lineHeight-${item.key})` }}
+                >
+                  This is a sample paragraph demonstrating the {item.label.toLowerCase()} line height. It shows how text flows and how much vertical space is allocated between lines. This helps designers understand the visual rhythm and readability of different line height settings.
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Letter Spacing showcase */}
+      <div className="space-y-6">
+        <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Letter Spacing</h3>
+        <div className="space-y-4">
+          {[
+            { key: 'tighter', label: 'Tighter', description: 'Closer letter spacing' },
+            { key: 'tight', label: 'Tight', description: 'Slightly closer spacing' },
+            { key: 'normal', label: 'Normal', description: 'Standard letter spacing' },
+            { key: 'wide', label: 'Wide', description: 'Slightly expanded spacing' },
+            { key: 'wider', label: 'Wider', description: 'Expanded letter spacing' },
+            { key: 'widest', label: 'Widest', description: 'Maximum letter spacing' }
+          ].map((item) => (
+            <div key={item.key} className="p-4 border border-gray-200 rounded-lg bg-white shadow-sm">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center space-x-4">
+                  <span className="text-sm font-bold text-gray-700 w-20 bg-pink-100 text-pink-800 px-3 py-1 rounded-full">{item.label}</span>
+                  <span className="text-sm text-gray-600">{item.description}</span>
+                </div>
+                <code className="text-xs bg-gray-100 px-3 py-1 rounded font-mono text-gray-700">
+                  var(--typography-letterSpacing-{item.key})
+                </code>
+              </div>
+              <div className="border-l-4 border-pink-400 pl-4 py-2 bg-pink-50 rounded-r">
+                <p
+                  className="text-lg text-gray-900 font-bold"
+                  style={{ letterSpacing: `var(--typography-letterSpacing-${item.key})` }}
+                >
+                  THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
+                </p>
+                <p
+                  className="text-sm text-gray-600 mt-2"
+                  style={{ letterSpacing: `var(--typography-letterSpacing-${item.key})` }}
+                >
+                  The quick brown fox jumps over the lazy dog
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Typography Scale Relationships */}
+      <div className="space-y-6">
+        <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Typography Scale Relationships</h3>
+        <div className="space-y-6">
+          {/* Size Progression */}
+          <div className="p-6 border border-gray-200 rounded-lg bg-white shadow-sm">
+            <h4 className="text-md font-medium text-gray-800 mb-4">Size Progression</h4>
+            <div className="space-y-3">
+              {fontSizes.slice(0, 6).map((size, index) => (
+                <div key={size} className="flex items-center space-x-4">
+                  <span className="text-xs text-gray-500 w-12">{size}</span>
+                  <div
+                    className="flex-1 bg-gray-100 rounded px-3 py-2"
+                    style={{ fontSize: `var(--typography-fontSize-${size})` }}
+                  >
+                    <span className="text-gray-700">Sample text at {size} size</span>
+                  </div>
+                  <span className="text-xs text-gray-500 w-16">
+                    {index > 0 ? `${Math.round((parseFloat(fontSizes[index]) / parseFloat(fontSizes[index - 1])) * 100)}%` : 'Base'}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Weight Progression */}
+          <div className="p-6 border border-gray-200 rounded-lg bg-white shadow-sm">
+            <h4 className="text-md font-medium text-gray-800 mb-4">Weight Progression</h4>
+            <div className="space-y-3">
+              {fontWeights.map((weight) => (
+                <div key={weight} className="flex items-center space-x-4">
+                  <span className="text-xs text-gray-500 w-16">{weight}</span>
+                  <div className="flex-1 bg-gray-100 rounded px-3 py-2">
+                    <span 
+                      className="text-gray-700"
+                      style={{ fontWeight: `var(--typography-fontWeight-${weight})` }}
+                    >
+                      Sample text at {weight} weight
+                    </span>
+                  </div>
+                  <span className="text-xs text-gray-500 w-16">
+                    {weight === 'light' ? '300' : 
+                     weight === 'normal' ? '400' : 
+                     weight === 'medium' ? '500' : 
+                     weight === 'semibold' ? '600' : 
+                     weight === 'bold' ? '700' : '800'}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Font Family Showcase */}
+          <div className="p-6 border border-gray-200 rounded-lg bg-white shadow-sm">
+            <h4 className="text-md font-medium text-gray-800 mb-4">Font Family Showcase</h4>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-3">
+                <h5 className="text-sm font-semibold text-gray-700">Display Fonts</h5>
+                <div className="space-y-2">
+                  <div className="p-3 bg-purple-50 rounded border">
+                    <p className="text-sm text-gray-600 mb-1">Eurostile (Display)</p>
+                    <p className="text-lg" style={{ fontFamily: 'var(--typography-fontFamily-display)' }}>
+                      Luxury Automotive
+                    </p>
+                  </div>
+                  <div className="p-3 bg-orange-50 rounded border">
+                    <p className="text-sm text-gray-600 mb-1">Microgramma (Heading)</p>
+                    <p className="text-lg font-bold" style={{ fontFamily: 'var(--typography-fontFamily-heading)' }}>
+                      ARCHITECTURAL STRENGTH
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <h5 className="text-sm font-semibold text-gray-700">UI Fonts</h5>
+                <div className="space-y-2">
+                  <div className="p-3 bg-teal-50 rounded border">
+                    <p className="text-sm text-gray-600 mb-1">Inter (Body)</p>
+                    <p className="text-lg" style={{ fontFamily: 'var(--typography-fontFamily-body)' }}>
+                      Optimal Readability
+                    </p>
+                  </div>
+                  <div className="p-3 bg-indigo-50 rounded border">
+                    <p className="text-sm text-gray-600 mb-1">Futura (UI)</p>
+                    <p className="text-lg" style={{ fontFamily: 'var(--typography-fontFamily-ui)' }}>
+                      Clean Interface
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Typography Usage Guidelines */}
+          <div className="p-6 border border-gray-200 rounded-lg bg-gray-50 shadow-sm">
+            <h4 className="text-md font-medium text-gray-800 mb-4">Typography Usage Guidelines</h4>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="space-y-3">
+                <h5 className="text-sm font-semibold text-gray-700">Headings & Display</h5>
+                <ul className="text-sm text-gray-600 space-y-1">
+                  <li>• Use Eurostile for hero headlines and luxury branding</li>
+                  <li>• Use Microgramma for strong, architectural headings</li>
+                  <li>• Maintain clear hierarchy with size and weight variations</li>
+                  <li>• Consider letter spacing for impact</li>
+                </ul>
+              </div>
+              <div className="space-y-3">
+                <h5 className="text-sm font-semibold text-gray-700">Body & UI</h5>
+                <ul className="text-sm text-gray-600 space-y-1">
+                  <li>• Use Inter for body text and long-form content</li>
+                  <li>• Use Futura for UI elements and labels</li>
+                  <li>• Maintain consistent line heights for readability</li>
+                  <li>• Use appropriate font weights for emphasis</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
     </div>
   );
