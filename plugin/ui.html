@@ -54,6 +54,18 @@
       background: #5A4FD8;
     }
     
+    .component-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    
+    .component-grid button {
+      margin-bottom: 0;
+      font-size: 12px;
+      padding: 10px 16px;
+    }
+    
     .info {
       background: #E8F4FD;
       border: 1px solid #B3D9F2;
@@ -71,7 +83,12 @@
     
     <div class="component-section">
       <h3>Components</h3>
-      <button id="insert-button">Insert Button</button>
+      <div class="component-grid">
+        <button id="insert-button">Button</button>
+        <button id="insert-input">Input</button>
+        <button id="insert-card">Card</button>
+        <button id="insert-badge">Badge</button>
+      </div>
     </div>
     
     <div class="info">
@@ -82,6 +99,18 @@
   <script>
     document.getElementById("insert-button").onclick = () => {
       parent.postMessage({ pluginMessage: { type: "insert", component: "button" } }, "*");
+    };
+    
+    document.getElementById("insert-input").onclick = () => {
+      parent.postMessage({ pluginMessage: { type: "insert", component: "input" } }, "*");
+    };
+    
+    document.getElementById("insert-card").onclick = () => {
+      parent.postMessage({ pluginMessage: { type: "insert", component: "card" } }, "*");
+    };
+    
+    document.getElementById("insert-badge").onclick = () => {
+      parent.postMessage({ pluginMessage: { type: "insert", component: "badge" } }, "*");
     };
   </script>
 </body>
