@@ -11,7 +11,7 @@
     }
     
     .container {
-      max-width: 320px;
+      max-width: 352px;
       background: white;
       border-radius: 12px;
       margin: 16px;
@@ -42,6 +42,23 @@
     
     .components-grid {
       padding: 20px;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    
+    .component-category {
+      margin-bottom: 24px;
+    }
+    
+    .category-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 16px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e2e8f0;
     }
     
     .component-item {
@@ -49,7 +66,7 @@
       border: 1px solid #e2e8f0;
       border-radius: 8px;
       padding: 16px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       transition: all 0.2s ease;
       cursor: pointer;
     }
@@ -68,7 +85,7 @@
     }
     
     .component-title {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
       color: #1e293b;
       margin: 0;
@@ -77,9 +94,9 @@
     .component-type {
       background: #6D5EF3;
       color: white;
-      padding: 4px 8px;
-      border-radius: 12px;
-      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 8px;
+      font-size: 10px;
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -94,11 +111,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 60px;
+      min-height: 50px;
     }
     
     .component-description {
-      font-size: 13px;
+      font-size: 12px;
       color: #64748b;
       line-height: 1.4;
       margin: 0 0 12px 0;
@@ -108,9 +125,9 @@
       background: #6D5EF3;
       color: white;
       border: none;
-      padding: 8px 16px;
+      padding: 6px 12px;
       border-radius: 6px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
       cursor: pointer;
       transition: background 0.2s;
@@ -129,12 +146,12 @@
     .button-preview {
       background: #333333;
       color: white;
-      padding: 8px 16px;
+      padding: 6px 12px;
       border-radius: 6px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
       border: none;
-      height: 32px;
+      height: 28px;
       display: flex;
       align-items: center;
     }
@@ -143,51 +160,156 @@
       background: white;
       border: 1px solid #cbd5e1;
       border-radius: 6px;
-      padding: 8px 12px;
-      font-size: 13px;
+      padding: 6px 10px;
+      font-size: 12px;
       color: #64748b;
-      min-width: 120px;
-      height: 28px;
+      min-width: 100px;
+      height: 24px;
       display: flex;
       align-items: center;
+    }
+    
+    .textarea-preview {
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px;
+      font-size: 11px;
+      color: #64748b;
+      min-width: 120px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .select-preview {
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 12px;
+      color: #64748b;
+      min-width: 100px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .select-preview::after {
+      content: "▼";
+      font-size: 10px;
+      color: #64748b;
+    }
+    
+    .checkbox-preview {
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 3px;
+      width: 14px;
+      height: 14px;
+    }
+    
+    .radio-preview {
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      width: 14px;
+      height: 14px;
     }
     
     .card-preview {
       background: white;
       border: 1px solid #e2e8f0;
       border-radius: 8px;
-      padding: 12px;
-      min-width: 140px;
-      min-height: 40px;
+      padding: 10px;
+      min-width: 120px;
+      min-height: 30px;
     }
     
     .card-preview::before {
       content: "Title";
       display: block;
       font-weight: 600;
-      font-size: 14px;
+      font-size: 12px;
       color: #1e293b;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
     
     .card-preview::after {
       content: "Content";
       display: block;
-      font-size: 12px;
+      font-size: 10px;
       color: #64748b;
     }
     
     .badge-preview {
       background: #f1f5f9;
       color: #475569;
-      padding: 4px 8px;
+      padding: 3px 6px;
       border-radius: 10px;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 500;
       border: 1px solid #cbd5e1;
-      height: 16px;
+      height: 14px;
       display: flex;
       align-items: center;
+    }
+    
+    .divider-preview {
+      background: #e2e8f0;
+      width: 120px;
+      height: 1px;
+    }
+    
+    .avatar-preview {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 20px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #475569;
+      font-weight: 500;
+    }
+    
+    .alert-preview {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 8px;
+      min-width: 120px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      font-size: 11px;
+      color: #1e40af;
+    }
+    
+    .tabs-preview {
+      display: flex;
+      gap: 4px;
+    }
+    
+    .tab-preview {
+      background: #333;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 500;
+      height: 20px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .tab-preview.inactive {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
     }
     
     .footer {
@@ -212,69 +334,191 @@
     </div>
     
     <div class="components-grid">
-      <!-- Button Component -->
-      <div class="component-item" onclick="insertComponent('button')">
-        <div class="component-header">
-          <h3 class="component-title">Button</h3>
-          <span class="component-type">Interactive</span>
+      <!-- Form Components -->
+      <div class="component-category">
+        <h3 class="category-title">Form Elements</h3>
+        
+        <div class="component-item" onclick="insertComponent('button')">
+          <div class="component-header">
+            <h4 class="component-title">Button</h4>
+            <span class="component-type">Interactive</span>
+          </div>
+          <div class="component-preview">
+            <div class="button-preview">Button</div>
+          </div>
+          <p class="component-description">
+            Primary action buttons with consistent sizing and hover states.
+          </p>
+          <button class="insert-button">Insert Button</button>
         </div>
-        <div class="component-preview">
-          <div class="button-preview">Button</div>
+        
+        <div class="component-item" onclick="insertComponent('input')">
+          <div class="component-header">
+            <h4 class="component-title">Input Field</h4>
+            <span class="component-type">Form</span>
+          </div>
+          <div class="component-preview">
+            <div class="input-preview">Enter text...</div>
+          </div>
+          <p class="component-description">
+            Single-line text input with proper borders and placeholder.
+          </p>
+          <button class="insert-button">Insert Input</button>
         </div>
-        <p class="component-description">
-          Primary action buttons with brand colors, hover states, and consistent sizing. Perfect for CTAs and form submissions.
-        </p>
-        <button class="insert-button">Insert Button</button>
+        
+        <div class="component-item" onclick="insertComponent('textarea')">
+          <div class="component-header">
+            <h4 class="component-title">Textarea</h4>
+            <span class="component-type">Form</span>
+          </div>
+          <div class="component-preview">
+            <div class="textarea-preview">Enter your message...</div>
+          </div>
+          <p class="component-description">
+            Multi-line text input for longer content and messages.
+          </p>
+          <button class="insert-button">Insert Textarea</button>
+        </div>
+        
+        <div class="component-item" onclick="insertComponent('select')">
+          <div class="component-header">
+            <h4 class="component-title">Select Dropdown</h4>
+            <span class="component-type">Form</span>
+          </div>
+          <div class="component-preview">
+            <div class="select-preview">Select option...</div>
+          </div>
+          <p class="component-description">
+            Dropdown selection with placeholder text and arrow indicator.
+          </p>
+          <button class="insert-button">Insert Select</button>
+        </div>
+        
+        <div class="component-item" onclick="insertComponent('checkbox')">
+          <div class="component-header">
+            <h4 class="component-title">Checkbox</h4>
+            <span class="component-type">Form</span>
+          </div>
+          <div class="component-preview">
+            <div class="checkbox-preview"></div>
+          </div>
+          <p class="component-description">
+            Standard checkbox for multiple selection options.
+          </p>
+          <button class="insert-button">Insert Checkbox</button>
+        </div>
+        
+        <div class="component-item" onclick="insertComponent('radio')">
+          <div class="component-header">
+            <h4 class="component-title">Radio Button</h4>
+            <span class="component-type">Form</span>
+          </div>
+          <div class="component-preview">
+            <div class="radio-preview"></div>
+          </div>
+          <p class="component-description">
+            Radio button for single selection from multiple options.
+          </p>
+          <button class="insert-button">Insert Radio</button>
+        </div>
       </div>
       
-      <!-- Input Component -->
-      <div class="component-item" onclick="insertComponent('input')">
-        <div class="component-header">
-          <h3 class="component-title">Input Field</h3>
-          <span class="component-type">Form</span>
+      <!-- Layout Components -->
+      <div class="component-category">
+        <h3 class="category-title">Layout & Display</h3>
+        
+        <div class="component-item" onclick="insertComponent('card')">
+          <div class="component-header">
+            <h4 class="component-title">Card</h4>
+            <span class="component-type">Layout</span>
+          </div>
+          <div class="component-preview">
+            <div class="card-preview"></div>
+          </div>
+          <p class="component-description">
+            Content container with title, description, and proper spacing.
+          </p>
+          <button class="insert-button">Insert Card</button>
         </div>
-        <div class="component-preview">
-          <div class="input-preview">Enter text...</div>
+        
+        <div class="component-item" onclick="insertComponent('badge')">
+          <div class="component-header">
+            <h4 class="component-title">Badge</h4>
+            <span class="component-type">Status</span>
+          </div>
+          <div class="component-preview">
+            <div class="badge-preview">Badge</div>
+          </div>
+          <p class="component-description">
+            Small status indicator with pill-shaped design.
+          </p>
+          <button class="insert-button">Insert Badge</button>
         </div>
-        <p class="component-description">
-          Text input fields with proper spacing, borders, and placeholder text. Ideal for forms, search bars, and data entry.
-        </p>
-        <button class="insert-button">Insert Input</button>
-      </div>
-      
-      <!-- Card Component -->
-      <div class="component-item" onclick="insertComponent('card')">
-        <div class="component-header">
-          <h3 class="component-title">Card</h3>
-          <span class="component-type">Layout</span>
+        
+        <div class="component-item" onclick="insertComponent('divider')">
+          <div class="component-header">
+            <h4 class="component-title">Divider</h4>
+            <span class="component-type">Layout</span>
+          </div>
+          <div class="component-preview">
+            <div class="divider-preview"></div>
+          </div>
+          <p class="component-description">
+            Horizontal separator line for content organization.
+          </p>
+          <button class="insert-button">Insert Divider</button>
         </div>
-        <div class="component-preview">
-          <div class="card-preview"></div>
+        
+        <div class="component-item" onclick="insertComponent('avatar')">
+          <div class="component-header">
+            <h4 class="component-title">Avatar</h4>
+            <span class="component-type">Display</span>
+          </div>
+          <div class="component-preview">
+            <div class="avatar-preview">JD</div>
+          </div>
+          <p class="component-description">
+            Circular profile image with initials fallback.
+          </p>
+          <button class="insert-button">Insert Avatar</button>
         </div>
-        <p class="component-description">
-          Content containers with titles, descriptions, and proper spacing. Great for product cards, info panels, and content organization.
-        </p>
-        <button class="insert-button">Insert Card</button>
-      </div>
-      
-      <!-- Badge Component -->
-      <div class="component-item" onclick="insertComponent('badge')">
-        <div class="component-header">
-          <h3 class="component-title">Badge</h3>
-          <span class="component-type">Status</span>
+        
+        <div class="component-item" onclick="insertComponent('alert')">
+          <div class="component-header">
+            <h4 class="component-title">Alert</h4>
+            <span class="component-type">Display</span>
+          </div>
+          <div class="component-preview">
+            <div class="alert-preview">Info message</div>
+          </div>
+          <p class="component-description">
+            Informational alert with colored background and border.
+          </p>
+          <button class="insert-button">Insert Alert</button>
         </div>
-        <div class="component-preview">
-          <div class="badge-preview">Badge</div>
+        
+        <div class="component-item" onclick="insertComponent('tabs')">
+          <div class="component-header">
+            <h4 class="component-title">Tabs</h4>
+            <span class="component-type">Navigation</span>
+          </div>
+          <div class="component-preview">
+            <div class="tabs-preview">
+              <div class="tab-preview">Tab 1</div>
+              <div class="tab-preview inactive">Tab 2</div>
+              <div class="tab-preview inactive">Tab 3</div>
+            </div>
+          </div>
+          <p class="component-description">
+            Tab navigation with active and inactive states.
+          </p>
+          <button class="insert-button">Insert Tabs</button>
         </div>
-        <p class="component-description">
-          Small status indicators and labels with pill-shaped design. Perfect for tags, statuses, and small information display.
-        </p>
-        <button class="insert-button">Insert Badge</button>
       </div>
     </div>
     
     <div class="footer">
-      <p class="footer-text">Built with your design system tokens</p>
+      <p class="footer-text">Built with shadcn/ui design principles</p>
     </div>
   </div>
 
