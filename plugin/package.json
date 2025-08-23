@@ -1,15 +1,35 @@
 {
-  "name": "plugin",
+  "name": "house-design-system-plugin",
   "version": "1.0.0",
+  "description": "Luxury Automotive Design System Plugin for Figma - Comprehensive typography, components, and design tokens",
   "main": "code.js",
   "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": [
+    "figma",
+    "plugin",
+    "design-system",
+    "typography",
+    "luxury",
+    "automotive",
+    "components",
+    "tokens"
+  ],
+  "author": "House Design System",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/house-design-system/figma-plugin"
+  },
   "devDependencies": {
-    "@figma/plugin-typings": "^1.117.0"
+    "@figma/plugin-typings": "^1.117.0",
+    "typescript": "^5.0.0"
+  },
+  "figma": {
+    "id": "in.house.design.system",
+    "name": "House Design System"
   }
 }

@@ -1,257 +1,382 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>House Design System Plugin</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
-            color: #ffffff;
-            overflow: hidden;
-        }
+  <meta charset="utf-8">
+  <title>House Design System</title>
+  <style>
+    /* Design System Colors */
+    :root {
+      --color-brand-50: #F3F1FF;
+      --color-brand-100: #E6E2FF;
+      --color-brand-500: #6D5EF3;
+      --color-brand-600: #5B4AE6;
+      --color-brand-700: #4A39D9;
+      --color-neutral-0: #FFFFFF;
+      --color-neutral-50: #FAFAFA;
+      --color-neutral-100: #F5F5F5;
+      --color-neutral-200: #E5E5E5;
+      --color-neutral-300: #D4D4D4;
+      --color-neutral-400: #A3A3A3;
+      --color-neutral-500: #737373;
+      --color-neutral-600: #525252;
+      --color-neutral-700: #404040;
+      --color-neutral-800: #262626;
+      --color-neutral-900: #171717;
+      --spacing-2: 8px;
+      --spacing-3: 12px;
+      --spacing-4: 16px;
+      --spacing-5: 20px;
+      --spacing-6: 24px;
+      --spacing-8: 32px;
+      --radius-base: 4px;
+      --radius-md: 6px;
+      --radius-lg: 8px;
+      --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+      --shadow-base: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
 
-        .header {
-            background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%);
-            padding: 20px;
-            text-align: center;
-            border-bottom: 2px solid #00d4ff;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--color-neutral-900);
+      background: var(--color-neutral-50);
+      padding: var(--spacing-6);
+      overflow-x: hidden;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: var(--spacing-8);
+      padding-bottom: var(--spacing-6);
+      border-bottom: 1px solid var(--color-neutral-200);
+    }
+    
+    .header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 var(--spacing-2) 0;
+      color: var(--color-neutral-900);
+      letter-spacing: -0.025em;
+    }
+    
+    .header .subtitle {
+      font-size: 13px;
+      color: var(--color-neutral-600);
+      font-weight: 500;
+      margin: 0;
+    }
 
-        .header h1 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            background: linear-gradient(45deg, #00d4ff, #0099cc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+    .header .description {
+      font-size: 12px;
+      color: var(--color-neutral-500);
+      margin: var(--spacing-2) 0 0 0;
+      line-height: 1.4;
+    }
+    
+    .components {
+      display: grid;
+      gap: var(--spacing-3);
+    }
 
-        .header p {
-            margin: 8px 0 0 0;
-            font-size: 12px;
-            opacity: 0.8;
-            font-weight: 400;
-        }
+    .section {
+      margin-bottom: var(--spacing-6);
+    }
 
-        .components-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            padding: 20px;
-            max-height: 500px;
-            overflow-y: auto;
-        }
+    .section-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-neutral-700);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--spacing-3);
+      padding-left: var(--spacing-2);
+    }
+    
+    .component-item {
+      background: var(--color-neutral-0);
+      border: 1px solid var(--color-neutral-200);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-4);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .component-item:hover {
+      border-color: var(--color-brand-500);
+      box-shadow: var(--shadow-base);
+      transform: translateY(-1px);
+      background: var(--color-brand-50);
+    }
+    
+    .component-item:active {
+      transform: translateY(0);
+      box-shadow: var(--shadow-sm);
+    }
 
-        .component-item {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 16px;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
+    .component-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--color-brand-500);
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
 
-        .component-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #00d4ff;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.15);
-        }
+    .component-item:hover::before {
+      opacity: 1;
+    }
+    
+    .component-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0 0 var(--spacing-2) 0;
+      color: var(--color-neutral-900);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+    }
 
-        .component-item:active {
-            transform: translateY(0);
-        }
+    .component-icon {
+      font-size: 16px;
+      opacity: 0.8;
+    }
+    
+    .component-description {
+      font-size: 12px;
+      color: var(--color-neutral-600);
+      margin: 0;
+      line-height: 1.4;
+    }
 
-        .component-preview {
-            width: 100%;
-            height: 60px;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border-radius: 6px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
+    .component-meta {
+      font-size: 11px;
+      color: var(--color-neutral-400);
+      margin-top: var(--spacing-2);
+      font-weight: 500;
+    }
+    
+    .status {
+      position: fixed;
+      bottom: var(--spacing-4);
+      left: var(--spacing-4);
+      right: var(--spacing-4);
+      background: var(--color-brand-50);
+      border: 1px solid var(--color-brand-200);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-3);
+      font-size: 12px;
+      color: var(--color-brand-700);
+      text-align: center;
+      display: none;
+      font-weight: 500;
+      box-shadow: var(--shadow-base);
+    }
 
-        .component-preview::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
-            animation: shimmer 2s infinite;
-        }
+    .status.success {
+      background: #f0fdf4;
+      border-color: #86efac;
+      color: #15803d;
+    }
 
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
+    .status.error {
+      background: #fef2f2;
+      border-color: #fca5a5;
+      color: #dc2626;
+    }
 
-        .component-name {
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+    .footer {
+      margin-top: var(--spacing-8);
+      padding-top: var(--spacing-6);
+      border-top: 1px solid var(--color-neutral-200);
+      text-align: center;
+    }
 
-        .component-description {
-            font-size: 10px;
-            opacity: 0.7;
-            line-height: 1.3;
-        }
+    .footer-text {
+      font-size: 11px;
+      color: var(--color-neutral-400);
+      line-height: 1.4;
+    }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
+    .version {
+      font-size: 10px;
+      color: var(--color-neutral-300);
+      margin-top: var(--spacing-2);
+      font-weight: 500;
+    }
 
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 3px;
-        }
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
 
-        ::-webkit-scrollbar-thumb {
-            background: rgba(0, 212, 255, 0.3);
-            border-radius: 3px;
-        }
+    ::-webkit-scrollbar-track {
+      background: var(--color-neutral-100);
+    }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(0, 212, 255, 0.5);
-        }
-    </style>
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-neutral-300);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-neutral-400);
+    }
+  </style>
 </head>
 <body>
-    <div class="header">
-        <h1>House Design System</h1>
-        <p>Luxury Automotive Components</p>
+  <div class="header">
+    <h1>🏠 House Design System</h1>
+    <p class="subtitle">Luxury Automotive Aesthetics</p>
+    <p class="description">Create sophisticated components with comprehensive design tokens</p>
+  </div>
+  
+  <div class="components">
+    <!-- Core Components Section -->
+    <div class="section">
+      <div class="section-title">Core Components</div>
+      
+      <div class="component-item" onclick="createComponent('create-button')">
+        <div class="component-title">
+          <span class="component-icon">🔘</span>
+          Button
+        </div>
+        <div class="component-description">Primary action button with luxury styling and multiple variants</div>
+        <div class="component-meta">Solid • Medium • Brand Colors</div>
+      </div>
+      
+      <div class="component-item" onclick="createComponent('create-input')">
+        <div class="component-title">
+          <span class="component-icon">📝</span>
+          Input Field
+        </div>
+        <div class="component-description">Text input with refined borders and typography</div>
+        <div class="component-meta">Base Radius • Body Font • Neutral Colors</div>
+      </div>
+      
+      <div class="component-item" onclick="createComponent('create-card')">
+        <div class="component-title">
+          <span class="component-icon">🃏</span>
+          Card
+        </div>
+        <div class="component-description">Content container with elegant shadows and typography hierarchy</div>
+        <div class="component-meta">Large Radius • Base Shadow • Mixed Typography</div>
+      </div>
     </div>
 
-    <div class="components-grid">
-        <div class="component-item" onclick="createComponent('create-button')">
-            <div class="component-preview">
-                <div style="background: #0a0a0f; color: white; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: bold; letter-spacing: 0.5px;">BUTTON</div>
-            </div>
-            <div class="component-name">Button</div>
-            <div class="component-description">Primary action component with luxury styling</div>
+    <!-- Interface Elements Section -->
+    <div class="section">
+      <div class="section-title">Interface Elements</div>
+      
+      <div class="component-item" onclick="createComponent('create-badge')">
+        <div class="component-title">
+          <span class="component-icon">🏷️</span>
+          Badge
         </div>
-
-        <div class="component-item" onclick="createComponent('create-input')">
-            <div class="component-preview">
-                <div style="background: #f5f5f7; color: #666; padding: 8px 12px; border-radius: 4px; font-size: 12px; border: 1px solid #e0e0e5;">Input text</div>
-            </div>
-            <div class="component-name">Input</div>
-            <div class="component-description">Text input field with refined borders</div>
+        <div class="component-description">Status indicator with pill styling and brand colors</div>
+        <div class="component-meta">Full Radius • UI Font • Extra Small</div>
+      </div>
+      
+      <div class="component-item" onclick="createComponent('create-alert')">
+        <div class="component-title">
+          <span class="component-icon">⚠️</span>
+          Alert
         </div>
-
-        <div class="component-item" onclick="createComponent('create-card')">
-            <div class="component-preview">
-                <div style="background: white; color: #333; padding: 8px; border-radius: 6px; font-size: 10px; border: 1px solid #e0e0e5;">
-                    <div style="font-weight: bold; margin-bottom: 4px;">CARD TITLE</div>
-                    <div style="font-size: 9px; opacity: 0.7;">Card content...</div>
-                </div>
-            </div>
-            <div class="component-name">Card</div>
-            <div class="component-description">Content container with elegant shadows</div>
-        </div>
-
-        <div class="component-item" onclick="createComponent('create-badge')">
-            <div class="component-preview">
-                <div style="background: #0a0a0f; color: white; padding: 4px 8px; border-radius: 12px; font-size: 10px; font-weight: bold;">BADGE</div>
-            </div>
-            <div class="component-name">Badge</div>
-            <div class="component-description">Status indicator with rounded design</div>
-        </div>
-
-        <div class="component-item" onclick="createComponent('create-textarea')">
-            <div class="component-preview">
-                <div style="background: #f5f5f7; color: #666; padding: 8px; border-radius: 4px; font-size: 10px; border: 1px solid #e0e0e5; height: 40px;">
-                    Textarea content with multiple lines...
-                </div>
-            </div>
-            <div class="component-name">Textarea</div>
-            <div class="component-description">Multi-line text input area</div>
-        </div>
-
-        <div class="component-item" onclick="createComponent('create-select')">
-            <div class="component-preview">
-                <div style="background: #f5f5f7; color: #666; padding: 8px 12px; border-radius: 4px; font-size: 12px; border: 1px solid #e0e0e5;">Select option</div>
-            </div>
-            <div class="component-name">Select</div>
-            <div class="component-description">Dropdown selection component</div>
-        </div>
-
-        <div class="component-item" onclick="createComponent('create-checkbox')">
-            <div class="component-preview">
-                <div style="background: white; border: 1px solid #e0e0e5; width: 16px; height: 16px; border-radius: 3px; margin: 0 auto;"></div>
-            </div>
-            <div class="component-name">Checkbox</div>
-            <div class="component-description">Selection control with square design</div>
-        </div>
-
-        <div class="component-item" onclick="createComponent('create-radio')">
-            <div class="component-preview">
-                <div style="background: white; border: 1px solid #e0e0e5; width: 16px; height: 16px; border-radius: 50%; margin: 0 auto;"></div>
-            </div>
-            <div class="component-name">Radio</div>
-            <div class="component-description">Single choice selection control</div>
-        </div>
-
-        <div class="component-item" onclick="createComponent('create-divider')">
-            <div class="component-preview">
-                <div style="background: #e0e0e5; height: 1px; width: 100%; margin: 0 auto;"></div>
-            </div>
-            <div class="component-name">Divider</div>
-            <div class="component-description">Visual separation element</div>
-        </div>
-
-        <div class="component-item" onclick="createComponent('create-avatar')">
-            <div class="component-preview">
-                <div style="background: #0a0a0f; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; margin: 0 auto;">U</div>
-            </div>
-            <div class="component-name">Avatar</div>
-            <div class="component-description">User profile representation</div>
-        </div>
-
-        <div class="component-item" onclick="createComponent('create-alert')">
-            <div class="component-preview">
-                <div style="background: #f0f8ff; color: #333; padding: 8px; border-radius: 4px; font-size: 10px; border: 1px solid #b3d9ff;">
-                    <div style="font-weight: bold; margin-bottom: 2px;">ALERT</div>
-                    <div style="font-size: 9px; opacity: 0.8;">Alert message...</div>
-                </div>
-            </div>
-            <div class="component-name">Alert</div>
-            <div class="component-description">Notification and warning display</div>
-        </div>
-
-        <div class="component-item" onclick="createComponent('create-tabs')">
-            <div class="component-preview">
-                <div style="display: flex; gap: 8px; justify-content: center;">
-                    <div style="background: #0a0a0f; color: white; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold;">TAB 1</div>
-                    <div style="background: #f5f5f7; color: #666; padding: 4px 8px; border-radius: 4px; font-size: 10px; border: 1px solid #e0e0e5;">TAB 2</div>
-                </div>
-            </div>
-            <div class="component-name">Tabs</div>
-            <div class="component-description">Content organization interface</div>
-        </div>
+        <div class="component-description">Information notification with proper color semantics</div>
+        <div class="component-meta">Base Radius • Border • Heading Font</div>
+      </div>
     </div>
 
-    <script>
-        function createComponent(type) {
-            parent.postMessage({ pluginMessage: { type: type } }, '*');
-        }
-    </script>
+    <!-- Typography & System Section -->
+    <div class="section">
+      <div class="section-title">Typography & System</div>
+      
+      <div class="component-item" onclick="createComponent('create-typography-specimen')">
+        <div class="component-title">
+          <span class="component-icon">📖</span>
+          Typography Specimen
+        </div>
+        <div class="component-description">Complete showcase of font families and typography scale</div>
+        <div class="component-meta">4 Font Families • 6 Sizes • Full Hierarchy</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p class="footer-text">
+      Powered by comprehensive design tokens<br>
+      Eurostile • Microgramma • Inter • Futura
+    </p>
+    <p class="version">v1.0.0 • House Design System</p>
+  </div>
+  
+  <div class="status" id="status">Creating component...</div>
+  
+  <script>
+    let statusTimeout;
+
+    function createComponent(type) {
+      console.log(`🎨 Creating component: ${type}`);
+      
+      // Show status
+      const status = document.getElementById('status');
+      status.className = 'status';
+      status.style.display = 'block';
+      status.textContent = 'Creating component...';
+      
+      // Clear any existing timeout
+      if (statusTimeout) {
+        clearTimeout(statusTimeout);
+      }
+      
+      // Send message to plugin
+      parent.postMessage({ pluginMessage: { type: type } }, '*');
+      
+      // Auto-hide status after 4 seconds
+      statusTimeout = setTimeout(() => {
+        status.style.display = 'none';
+      }, 4000);
+    }
+
+    // Listen for success/error messages from plugin
+    window.addEventListener('message', (event) => {
+      const { type, message } = event.data.pluginMessage || {};
+      const status = document.getElementById('status');
+      
+      if (type === 'success') {
+        status.className = 'status success';
+        status.textContent = message || '✅ Component created successfully!';
+        status.style.display = 'block';
+        
+        if (statusTimeout) clearTimeout(statusTimeout);
+        statusTimeout = setTimeout(() => {
+          status.style.display = 'none';
+        }, 3000);
+      } else if (type === 'error') {
+        status.className = 'status error';
+        status.textContent = message || '❌ Failed to create component';
+        status.style.display = 'block';
+        
+        if (statusTimeout) clearTimeout(statusTimeout);
+        statusTimeout = setTimeout(() => {
+          status.style.display = 'none';
+        }, 5000);
+      }
+    });
+    
+    console.log('🏠 House Design System UI loaded');
+    console.log('📊 Available components: Button, Input, Card, Badge, Alert, Typography Specimen');
+  </script>
 </body>
 </html>
