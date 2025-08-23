@@ -196,6 +196,349 @@
       color: #dc2626;
     }
 
+    /* Component Examples */
+    .component-example {
+      background: var(--color-neutral-50);
+      border: 1px solid var(--color-neutral-200);
+      border-radius: var(--radius-base);
+      padding: var(--spacing-3);
+      margin: var(--spacing-2) 0;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Button Example */
+    .example-button {
+      background: var(--color-brand-500);
+      color: white;
+      border: none;
+      border-radius: var(--radius-base);
+      padding: 4px 12px;
+      font-size: 10px;
+      font-weight: 500;
+      cursor: default;
+    }
+
+    /* Input Example */
+    .example-input {
+      border: 1px solid var(--color-neutral-300);
+      border-radius: var(--radius-base);
+      padding: 4px 8px;
+      font-size: 10px;
+      color: var(--color-neutral-400);
+      width: 100px;
+    }
+
+    /* Card Example */
+    .example-card {
+      background: white;
+      border: 1px solid var(--color-neutral-200);
+      border-radius: var(--radius-md);
+      padding: 8px;
+      width: 80px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .example-card-title {
+      font-size: 9px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--color-neutral-900);
+    }
+
+    .example-card-content {
+      font-size: 8px;
+      color: var(--color-neutral-600);
+      line-height: 1.3;
+    }
+
+    /* Badge Example */
+    .example-badge {
+      background: var(--color-brand-100);
+      color: var(--color-brand-700);
+      border-radius: 10px;
+      padding: 2px 6px;
+      font-size: 8px;
+      font-weight: 500;
+    }
+
+    /* Alert Example */
+    .example-alert {
+      background: var(--color-brand-50);
+      border: 1px solid var(--color-brand-200);
+      border-radius: var(--radius-base);
+      padding: 6px;
+      width: 100%;
+      font-size: 9px;
+      color: var(--color-brand-700);
+    }
+
+    /* Accordion Example */
+    .example-accordion {
+      width: 100%;
+    }
+
+    .example-accordion-item {
+      border: 1px solid var(--color-neutral-200);
+      border-radius: var(--radius-base);
+      margin-bottom: 2px;
+    }
+
+    .example-accordion-header {
+      background: var(--color-neutral-50);
+      padding: 4px 6px;
+      font-size: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .example-accordion-content {
+      padding: 4px 6px;
+      font-size: 7px;
+      color: var(--color-neutral-600);
+      background: white;
+    }
+
+    /* Dialog Example */
+    .example-dialog-overlay {
+      background: rgba(0,0,0,0.3);
+      border-radius: var(--radius-base);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 50px;
+    }
+
+    .example-dialog {
+      background: white;
+      border-radius: var(--radius-base);
+      padding: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      width: 60px;
+      text-align: center;
+    }
+
+    .example-dialog-title {
+      font-size: 8px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .example-dialog-buttons {
+      display: flex;
+      gap: 3px;
+      justify-content: center;
+    }
+
+    .example-dialog-btn {
+      font-size: 7px;
+      padding: 2px 4px;
+      border-radius: 2px;
+      border: 1px solid var(--color-neutral-300);
+      background: white;
+    }
+
+    .example-dialog-btn.danger {
+      background: var(--color-danger-500);
+      color: white;
+      border-color: var(--color-danger-500);
+    }
+
+    /* Tabs Example */
+    .example-tabs {
+      width: 100%;
+    }
+
+    .example-tab-list {
+      display: flex;
+      border-bottom: 1px solid var(--color-neutral-200);
+      margin-bottom: 4px;
+    }
+
+    .example-tab {
+      flex: 1;
+      padding: 3px 6px;
+      font-size: 7px;
+      text-align: center;
+      border-bottom: 2px solid transparent;
+    }
+
+    .example-tab.active {
+      border-bottom-color: var(--color-brand-500);
+      color: var(--color-brand-600);
+      font-weight: 500;
+    }
+
+    .example-tab-content {
+      font-size: 7px;
+      color: var(--color-neutral-600);
+    }
+
+    /* Dropdown Example */
+    .example-dropdown {
+      width: 100%;
+    }
+
+    .example-dropdown-trigger {
+      border: 1px solid var(--color-neutral-300);
+      border-radius: var(--radius-base);
+      padding: 3px 6px;
+      font-size: 8px;
+      background: white;
+      width: 70px;
+      text-align: left;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .example-dropdown-menu {
+      background: white;
+      border: 1px solid var(--color-neutral-200);
+      border-radius: var(--radius-base);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 70px;
+    }
+
+    .example-dropdown-item {
+      padding: 2px 6px;
+      font-size: 7px;
+      border-bottom: 1px solid var(--color-neutral-100);
+    }
+
+    .example-dropdown-item:first-child {
+      background: var(--color-brand-50);
+      color: var(--color-brand-700);
+    }
+
+    .example-dropdown-item:last-child {
+      border-bottom: none;
+    }
+
+    /* Progress Example */
+    .example-progress {
+      width: 100%;
+    }
+
+    .example-progress-label {
+      font-size: 8px;
+      margin-bottom: 3px;
+      color: var(--color-neutral-900);
+    }
+
+    .example-progress-bar {
+      width: 100%;
+      height: 4px;
+      background: var(--color-neutral-200);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 3px;
+    }
+
+    .example-progress-fill {
+      width: 65%;
+      height: 100%;
+      background: var(--color-brand-500);
+    }
+
+    .example-progress-text {
+      font-size: 7px;
+      color: var(--color-neutral-600);
+    }
+
+    /* Switch Example */
+    .example-switches {
+      width: 100%;
+    }
+
+    .example-switch-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3px;
+      font-size: 7px;
+    }
+
+    .example-switch {
+      width: 20px;
+      height: 12px;
+      border-radius: 6px;
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .example-switch.on {
+      background: var(--color-brand-500);
+    }
+
+    .example-switch.off {
+      background: var(--color-neutral-300);
+    }
+
+    .example-switch-thumb {
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 1px;
+      transition: all 0.2s;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .example-switch.on .example-switch-thumb {
+      left: 9px;
+    }
+
+    .example-switch.off .example-switch-thumb {
+      left: 1px;
+    }
+
+    /* Typography Example */
+    .example-typography {
+      text-align: left;
+      width: 100%;
+    }
+
+    .example-typography-line {
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .example-typography-display {
+      font-size: 12px;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--color-neutral-900);
+    }
+
+    .example-typography-heading {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--color-neutral-800);
+    }
+
+    .example-typography-body {
+      font-size: 8px;
+      color: var(--color-neutral-700);
+    }
+
+    .example-typography-ui {
+      font-size: 7px;
+      font-weight: 500;
+      color: var(--color-neutral-600);
+    }
+
     .footer {
       margin-top: var(--spacing-8);
       padding-top: var(--spacing-6);
@@ -253,6 +596,9 @@
           Button
         </div>
         <div class="component-description">Primary action button with luxury styling and multiple variants</div>
+        <div class="component-example">
+          <button class="example-button">Button</button>
+        </div>
         <div class="component-meta">Solid • Medium • Brand Colors</div>
       </div>
       
@@ -262,6 +608,9 @@
           Input Field
         </div>
         <div class="component-description">Text input with refined borders and typography</div>
+        <div class="component-example">
+          <input class="example-input" placeholder="Enter text..." disabled>
+        </div>
         <div class="component-meta">Base Radius • Body Font • Neutral Colors</div>
       </div>
       
@@ -309,6 +658,132 @@
         </div>
         <div class="component-description">Complete showcase of font families and typography scale</div>
         <div class="component-meta">4 Font Families • 6 Sizes • Full Hierarchy</div>
+      </div>
+    </div>
+
+    <!-- Advanced Components Section -->
+    <div class="section">
+      <div class="section-title">Advanced Components</div>
+      
+      <div class="component-item" onclick="createComponent('create-accordion')">
+        <div class="component-title">
+          <span class="component-icon">📋</span>
+          Accordion
+        </div>
+        <div class="component-description">Collapsible content sections with expand/collapse functionality</div>
+        <div class="component-example">
+          <div class="example-accordion">
+            <div class="example-accordion-item">
+              <div class="example-accordion-header">Performance ▼</div>
+              <div class="example-accordion-content">Engine specifications...</div>
+            </div>
+            <div class="example-accordion-item">
+              <div class="example-accordion-header">Interior ▶</div>
+            </div>
+          </div>
+        </div>
+        <div class="component-meta">Interactive • Content Organization</div>
+      </div>
+
+      <div class="component-item" onclick="createComponent('create-dialog')">
+        <div class="component-title">
+          <span class="component-icon">💬</span>
+          Dialog
+        </div>
+        <div class="component-description">Modal window with overlay for confirmations and forms</div>
+        <div class="component-example">
+          <div class="example-dialog-overlay">
+            <div class="example-dialog">
+              <div class="example-dialog-title">Confirm</div>
+              <div class="example-dialog-buttons">
+                <div class="example-dialog-btn">Cancel</div>
+                <div class="example-dialog-btn danger">Delete</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="component-meta">Modal • Overlay • Actions</div>
+      </div>
+
+      <div class="component-item" onclick="createComponent('create-tabs')">
+        <div class="component-title">
+          <span class="component-icon">📑</span>
+          Tabs
+        </div>
+        <div class="component-description">Tabbed navigation interface with content switching</div>
+        <div class="component-example">
+          <div class="example-tabs">
+            <div class="example-tab-list">
+              <div class="example-tab active">Overview</div>
+              <div class="example-tab">Specs</div>
+              <div class="example-tab">Gallery</div>
+            </div>
+            <div class="example-tab-content">Vehicle overview content...</div>
+          </div>
+        </div>
+        <div class="component-meta">Navigation • Content Switching</div>
+      </div>
+
+      <div class="component-item" onclick="createComponent('create-dropdown')">
+        <div class="component-title">
+          <span class="component-icon">⬇️</span>
+          Dropdown Menu
+        </div>
+        <div class="component-description">Contextual menu with multiple selectable options</div>
+        <div class="component-example">
+          <div class="example-dropdown">
+            <div class="example-dropdown-trigger">Options ▼</div>
+            <div class="example-dropdown-menu">
+              <div class="example-dropdown-item">⚡ Performance</div>
+              <div class="example-dropdown-item">✨ Luxury</div>
+              <div class="example-dropdown-item">🏎️ Sport</div>
+            </div>
+          </div>
+        </div>
+        <div class="component-meta">Menu • Selection • Context</div>
+      </div>
+
+      <div class="component-item" onclick="createComponent('create-progress')">
+        <div class="component-title">
+          <span class="component-icon">📊</span>
+          Progress Bar
+        </div>
+        <div class="component-description">Loading indicator showing completion status</div>
+        <div class="component-example">
+          <div class="example-progress">
+            <div class="example-progress-label">Installation Progress</div>
+            <div class="example-progress-bar">
+              <div class="example-progress-fill"></div>
+            </div>
+            <div class="example-progress-text">65% Complete</div>
+          </div>
+        </div>
+        <div class="component-meta">Loading • Status • Feedback</div>
+      </div>
+
+      <div class="component-item" onclick="createComponent('create-switch')">
+        <div class="component-title">
+          <span class="component-icon">🔄</span>
+          Switch
+        </div>
+        <div class="component-description">Toggle control for binary on/off states</div>
+        <div class="component-example">
+          <div class="example-switches">
+            <div class="example-switch-item">
+              Performance
+              <div class="example-switch on">
+                <div class="example-switch-thumb"></div>
+              </div>
+            </div>
+            <div class="example-switch-item">
+              Eco Mode
+              <div class="example-switch off">
+                <div class="example-switch-thumb"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="component-meta">Toggle • Control • Binary State</div>
       </div>
     </div>
   </div>

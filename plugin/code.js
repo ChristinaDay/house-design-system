@@ -429,6 +429,427 @@ async function createAlert() {
     figma.currentPage.appendChild(alert);
     console.log("✅ Alert component created");
 }
+async function createAccordion() {
+    console.log("📋 Creating Accordion component...");
+    const accordion = figma.createFrame();
+    accordion.name = "Accordion • Collapsible Content";
+    accordion.resize(400, 280);
+    accordion.cornerRadius = radius.lg;
+    accordion.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[0]) }];
+    accordion.strokes = [{ type: "SOLID", color: hexToRgb(colors.neutral[200]) }];
+    accordion.strokeWeight = 1;
+    let currentY = 0;
+    // Create 3 accordion items
+    const items = [
+        { title: "Performance Specifications", content: "Advanced engine performance metrics and technical specifications" },
+        { title: "Interior Features", content: "Luxury interior appointments and comfort technologies" },
+        { title: "Safety Systems", content: "Comprehensive safety and driver assistance systems" }
+    ];
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        // Item container
+        const itemContainer = figma.createFrame();
+        itemContainer.name = `Accordion Item ${i + 1}`;
+        itemContainer.resize(400, 80);
+        itemContainer.x = 0;
+        itemContainer.y = currentY;
+        itemContainer.fills = [];
+        // Header with title and icon
+        const header = figma.createFrame();
+        header.name = "Header";
+        header.resize(400, 48);
+        header.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[50]) }];
+        header.strokes = [{ type: "SOLID", color: hexToRgb(colors.neutral[200]) }];
+        header.strokeWeight = i === items.length - 1 ? 0 : 1;
+        header.strokeAlign = "INSIDE";
+        // Title text
+        const titleText = figma.createText();
+        titleText.characters = item.title;
+        titleText.x = spacing[4];
+        titleText.y = (48 - typographyScale.fontSize.base) / 2;
+        await applyFont(titleText, "heading", "medium");
+        applyTypography(titleText, "base", "medium", "normal", "normal");
+        titleText.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[900]) }];
+        header.appendChild(titleText);
+        // Chevron icon (simple triangle)
+        const chevron = figma.createPolygon();
+        chevron.pointCount = 3;
+        chevron.resize(12, 8);
+        chevron.x = 360;
+        chevron.y = 20;
+        chevron.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[500]) }];
+        chevron.rotation = Math.PI; // Point down
+        header.appendChild(chevron);
+        itemContainer.appendChild(header);
+        // Content area (collapsed by default, first item expanded)
+        if (i === 0) {
+            const content = figma.createFrame();
+            content.name = "Content";
+            content.resize(400, 32);
+            content.y = 48;
+            content.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[0]) }];
+            const contentText = figma.createText();
+            contentText.characters = item.content;
+            contentText.x = spacing[4];
+            contentText.y = spacing[2];
+            contentText.resize(360, 24);
+            await applyFont(contentText, "body", "normal");
+            applyTypography(contentText, "sm", "normal", "relaxed", "normal");
+            contentText.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[600]) }];
+            content.appendChild(contentText);
+            itemContainer.appendChild(content);
+            itemContainer.resize(400, 80);
+        }
+        else {
+            itemContainer.resize(400, 48);
+        }
+        accordion.appendChild(itemContainer);
+        currentY += i === 0 ? 80 : 48;
+    }
+    accordion.resize(400, currentY);
+    figma.currentPage.appendChild(accordion);
+    console.log("✅ Accordion component created");
+}
+async function createDialog() {
+    console.log("💬 Creating Dialog component...");
+    // Create overlay backdrop
+    const overlay = figma.createFrame();
+    overlay.name = "Dialog Overlay";
+    overlay.resize(600, 400);
+    overlay.fills = [{ type: "SOLID", color: { r: 0, g: 0, b: 0 }, opacity: 0.5 }];
+    // Create dialog content
+    const dialog = figma.createFrame();
+    dialog.name = "Dialog • Modal Window";
+    dialog.resize(420, 280);
+    dialog.cornerRadius = radius.lg;
+    dialog.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[0]) }];
+    dialog.effects = [createShadow("2xl")];
+    // Center the dialog
+    dialog.x = (overlay.width - dialog.width) / 2;
+    dialog.y = (overlay.height - dialog.height) / 2;
+    let currentY = spacing[6];
+    // Dialog header
+    const title = figma.createText();
+    title.characters = "Confirm Action";
+    title.x = spacing[6];
+    title.y = currentY;
+    await applyFont(title, "heading", "bold");
+    applyTypography(title, "lg", "bold", "tight", "normal");
+    title.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[900]) }];
+    dialog.appendChild(title);
+    currentY += spacing[8];
+    // Dialog description
+    const description = figma.createText();
+    description.characters = "This action will permanently delete the selected items from your design system. This action cannot be undone.";
+    description.x = spacing[6];
+    description.y = currentY;
+    description.resize(340, 48);
+    await applyFont(description, "body", "normal");
+    applyTypography(description, "sm", "normal", "relaxed", "normal");
+    description.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[600]) }];
+    dialog.appendChild(description);
+    currentY += 72;
+    // Button group
+    const buttonGroup = figma.createFrame();
+    buttonGroup.name = "Button Group";
+    buttonGroup.resize(340, 36);
+    buttonGroup.x = spacing[6];
+    buttonGroup.y = currentY;
+    buttonGroup.fills = [];
+    buttonGroup.layoutMode = "HORIZONTAL";
+    buttonGroup.counterAxisSizingMode = "FIXED";
+    buttonGroup.primaryAxisSizingMode = "FIXED";
+    buttonGroup.itemSpacing = spacing[3];
+    buttonGroup.primaryAxisAlignItems = "MAX";
+    // Cancel button
+    const cancelButton = figma.createFrame();
+    cancelButton.name = "Cancel Button";
+    cancelButton.resize(80, 36);
+    cancelButton.cornerRadius = radius.md;
+    cancelButton.fills = [];
+    cancelButton.strokes = [{ type: "SOLID", color: hexToRgb(colors.neutral[300]) }];
+    cancelButton.strokeWeight = 1;
+    const cancelText = figma.createText();
+    cancelText.characters = "Cancel";
+    cancelText.x = (80 - 42) / 2; // Approximate centering
+    cancelText.y = (36 - typographyScale.fontSize.sm) / 2;
+    await applyFont(cancelText, "ui", "medium");
+    applyTypography(cancelText, "sm", "medium", "none", "normal");
+    cancelText.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[700]) }];
+    cancelButton.appendChild(cancelText);
+    buttonGroup.appendChild(cancelButton);
+    // Confirm button
+    const confirmButton = figma.createFrame();
+    confirmButton.name = "Confirm Button";
+    confirmButton.resize(80, 36);
+    confirmButton.cornerRadius = radius.md;
+    confirmButton.fills = [{ type: "SOLID", color: hexToRgb(colors.danger[500]) }];
+    const confirmText = figma.createText();
+    confirmText.characters = "Delete";
+    confirmText.x = (80 - 38) / 2; // Approximate centering
+    confirmText.y = (36 - typographyScale.fontSize.sm) / 2;
+    await applyFont(confirmText, "ui", "medium");
+    applyTypography(confirmText, "sm", "medium", "none", "normal");
+    confirmText.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[0]) }];
+    confirmButton.appendChild(confirmText);
+    buttonGroup.appendChild(confirmButton);
+    dialog.appendChild(buttonGroup);
+    overlay.appendChild(dialog);
+    figma.currentPage.appendChild(overlay);
+    console.log("✅ Dialog component created");
+}
+async function createTabs() {
+    console.log("📑 Creating Tabs component...");
+    const tabs = figma.createFrame();
+    tabs.name = "Tabs • Navigation Tabs";
+    tabs.resize(480, 320);
+    tabs.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[0]) }];
+    // Tab list (navigation)
+    const tabList = figma.createFrame();
+    tabList.name = "Tab List";
+    tabList.resize(480, 44);
+    tabList.fills = [];
+    tabList.strokes = [{ type: "SOLID", color: hexToRgb(colors.neutral[200]) }];
+    tabList.strokeWeight = 1;
+    tabList.strokeAlign = "INSIDE";
+    const tabItems = ["Overview", "Specifications", "Gallery", "Reviews"];
+    const tabWidth = 120;
+    for (let i = 0; i < tabItems.length; i++) {
+        const tab = figma.createFrame();
+        tab.name = `Tab ${i + 1}`;
+        tab.resize(tabWidth, 44);
+        tab.x = i * tabWidth;
+        tab.fills = i === 0 ? [{ type: "SOLID", color: hexToRgb(colors.neutral[50]) }] : [];
+        // Active tab indicator
+        if (i === 0) {
+            const indicator = figma.createRectangle();
+            indicator.resize(tabWidth, 2);
+            indicator.y = 42;
+            indicator.fills = [{ type: "SOLID", color: hexToRgb(colors.brand[500]) }];
+            tab.appendChild(indicator);
+        }
+        const tabText = figma.createText();
+        tabText.characters = tabItems[i];
+        tabText.x = (tabWidth - (tabItems[i].length * 8)) / 2; // Approximate centering
+        tabText.y = (44 - typographyScale.fontSize.sm) / 2;
+        await applyFont(tabText, "ui", i === 0 ? "medium" : "normal");
+        applyTypography(tabText, "sm", i === 0 ? "medium" : "normal", "normal", "normal");
+        tabText.fills = [{ type: "SOLID", color: hexToRgb(i === 0 ? colors.brand[600] : colors.neutral[600]) }];
+        tab.appendChild(tabText);
+        tabList.appendChild(tab);
+    }
+    tabs.appendChild(tabList);
+    // Tab content
+    const content = figma.createFrame();
+    content.name = "Tab Content";
+    content.resize(480, 276);
+    content.y = 44;
+    content.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[0]) }];
+    // Content for active tab (Overview)
+    const contentTitle = figma.createText();
+    contentTitle.characters = "Vehicle Overview";
+    contentTitle.x = spacing[6];
+    contentTitle.y = spacing[6];
+    await applyFont(contentTitle, "heading", "bold");
+    applyTypography(contentTitle, "lg", "bold", "tight", "normal");
+    contentTitle.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[900]) }];
+    content.appendChild(contentTitle);
+    const contentText = figma.createText();
+    contentText.characters = "Experience the pinnacle of luxury automotive engineering. This vehicle represents the perfect fusion of performance, elegance, and cutting-edge technology designed for the most discerning drivers.";
+    contentText.x = spacing[6];
+    contentText.y = spacing[6] + 40;
+    contentText.resize(420, 80);
+    await applyFont(contentText, "body", "normal");
+    applyTypography(contentText, "base", "normal", "relaxed", "normal");
+    contentText.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[600]) }];
+    content.appendChild(contentText);
+    tabs.appendChild(content);
+    figma.currentPage.appendChild(tabs);
+    console.log("✅ Tabs component created");
+}
+async function createDropdown() {
+    console.log("⬇️ Creating Dropdown Menu component...");
+    const dropdown = figma.createFrame();
+    dropdown.name = "Dropdown Menu";
+    dropdown.resize(220, 280);
+    dropdown.fills = [];
+    // Trigger button
+    const trigger = figma.createFrame();
+    trigger.name = "Dropdown Trigger";
+    trigger.resize(160, 36);
+    trigger.cornerRadius = radius.md;
+    trigger.fills = [];
+    trigger.strokes = [{ type: "SOLID", color: hexToRgb(colors.neutral[300]) }];
+    trigger.strokeWeight = 1;
+    const triggerText = figma.createText();
+    triggerText.characters = "Vehicle Options";
+    triggerText.x = spacing[3];
+    triggerText.y = (36 - typographyScale.fontSize.sm) / 2;
+    await applyFont(triggerText, "ui", "medium");
+    applyTypography(triggerText, "sm", "medium", "normal", "normal");
+    triggerText.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[700]) }];
+    trigger.appendChild(triggerText);
+    // Chevron down icon
+    const chevron = figma.createPolygon();
+    chevron.pointCount = 3;
+    chevron.resize(8, 6);
+    chevron.x = 140;
+    chevron.y = 15;
+    chevron.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[500]) }];
+    trigger.appendChild(chevron);
+    dropdown.appendChild(trigger);
+    // Dropdown menu
+    const menu = figma.createFrame();
+    menu.name = "Dropdown Menu";
+    menu.resize(200, 240);
+    menu.x = 0;
+    menu.y = 44;
+    menu.cornerRadius = radius.md;
+    menu.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[0]) }];
+    menu.strokes = [{ type: "SOLID", color: hexToRgb(colors.neutral[200]) }];
+    menu.strokeWeight = 1;
+    menu.effects = [createShadow("lg")];
+    const menuItems = [
+        { text: "Performance Package", icon: "⚡" },
+        { text: "Luxury Interior", icon: "✨" },
+        { text: "Sport Exterior", icon: "🏎️" },
+        { text: "Technology Suite", icon: "📱" },
+        { text: "Safety Plus", icon: "🛡️" },
+        { text: "Custom Paint", icon: "🎨" }
+    ];
+    for (let i = 0; i < menuItems.length; i++) {
+        const item = menuItems[i];
+        const menuItem = figma.createFrame();
+        menuItem.name = `Menu Item ${i + 1}`;
+        menuItem.resize(200, 40);
+        menuItem.y = i * 40;
+        menuItem.fills = [];
+        // Hover state for first item
+        if (i === 0) {
+            menuItem.fills = [{ type: "SOLID", color: hexToRgb(colors.brand[50]) }];
+        }
+        const itemText = figma.createText();
+        itemText.characters = `${item.icon} ${item.text}`;
+        itemText.x = spacing[3];
+        itemText.y = (40 - typographyScale.fontSize.sm) / 2;
+        await applyFont(itemText, "ui", "normal");
+        applyTypography(itemText, "sm", "normal", "normal", "normal");
+        itemText.fills = [{ type: "SOLID", color: hexToRgb(i === 0 ? colors.brand[700] : colors.neutral[700]) }];
+        menuItem.appendChild(itemText);
+        menu.appendChild(menuItem);
+    }
+    dropdown.appendChild(menu);
+    figma.currentPage.appendChild(dropdown);
+    console.log("✅ Dropdown Menu component created");
+}
+async function createProgressBar() {
+    console.log("📊 Creating Progress component...");
+    const container = figma.createFrame();
+    container.name = "Progress • Loading Indicator";
+    container.resize(320, 120);
+    container.fills = [];
+    let currentY = 0;
+    // Title
+    const title = figma.createText();
+    title.characters = "Installation Progress";
+    title.x = 0;
+    title.y = currentY;
+    await applyFont(title, "heading", "medium");
+    applyTypography(title, "base", "medium", "normal", "normal");
+    title.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[900]) }];
+    container.appendChild(title);
+    currentY += 32;
+    // Progress bar background
+    const progressBg = figma.createFrame();
+    progressBg.name = "Progress Background";
+    progressBg.resize(320, 8);
+    progressBg.y = currentY;
+    progressBg.cornerRadius = radius.full;
+    progressBg.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[200]) }];
+    // Progress bar fill (68% complete)
+    const progressFill = figma.createFrame();
+    progressFill.name = "Progress Fill";
+    progressFill.resize(218, 8); // 68% of 320
+    progressFill.cornerRadius = radius.full;
+    progressFill.fills = [{ type: "SOLID", color: hexToRgb(colors.brand[500]) }];
+    progressBg.appendChild(progressFill);
+    container.appendChild(progressBg);
+    currentY += 20;
+    // Progress text
+    const progressText = figma.createText();
+    progressText.characters = "68% Complete";
+    progressText.x = 0;
+    progressText.y = currentY;
+    await applyFont(progressText, "ui", "medium");
+    applyTypography(progressText, "sm", "medium", "normal", "normal");
+    progressText.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[600]) }];
+    container.appendChild(progressText);
+    currentY += 28;
+    // Status text
+    const status = figma.createText();
+    status.characters = "Installing vehicle performance modules...";
+    status.x = 0;
+    status.y = currentY;
+    await applyFont(status, "body", "normal");
+    applyTypography(status, "sm", "normal", "normal", "normal");
+    status.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[500]) }];
+    container.appendChild(status);
+    figma.currentPage.appendChild(container);
+    console.log("✅ Progress component created");
+}
+async function createSwitch() {
+    console.log("🔄 Creating Switch component...");
+    const container = figma.createFrame();
+    container.name = "Switch • Toggle Control";
+    container.resize(280, 120);
+    container.fills = [];
+    let currentY = 0;
+    // Create multiple switch examples
+    const switches = [
+        { label: "Performance Mode", enabled: true },
+        { label: "Eco Driving", enabled: false },
+        { label: "Night Vision", enabled: true }
+    ];
+    for (let i = 0; i < switches.length; i++) {
+        const switchData = switches[i];
+        const switchContainer = figma.createFrame();
+        switchContainer.name = `Switch ${i + 1}`;
+        switchContainer.resize(280, 32);
+        switchContainer.y = currentY;
+        switchContainer.fills = [];
+        // Label
+        const label = figma.createText();
+        label.characters = switchData.label;
+        label.x = 0;
+        label.y = (32 - typographyScale.fontSize.base) / 2;
+        await applyFont(label, "body", "medium");
+        applyTypography(label, "base", "medium", "normal", "normal");
+        label.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[900]) }];
+        switchContainer.appendChild(label);
+        // Switch track
+        const track = figma.createFrame();
+        track.name = "Switch Track";
+        track.resize(44, 24);
+        track.x = 220;
+        track.y = 4;
+        track.cornerRadius = 12;
+        track.fills = [{ type: "SOLID", color: hexToRgb(switchData.enabled ? colors.brand[500] : colors.neutral[300]) }];
+        // Switch thumb
+        const thumb = figma.createEllipse();
+        thumb.name = "Switch Thumb";
+        thumb.resize(20, 20);
+        thumb.x = switchData.enabled ? 22 : 2;
+        thumb.y = 2;
+        thumb.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[0]) }];
+        thumb.effects = [createShadow("sm")];
+        track.appendChild(thumb);
+        switchContainer.appendChild(track);
+        container.appendChild(switchContainer);
+        currentY += 40;
+    }
+    figma.currentPage.appendChild(container);
+    console.log("✅ Switch component created");
+}
 async function createTypographySpecimen() {
     console.log("📖 Creating Comprehensive House Design System Typography Showcase...");
     try {
@@ -664,6 +1085,36 @@ figma.ui.onmessage = async (msg) => {
                 figma.notify("Creating typography specimen...");
                 await createTypographySpecimen();
                 figma.notify("✅ Typography specimen created!");
+                break;
+            case "create-accordion":
+                figma.notify("Creating accordion...");
+                await createAccordion();
+                figma.notify("✅ Accordion created!");
+                break;
+            case "create-dialog":
+                figma.notify("Creating dialog...");
+                await createDialog();
+                figma.notify("✅ Dialog created!");
+                break;
+            case "create-tabs":
+                figma.notify("Creating tabs...");
+                await createTabs();
+                figma.notify("✅ Tabs created!");
+                break;
+            case "create-dropdown":
+                figma.notify("Creating dropdown...");
+                await createDropdown();
+                figma.notify("✅ Dropdown created!");
+                break;
+            case "create-progress":
+                figma.notify("Creating progress...");
+                await createProgressBar();
+                figma.notify("✅ Progress created!");
+                break;
+            case "create-switch":
+                figma.notify("Creating switch...");
+                await createSwitch();
+                figma.notify("✅ Switch created!");
                 break;
             default:
                 console.log(`❌ Unknown message: ${msg.type}`);
