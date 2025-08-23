@@ -850,6 +850,146 @@ async function createSwitch() {
     figma.currentPage.appendChild(container);
     console.log("✅ Switch component created");
 }
+async function createColorPalette() {
+    console.log("🎨 Creating Color Palette component...");
+    const palette = figma.createFrame();
+    palette.name = "Color Palette • House Design System";
+    palette.resize(1200, 800);
+    palette.cornerRadius = radius.lg;
+    palette.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[0]) }];
+    let currentY = spacing[6];
+    const leftMargin = spacing[6];
+    const swatchSize = 60;
+    const swatchSpacing = 8;
+    // Main title
+    const title = figma.createText();
+    title.characters = "House Design System Color Palette";
+    title.x = leftMargin;
+    title.y = currentY;
+    await applyFont(title, "display", "bold");
+    applyTypography(title, "2xl", "bold", "tight", "normal");
+    title.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[900]) }];
+    palette.appendChild(title);
+    currentY += 50;
+    // Subtitle
+    const subtitle = figma.createText();
+    subtitle.characters = "Luxury Automotive Color System";
+    subtitle.x = leftMargin;
+    subtitle.y = currentY;
+    await applyFont(subtitle, "heading", "medium");
+    applyTypography(subtitle, "base", "medium", "normal", "normal");
+    subtitle.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[600]) }];
+    palette.appendChild(subtitle);
+    currentY += 40;
+    // Color families to display
+    const colorFamilies = [
+        { name: "Brand Colors", colors: colors.brand, description: "Primary brand identity colors" },
+        { name: "Neutral Colors", colors: colors.neutral, description: "Text, backgrounds, and borders" },
+        { name: "Accent Colors", colors: colors.accent, description: "Secondary highlights and accents" },
+        { name: "Success Colors", colors: colors.success, description: "Success states and confirmations" },
+        { name: "Warning Colors", colors: colors.warning, description: "Warnings and cautions" },
+        { name: "Danger Colors", colors: colors.danger, description: "Errors and destructive actions" }
+    ];
+    for (const family of colorFamilies) {
+        // Family title
+        const familyTitle = figma.createText();
+        familyTitle.characters = family.name;
+        familyTitle.x = leftMargin;
+        familyTitle.y = currentY;
+        await applyFont(familyTitle, "heading", "bold");
+        applyTypography(familyTitle, "lg", "bold", "tight", "normal");
+        familyTitle.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[900]) }];
+        palette.appendChild(familyTitle);
+        currentY += 28;
+        // Family description
+        const familyDesc = figma.createText();
+        familyDesc.characters = family.description;
+        familyDesc.x = leftMargin;
+        familyDesc.y = currentY;
+        await applyFont(familyDesc, "body", "normal");
+        applyTypography(familyDesc, "sm", "normal", "normal", "normal");
+        familyDesc.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[600]) }];
+        palette.appendChild(familyDesc);
+        currentY += 24;
+        // Create color swatches
+        const swatchContainer = figma.createFrame();
+        swatchContainer.name = `${family.name} Swatches`;
+        swatchContainer.x = leftMargin;
+        swatchContainer.y = currentY;
+        swatchContainer.fills = [];
+        let swatchX = 0;
+        const swatchKeys = Object.keys(family.colors).sort((a, b) => {
+            const aNum = parseInt(a);
+            const bNum = parseInt(b);
+            return aNum - bNum;
+        });
+        for (const colorKey of swatchKeys) {
+            const colorValue = family.colors[colorKey];
+            // Swatch container
+            const swatchGroup = figma.createFrame();
+            swatchGroup.name = `${family.name.split(' ')[0]}-${colorKey}`;
+            swatchGroup.resize(swatchSize + 16, swatchSize + 40);
+            swatchGroup.x = swatchX;
+            swatchGroup.y = 0;
+            swatchGroup.fills = [];
+            // Color swatch
+            const swatch = figma.createRectangle();
+            swatch.resize(swatchSize, swatchSize);
+            swatch.x = 8;
+            swatch.y = 0;
+            swatch.cornerRadius = radius.md;
+            swatch.fills = [{ type: "SOLID", color: hexToRgb(colorValue) }];
+            swatch.strokes = [{ type: "SOLID", color: hexToRgb(colors.neutral[200]) }];
+            swatch.strokeWeight = 1;
+            swatchGroup.appendChild(swatch);
+            // Color name
+            const colorName = figma.createText();
+            colorName.characters = colorKey;
+            colorName.x = 8;
+            colorName.y = swatchSize + 4;
+            colorName.resize(swatchSize, 12);
+            await applyFont(colorName, "ui", "medium");
+            applyTypography(colorName, "xs", "medium", "none", "normal");
+            colorName.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[700]) }];
+            colorName.textAlignHorizontal = "CENTER";
+            swatchGroup.appendChild(colorName);
+            // Hex value
+            const hexValue = figma.createText();
+            hexValue.characters = colorValue.toUpperCase();
+            hexValue.x = 8;
+            hexValue.y = swatchSize + 18;
+            hexValue.resize(swatchSize, 12);
+            await applyFont(hexValue, "ui", "normal");
+            applyTypography(hexValue, "xs", "normal", "none", "normal");
+            hexValue.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[500]) }];
+            hexValue.textAlignHorizontal = "CENTER";
+            swatchGroup.appendChild(hexValue);
+            swatchContainer.appendChild(swatchGroup);
+            swatchX += swatchSize + 16 + swatchSpacing;
+        }
+        // Set container size
+        swatchContainer.resize(swatchX - swatchSpacing, swatchSize + 40);
+        palette.appendChild(swatchContainer);
+        currentY += swatchSize + 64;
+    }
+    // Usage guidelines
+    currentY += 20;
+    const guidelines = figma.createText();
+    guidelines.characters = "Usage Guidelines:\n• Use brand colors for primary actions and key elements\n• Neutral colors provide hierarchy and structure\n• Status colors communicate state and feedback\n• Maintain proper contrast ratios for accessibility";
+    guidelines.x = leftMargin;
+    guidelines.y = currentY;
+    guidelines.resize(800, 100);
+    await applyFont(guidelines, "body", "normal");
+    applyTypography(guidelines, "sm", "normal", "relaxed", "normal");
+    guidelines.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[600]) }];
+    palette.appendChild(guidelines);
+    currentY += 100;
+    // Final container size
+    palette.resize(1200, currentY + spacing[6]);
+    figma.currentPage.appendChild(palette);
+    figma.viewport.scrollAndZoomIntoView([palette]);
+    console.log("✅ Color Palette component created");
+}
 async function createTypographySpecimen() {
     console.log("📖 Creating Comprehensive House Design System Typography Showcase...");
     try {
@@ -1085,6 +1225,11 @@ figma.ui.onmessage = async (msg) => {
                 figma.notify("Creating typography specimen...");
                 await createTypographySpecimen();
                 figma.notify("✅ Typography specimen created!");
+                break;
+            case "create-color-palette":
+                figma.notify("Creating color palette...");
+                await createColorPalette();
+                figma.notify("✅ Color palette created!");
                 break;
             case "create-accordion":
                 figma.notify("Creating accordion...");
