@@ -62,18 +62,18 @@ const fontFamilies = {
     name: "Display",
     description: "Luxury, stylized text for hero content",
     fonts: [
-      { family: "Arial Black", style: "Regular" },      // Bold, impactful
-      { family: "Impact", style: "Regular" },           // Strong presence
-      { family: "Helvetica", style: "Bold" },           // Clean bold
+      { family: "Inter", style: "Bold" },               // Modern, strong
+      { family: "SF Pro Display", style: "Bold" },      // macOS system
+      { family: "Arial", style: "Bold" },               // Universal fallback
     ]
   },
   heading: {
     name: "Heading", 
     description: "Strong, architectural headings",
     fonts: [
-      { family: "Arial", style: "Bold" },               // Reliable bold
-      { family: "Helvetica", style: "Bold" },           // Clean alternative
-      { family: "SF Pro Display", style: "Bold" },      // macOS system
+      { family: "MicrogrammaEF Extend", style: "Medium" },  // Actual Microgramma
+      { family: "Inter", style: "Extrabold" },              // Strong fallback
+      { family: "Arial", style: "Bold" },                   // Universal fallback
     ]
   },
   body: {
@@ -133,7 +133,11 @@ async function loadSystemFonts(): Promise<void> {
   const systemFonts = [
     { family: "Arial", style: "Regular" },
     { family: "Arial", style: "Bold" },
-    { family: "Inter", style: "Regular" }
+    { family: "Inter", style: "Regular" },
+    { family: "Inter", style: "Bold" },
+    { family: "Inter", style: "Extrabold" },
+    { family: "SF Pro Display", style: "Bold" },
+    { family: "MicrogrammaEF Extend", style: "Medium" }
   ];
   
   for (const font of systemFonts) {
@@ -167,10 +171,10 @@ async function loadSystemFonts(): Promise<void> {
   for (const font of customFonts) {
     try {
       await figma.loadFontAsync({ family: font.family, style: font.style });
-      console.log(`🎨 Custom font: ${font.family} ${font.style}`);
+      console.log(`🎨 Custom font loaded successfully: ${font.family} ${font.style}`);
       customFontsLoaded++;
     } catch (error) {
-      console.log(`⚠️ Custom font not available: ${font.family} ${font.style}`);
+      console.log(`⚠️ Custom font failed to load: ${font.family} ${font.style} - Error: ${error}`);
     }
   }
   
@@ -184,6 +188,7 @@ async function applyFont(
   weight: keyof typeof typographyScale.fontWeight = "normal"
 ): Promise<void> {
   const family = fontFamilies[fontType];
+  console.log(`🎨 Applying font: ${fontType}, weight: ${weight}`);
   
   // Map weight to specific font files for each family
   let customFontName = "";
@@ -300,6 +305,19 @@ function hexToRgb(hex: string): RGB {
     };
   }
   return { r: 0, g: 0, b: 0 };
+}
+
+function parseRgba(rgba: string): RGBA {
+  const match = rgba.match(/rgba?\(([^)]+)\)/);
+  if (!match) return { r: 0, g: 0, b: 0, a: 1 };
+  
+  const values = match[1].split(',').map(v => parseFloat(v.trim()));
+  return {
+    r: values[0] / 255,
+    g: values[1] / 255,
+    b: values[2] / 255,
+    a: values.length > 3 ? values[3] : 1
+  };
 }
 
 function createShadow(shadowType: keyof typeof shadows): DropShadowEffect | InnerShadowEffect {
@@ -1075,6 +1093,120 @@ async function createColorPalette(): Promise<void> {
   palette.appendChild(subtitle);
   currentY += 40;
   
+  // UI Colors and Gradients Section
+  const uiTitle = figma.createText();
+  uiTitle.characters = "Plugin UI Colors & Gradients";
+  uiTitle.x = leftMargin;
+  uiTitle.y = currentY;
+  
+  await applyFont(uiTitle, "heading", "bold");
+  applyTypography(uiTitle, "lg", "bold", "tight", "normal");
+  uiTitle.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[900]) }];
+  
+  palette.appendChild(uiTitle);
+  currentY += 35;
+  
+  // UI Colors row
+  const uiColorsRow = figma.createFrame();
+  uiColorsRow.name = "UI Colors & Gradients";
+  uiColorsRow.x = leftMargin;
+  uiColorsRow.y = currentY;
+  uiColorsRow.resize(1100, 120);
+  uiColorsRow.fills = [];
+  
+  // Define UI colors and gradients used in the plugin
+  const uiElements = [
+    { name: "Brand Purple", color: colors.brand[500], type: "solid" },
+    { name: "Light Purple", color: colors.brand[100], type: "solid" },
+    { name: "Red Orange", color: colors.accent[700], type: "solid" },
+    { name: "Bright Orange", color: colors.accent[400], type: "solid" },
+    { name: "Deep Black", color: colors.neutral[950], type: "solid" },
+    { name: "Purple→Light", gradient: [colors.brand[500], colors.brand[100]], type: "gradient" },
+    { name: "Red→Orange→White", gradient: ["#CC3700", "#FF6B35", "#FFFFFF"], type: "gradient" },
+    { name: "Glass Effect", gradient: ["rgba(255,255,255,0.1)", "rgba(255,255,255,0.05)"], type: "gradient" }
+  ];
+  
+  let uiX = 0;
+  for (const element of uiElements) {
+    const swatchGroup = figma.createFrame();
+    swatchGroup.name = element.name;
+    swatchGroup.resize(swatchSize + 16, swatchSize + 45);
+    swatchGroup.x = uiX;
+    swatchGroup.y = 0;
+    swatchGroup.fills = [];
+    
+    // Color/gradient swatch
+    const swatch = figma.createRectangle();
+    swatch.resize(swatchSize, swatchSize);
+    swatch.x = 8;
+    swatch.y = 0;
+    swatch.cornerRadius = radius.md;
+    
+    if (element.type === "solid") {
+      swatch.fills = [{ type: "SOLID", color: hexToRgb(element.color!) }];
+    } else if (element.type === "gradient" && element.gradient) {
+      const gradientStops = element.gradient.map((color, index) => {
+        let colorWithAlpha: RGBA;
+        if (color.startsWith("rgba") || color.startsWith("rgb")) {
+          colorWithAlpha = parseRgba(color);
+        } else {
+          const baseColor = hexToRgb(color);
+          colorWithAlpha = { r: baseColor.r, g: baseColor.g, b: baseColor.b, a: 1 };
+        }
+        
+        return {
+          color: colorWithAlpha,
+          position: index / (element.gradient!.length - 1)
+        };
+      });
+      
+      swatch.fills = [{
+        type: "GRADIENT_LINEAR",
+        gradientTransform: [[1, 0, 0], [0, 1, 0]],
+        gradientStops: gradientStops
+      }];
+    }
+    
+    swatch.strokes = [{ type: "SOLID", color: hexToRgb(colors.neutral[200]) }];
+    swatch.strokeWeight = 1;
+    
+    swatchGroup.appendChild(swatch);
+    
+    // Label
+    const label = figma.createText();
+    label.characters = element.name;
+    label.x = 8;
+    label.y = swatchSize + 4;
+    label.resize(swatchSize, 12);
+    
+    await applyFont(label, "ui", "medium");
+    applyTypography(label, "xs", "medium", "none", "normal");
+    label.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[700]) }];
+    label.textAlignHorizontal = "CENTER";
+    
+    swatchGroup.appendChild(label);
+    
+    // Usage note
+    const usage = figma.createText();
+    usage.characters = element.type === "gradient" ? "Gradient" : "Solid";
+    usage.x = 8;
+    usage.y = swatchSize + 18;
+    usage.resize(swatchSize, 10);
+    
+    await applyFont(usage, "ui", "normal");
+    applyTypography(usage, "xs", "normal", "none", "normal");
+    usage.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[500]) }];
+    usage.textAlignHorizontal = "CENTER";
+    
+    swatchGroup.appendChild(usage);
+    uiColorsRow.appendChild(swatchGroup);
+    
+    uiX += swatchSize + 24;
+  }
+  
+  palette.appendChild(uiColorsRow);
+  currentY += 140;
+  
   // Color families to display
   const colorFamilies = [
     { name: "Brand Colors", colors: colors.brand, description: "Primary brand identity colors" },
@@ -1456,6 +1588,95 @@ async function createTypographySpecimen(): Promise<void> {
   }
 }
 
+async function createEditorialHeadline(): Promise<void> {
+  console.log("🏍️ Creating 80s Motorcycle Magazine Editorial Headline...");
+  
+  try {
+    const headline = figma.createFrame();
+    headline.name = "Editorial Headline • 80s Motorcycle Magazine";
+    headline.resize(800, 400);
+    headline.cornerRadius = 8;
+    headline.fills = [{ 
+      type: "SOLID", 
+      color: hexToRgb(colors.neutral[900]) 
+    }];
+    
+    // Add gold accent border
+    headline.strokeWeight = 2;
+    headline.strokes = [{ 
+      type: "SOLID", 
+      color: hexToRgb(colors.warning[500])
+    }];
+    
+    // Main headline "SPEED"
+    const mainHeadline = figma.createText();
+    mainHeadline.characters = "SPEED";
+    mainHeadline.x = 40;
+    mainHeadline.y = 60;
+    
+    await applyFont(mainHeadline, "display", "extrabold");
+    applyTypography(mainHeadline, "5xl", "extrabold", "none", "wider");
+    mainHeadline.fills = [{ 
+      type: "GRADIENT_LINEAR", 
+      gradientTransform: [
+        [1, 0, 0],
+        [0, 1, 0]
+      ],
+      gradientStops: [
+        { position: 0, color: { r: 1, g: 1, b: 1, a: 1 } },      // Pure white at top
+        { position: 1, color: { r: 0.898, g: 0.898, b: 0.898, a: 1 } }     // Light gray at bottom
+      ]
+    }];
+    
+    headline.appendChild(mainHeadline);
+    
+    // Sub-headline "& STYLE"
+    const subHeadline = figma.createText();
+    subHeadline.characters = "& STYLE";
+    subHeadline.x = 40;
+    subHeadline.y = 60 + typographyScale.fontSize["5xl"] + 2; // 2px below SPEED
+    
+    await applyFont(subHeadline, "heading", "medium");
+    applyTypography(subHeadline, "3xl", "medium", "none", "wide");
+    subHeadline.fills = [{ type: "SOLID", color: hexToRgb(colors.warning[400]) }];
+    
+    headline.appendChild(subHeadline);
+    
+    // Tagline
+    const tagline = figma.createText();
+    tagline.characters = "The Ultimate Guide to Motorcycle Fashion";
+    tagline.x = 40;
+    tagline.y = subHeadline.y + typographyScale.fontSize["3xl"] + 20; // 20px below & STYLE
+    
+    await applyFont(tagline, "body", "medium");
+    applyTypography(tagline, "lg", "medium", "normal", "normal");
+    tagline.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[300]) }];
+    
+    headline.appendChild(tagline);
+    
+    // Add gold accent stripe at top
+    const accentStripe = figma.createRectangle();
+    accentStripe.x = 0;
+    accentStripe.y = 0;
+    accentStripe.resize(headline.width, 3);
+    accentStripe.fills = [{ 
+      type: "SOLID", 
+      color: hexToRgb(colors.warning[500]) 
+    }];
+    
+    headline.appendChild(accentStripe);
+    
+    // Center the frame in the viewport
+    figma.viewport.scrollAndZoomIntoView([headline]);
+    
+    console.log("✅ Editorial headline created successfully!");
+    
+  } catch (error) {
+    console.error("❌ Editorial headline error:", error);
+    figma.notify(`❌ Error creating editorial headline: ${error instanceof Error ? error.message : "Unknown error"}`);
+  }
+}
+
 // =============================================================================
 // PLUGIN INITIALIZATION & MESSAGE HANDLING
 // =============================================================================
@@ -1511,6 +1732,12 @@ figma.ui.onmessage = async (msg) => {
         figma.notify("Creating color palette...");
         await createColorPalette();
         figma.notify("✅ Color palette created!");
+        break;
+        
+      case "create-editorial-headline":
+        figma.notify("Creating editorial headline...");
+        await createEditorialHeadline();
+        figma.notify("✅ Editorial headline created!");
         break;
         
       case "create-accordion":

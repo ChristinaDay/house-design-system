@@ -815,6 +815,62 @@
       color: var(--color-neutral-600);
     }
 
+    /* Editorial Headline Example */
+    .example-editorial {
+      text-align: left;
+      width: 100%;
+      padding: 8px;
+      background: linear-gradient(135deg, var(--color-neutral-900) 0%, var(--color-neutral-800) 100%);
+      border-radius: var(--radius-lg);
+      border: 2px solid var(--color-warning-500);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .example-editorial::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-warning-500) 0%, var(--color-warning-300) 50%, var(--color-neutral-0) 100%);
+    }
+    
+    .example-editorial-main {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--color-neutral-0);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      line-height: 1;
+      margin-bottom: 2px;
+      text-shadow: 2px 2px 0px var(--color-neutral-900);
+    }
+    
+    .example-editorial-sub {
+      font-family: var(--font-heading);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--color-warning-400);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      line-height: 1;
+      margin-bottom: 4px;
+      text-shadow: 1px 1px 0px var(--color-neutral-900);
+    }
+    
+    .example-editorial-tagline {
+      font-family: var(--font-body);
+      font-size: 6px;
+      color: var(--color-neutral-300);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1.2;
+      font-weight: 500;
+    }
+
     .footer {
       margin-top: var(--spacing-8);
       padding: var(--spacing-6);
@@ -970,6 +1026,21 @@
           </div>
         </div>
         <div class="component-meta">4 Font Families • 6 Sizes • Full Hierarchy</div>
+      </div>
+      
+      <div class="component-item" onclick="createComponent('create-editorial-headline')">
+        <div class="component-title">
+          Editorial Headline
+        </div>
+        <div class="component-description">80s motorcycle fashion magazine style using Eurostile and Microgramma</div>
+        <div class="component-example">
+          <div class="example-editorial">
+            <div class="example-editorial-main">SPEED</div>
+            <div class="example-editorial-sub">& STYLE</div>
+            <div class="example-editorial-tagline">The Ultimate Guide to Motorcycle Fashion</div>
+          </div>
+        </div>
+        <div class="component-meta">Eurostile • Microgramma • 80s Aesthetic</div>
       </div>
       
       <div class="component-item" onclick="createComponent('create-color-palette')">
