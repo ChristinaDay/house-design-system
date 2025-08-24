@@ -1123,7 +1123,7 @@ async function createTypographySpecimen() {
         applyTypography(title, "4xl", "bold", "tight", "normal");
         title.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[900]) }];
         specimen.appendChild(title);
-        currentY += 70;
+        currentY += typographyScale.fontSize["4xl"] + 2; // Only 2px below main title
         // Subtitle
         const subtitle = figma.createText();
         subtitle.characters = "Luxury Automotive Typography System";
@@ -1138,8 +1138,20 @@ async function createTypographySpecimen() {
         const divider = figma.createRectangle();
         divider.x = leftMargin;
         divider.y = currentY;
-        divider.resize(specimen.width - leftMargin - rightMargin, 1);
-        divider.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[200]) }];
+        divider.resize(specimen.width - leftMargin - rightMargin, 2);
+        divider.fills = [{
+                type: "GRADIENT_LINEAR",
+                gradientTransform: [
+                    [1, 0, 0],
+                    [0, 1, 0]
+                ],
+                gradientStops: [
+                    { position: 0, color: { r: 0.976, g: 0.455, b: 0.086, a: 1 } }, // Red-orange (accent-500)
+                    { position: 0.5, color: { r: 0.976, g: 0.455, b: 0.086, a: 1 } }, // Red-orange (accent-500) - extends the red-orange
+                    { position: 0.8, color: { r: 0.984, g: 0.749, b: 0.141, a: 1 } }, // Yellow gold (warning-400)
+                    { position: 1, color: { r: 0.984, g: 0.749, b: 0.141, a: 0 } } // Transparent fade
+                ]
+            }];
         specimen.appendChild(divider);
         currentY += 40;
         // Display Typography Section
