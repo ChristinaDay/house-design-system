@@ -4,13 +4,104 @@
   <meta charset="utf-8">
   <title>House Design System</title>
   <style>
-    /* Design System Colors */
+    /* Custom Font Declarations */
+    @font-face {
+      font-family: 'Eurostile';
+      src: url('../fonts/Eurostile-Regular-Italic.woff2') format('woff2');
+      font-weight: 400;
+      font-style: italic;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Eurostile';
+      src: url('../fonts/Eurostile-Medium-Italic-webfont.woff2') format('woff2');
+      font-weight: 500;
+      font-style: italic;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Eurostile';
+      src: url('../fonts/Eurostile-Bold-Italic.woff2') format('woff2');
+      font-weight: 700;
+      font-style: italic;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Microgramma';
+      src: url('../fonts/Microgramma-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Microgramma';
+      src: url('../fonts/Microgramma-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Microgramma';
+      src: url('../fonts/Microgramma-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Inter';
+      src: url('../fonts/Inter-Light.woff2') format('woff2');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Inter';
+      src: url('../fonts/Inter-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Inter';
+      src: url('../fonts/Inter-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Futura';
+      src: url('../fonts/Futura-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Futura';
+      src: url('../fonts/Futura-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* Design System Colors & Advanced Tokens */
     :root {
       --color-brand-50: #F3F1FF;
       --color-brand-100: #E6E2FF;
       --color-brand-500: #6D5EF3;
       --color-brand-600: #5B4AE6;
       --color-brand-700: #4A39D9;
+      --color-brand-800: #3D2CC2;
+      --color-brand-900: #2F1FA3;
       --color-neutral-0: #FFFFFF;
       --color-neutral-50: #FAFAFA;
       --color-neutral-100: #F5F5F5;
@@ -22,6 +113,11 @@
       --color-neutral-700: #404040;
       --color-neutral-800: #262626;
       --color-neutral-900: #171717;
+      --color-neutral-950: #0A0A0A;
+      --color-accent-400: #FF6B35;
+      --color-accent-500: #FF4500;
+      --color-accent-600: #E63E00;
+      --color-accent-700: #CC3700;
       --spacing-2: 8px;
       --spacing-3: 12px;
       --spacing-4: 16px;
@@ -31,8 +127,28 @@
       --radius-base: 4px;
       --radius-md: 6px;
       --radius-lg: 8px;
-      --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-      --shadow-base: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --radius-xl: 12px;
+      --radius-2xl: 16px;
+      --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+      --shadow-base: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+      --gradient-brand: linear-gradient(135deg, var(--color-brand-500) 0%, var(--color-brand-700) 100%);
+      --gradient-accent: linear-gradient(135deg, var(--color-accent-500) 0%, var(--color-accent-700) 100%);
+      --gradient-brand-accent: linear-gradient(135deg, var(--color-brand-500) 0%, var(--color-brand-100) 100%);
+      --gradient-surface: linear-gradient(135deg, var(--color-neutral-0) 0%, var(--color-neutral-50) 100%);
+      --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+      --blur-backdrop: blur(20px);
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-spring: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      
+      /* Typography Font Families */
+      --font-display: 'Eurostile', 'Arial Black', sans-serif;
+      --font-heading: 'Microgramma', 'Arial Black', sans-serif;
+      --font-body: 'Inter', 'SF Pro Text', system-ui, sans-serif;
+      --font-ui: 'Futura', 'SF Pro Display', system-ui, sans-serif;
     }
 
     * {
@@ -42,38 +158,68 @@
     }
     
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+      font-family: var(--font-body);
       font-size: 14px;
       line-height: 1.5;
       color: var(--color-neutral-900);
-      background: var(--color-neutral-50);
+      background: radial-gradient(ellipse at top, var(--color-brand-50) 0%, var(--color-neutral-50) 70%);
+      background-attachment: fixed;
       padding: var(--spacing-6);
       overflow-x: hidden;
+      min-height: 100vh;
     }
     
     .header {
-      text-align: center;
+      text-align: left;
       margin-bottom: var(--spacing-8);
-      padding-bottom: var(--spacing-6);
-      border-bottom: 1px solid var(--color-neutral-200);
+      padding: var(--spacing-8) var(--spacing-6) var(--spacing-6);
+      background: var(--gradient-surface);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-2xl);
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: var(--blur-backdrop);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gradient-brand-accent);
     }
     
     .header h1 {
-      font-size: 20px;
-      font-weight: 700;
-      margin: 0 0 var(--spacing-2) 0;
-      color: var(--color-neutral-900);
-      letter-spacing: -0.025em;
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 800;
+      margin: 0;
+      color: var(--color-neutral-950);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      line-height: 1.1;
     }
     
     .header .subtitle {
-      font-size: 13px;
-      color: var(--color-neutral-600);
-      font-weight: 500;
-      margin: 0;
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      margin: -8px 0 0 0;
+      text-transform: lowercase;
+      font-variant: small-caps;
+      letter-spacing: 0.05em;
+      opacity: 0.9;
+      background: linear-gradient(135deg, var(--color-brand-700) 0%, var(--color-brand-100) 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .header .description {
+      font-family: var(--font-body);
       font-size: 12px;
       color: var(--color-neutral-500);
       margin: var(--spacing-2) 0 0 0;
@@ -90,36 +236,74 @@
     }
 
     .section-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--color-neutral-700);
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-neutral-950);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: var(--spacing-3);
-      padding-left: var(--spacing-2);
+      letter-spacing: 0.1em;
+      margin-bottom: var(--spacing-4);
+      padding: var(--spacing-2) var(--spacing-4);
+      background: linear-gradient(135deg, rgba(109, 94, 243, 0.08) 0%, rgba(230, 226, 255, 0.12) 100%);
+      border: 1px solid rgba(109, 94, 243, 0.15);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(10px);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 60%;
+      background: var(--gradient-accent);
+      border-radius: 2px;
     }
     
     .component-item {
-      background: var(--color-neutral-0);
-      border: 1px solid var(--color-neutral-200);
-      border-radius: var(--radius-md);
-      padding: var(--spacing-4);
+      background: var(--gradient-surface);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-5);
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: var(--transition-spring);
       position: relative;
       overflow: hidden;
+      backdrop-filter: var(--blur-backdrop);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .component-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-glass);
+      opacity: 0;
+      transition: var(--transition-smooth);
+      pointer-events: none;
     }
     
     .component-item:hover {
-      border-color: var(--color-brand-500);
-      box-shadow: var(--shadow-base);
-      transform: translateY(-1px);
-      background: var(--color-brand-50);
+      border-color: var(--color-accent-500);
+      box-shadow: var(--shadow-xl), 0 0 20px rgba(249, 115, 22, 0.15);
+      transform: translateY(-4px) scale(1.02);
+      background: linear-gradient(135deg, rgba(255, 247, 237, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
+    }
+    
+    .component-item:hover::after {
+      opacity: 1;
     }
     
     .component-item:active {
-      transform: translateY(0);
-      box-shadow: var(--shadow-sm);
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: var(--shadow-md);
     }
 
     .component-item::before {
@@ -127,61 +311,98 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 3px;
+      width: 4px;
       height: 100%;
-      background: var(--color-brand-500);
+      background: var(--gradient-accent);
       opacity: 0;
-      transition: opacity 0.15s ease;
+      transition: var(--transition-spring);
+      border-radius: 0 2px 2px 0;
     }
 
     .component-item:hover::before {
       opacity: 1;
+      transform: scaleY(1.1);
     }
     
     .component-title {
-      font-size: 14px;
-      font-weight: 600;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
       margin: 0 0 var(--spacing-2) 0;
-      color: var(--color-neutral-900);
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-2);
+      color: var(--color-neutral-950);
+      letter-spacing: -0.01em;
     }
 
-    .component-icon {
-      font-size: 16px;
-      opacity: 0.8;
-    }
     
     .component-description {
+      font-family: var(--font-body);
       font-size: 12px;
       color: var(--color-neutral-600);
-      margin: 0;
-      line-height: 1.4;
+      margin: 0 0 var(--spacing-3) 0;
+      line-height: 1.5;
+      font-weight: 400;
     }
 
     .component-meta {
-      font-size: 11px;
-      color: var(--color-neutral-400);
+      font-family: var(--font-ui);
+      font-size: 10px;
+      color: var(--color-accent-700);
       margin-top: var(--spacing-2);
-      font-weight: 500;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.8;
+      background: linear-gradient(135deg, rgba(204, 55, 0, 0.15) 0%, rgba(255, 107, 53, 0.12) 50%, rgba(255, 255, 255, 0.8) 100%);
+      padding: 2px 8px;
+      border-radius: var(--radius-base);
+      display: inline-block;
+      border: 1px solid rgba(255, 107, 53, 0.25);
     }
     
     .status {
       position: fixed;
-      bottom: var(--spacing-4);
-      left: var(--spacing-4);
-      right: var(--spacing-4);
-      background: var(--color-brand-50);
-      border: 1px solid var(--color-brand-200);
-      border-radius: var(--radius-lg);
-      padding: var(--spacing-3);
-      font-size: 12px;
-      color: var(--color-brand-700);
+      bottom: var(--spacing-6);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gradient-surface);
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-4) var(--spacing-6);
+      font-family: var(--font-ui);
+      font-size: 13px;
+      color: var(--color-accent-700);
       text-align: center;
       display: none;
-      font-weight: 500;
-      box-shadow: var(--shadow-base);
+      font-weight: 600;
+      box-shadow: var(--shadow-xl), 0 0 20px rgba(249, 115, 22, 0.2);
+      backdrop-filter: var(--blur-backdrop);
+      min-width: 200px;
+      animation: statusSlide 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+    
+    .status::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: var(--gradient-brand-accent);
+      border-radius: var(--radius-xl);
+      z-index: -1;
+    }
+    
+    @keyframes statusSlide {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
     }
 
     .status.success {
@@ -198,34 +419,52 @@
 
     /* Component Examples */
     .component-example {
-      background: var(--color-neutral-50);
-      border: 1px solid var(--color-neutral-200);
-      border-radius: var(--radius-base);
-      padding: var(--spacing-3);
+      background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(250,250,250,0.6) 100%);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-4);
       margin: var(--spacing-2) 0;
-      min-height: 60px;
+      min-height: 70px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 11px;
       overflow: hidden;
       position: relative;
+      backdrop-filter: blur(10px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), var(--shadow-xs);
+    }
+    
+    .component-example::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 20%, rgba(109, 94, 243, 0.08) 0%, rgba(230, 226, 255, 0.04) 40%, transparent 70%);
+      pointer-events: none;
     }
 
     /* Button Example */
     .example-button {
-      background: var(--color-brand-500);
+      font-family: var(--font-ui);
+      background: var(--gradient-brand-accent);
       color: white;
       border: none;
-      border-radius: var(--radius-base);
-      padding: 4px 12px;
+      border-radius: var(--radius-md);
+      padding: 6px 16px;
       font-size: 10px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: default;
+      box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,0.3);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      letter-spacing: 0.025em;
     }
 
     /* Input Example */
     .example-input {
+      font-family: var(--font-body);
       border: 1px solid var(--color-neutral-300);
       border-radius: var(--radius-base);
       padding: 4px 8px;
@@ -236,39 +475,61 @@
 
     /* Card Example */
     .example-card {
-      background: white;
-      border: 1px solid var(--color-neutral-200);
-      border-radius: var(--radius-md);
-      padding: 8px;
-      width: 80px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      background: var(--gradient-surface);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: var(--radius-lg);
+      padding: 10px;
+      width: 90px;
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(5px);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .example-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%);
     }
 
     .example-card-title {
+      font-family: var(--font-heading);
       font-size: 9px;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 4px;
-      color: var(--color-neutral-900);
+      color: var(--color-neutral-950);
+      letter-spacing: -0.01em;
     }
 
     .example-card-content {
-      font-size: 8px;
+      font-family: var(--font-body);
+      font-size: 7px;
       color: var(--color-neutral-600);
-      line-height: 1.3;
+      line-height: 1.4;
+      opacity: 0.9;
     }
 
     /* Badge Example */
     .example-badge {
-      background: var(--color-brand-100);
-      color: var(--color-brand-700);
-      border-radius: 10px;
-      padding: 2px 6px;
+      font-family: var(--font-ui);
+      background: linear-gradient(135deg, rgba(204, 55, 0, 0.2) 0%, rgba(255, 107, 53, 0.15) 50%, rgba(255, 255, 255, 0.9) 100%);
+      color: var(--color-accent-700);
+      border: 1px solid var(--color-accent-400);
+      border-radius: 12px;
+      padding: 3px 8px;
       font-size: 8px;
-      font-weight: 500;
+      font-weight: 600;
+      box-shadow: var(--shadow-xs);
+      letter-spacing: 0.025em;
     }
 
     /* Alert Example */
     .example-alert {
+      font-family: var(--font-body);
       background: var(--color-brand-50);
       border: 1px solid var(--color-brand-200);
       border-radius: var(--radius-base);
@@ -290,6 +551,7 @@
     }
 
     .example-accordion-header {
+      font-family: var(--font-heading);
       background: var(--color-neutral-50);
       padding: 4px 6px;
       font-size: 8px;
@@ -299,6 +561,7 @@
     }
 
     .example-accordion-content {
+      font-family: var(--font-body);
       padding: 4px 6px;
       font-size: 7px;
       color: var(--color-neutral-600);
@@ -326,6 +589,7 @@
     }
 
     .example-dialog-title {
+      font-family: var(--font-heading);
       font-size: 8px;
       font-weight: 600;
       margin-bottom: 3px;
@@ -338,6 +602,7 @@
     }
 
     .example-dialog-btn {
+      font-family: var(--font-ui);
       font-size: 7px;
       padding: 2px 4px;
       border-radius: 2px;
@@ -363,6 +628,7 @@
     }
 
     .example-tab {
+      font-family: var(--font-ui);
       flex: 1;
       padding: 3px 6px;
       font-size: 7px;
@@ -377,6 +643,7 @@
     }
 
     .example-tab-content {
+      font-family: var(--font-body);
       font-size: 7px;
       color: var(--color-neutral-600);
     }
@@ -387,6 +654,7 @@
     }
 
     .example-dropdown-trigger {
+      font-family: var(--font-ui);
       border: 1px solid var(--color-neutral-300);
       border-radius: var(--radius-base);
       padding: 3px 6px;
@@ -409,6 +677,7 @@
     }
 
     .example-dropdown-item {
+      font-family: var(--font-body);
       padding: 2px 6px;
       font-size: 7px;
       border-bottom: 1px solid var(--color-neutral-100);
@@ -429,6 +698,7 @@
     }
 
     .example-progress-label {
+      font-family: var(--font-heading);
       font-size: 8px;
       margin-bottom: 3px;
       color: var(--color-neutral-900);
@@ -450,6 +720,7 @@
     }
 
     .example-progress-text {
+      font-family: var(--font-body);
       font-size: 7px;
       color: var(--color-neutral-600);
     }
@@ -460,6 +731,7 @@
     }
 
     .example-switch-item {
+      font-family: var(--font-ui);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -516,6 +788,7 @@
     }
 
     .example-typography-display {
+      font-family: var(--font-display);
       font-size: 12px;
       font-weight: 700;
       font-style: italic;
@@ -523,17 +796,20 @@
     }
 
     .example-typography-heading {
+      font-family: var(--font-heading);
       font-size: 10px;
       font-weight: 600;
       color: var(--color-neutral-800);
     }
 
     .example-typography-body {
+      font-family: var(--font-body);
       font-size: 8px;
       color: var(--color-neutral-700);
     }
 
     .example-typography-ui {
+      font-family: var(--font-ui);
       font-size: 7px;
       font-weight: 500;
       color: var(--color-neutral-600);
@@ -541,22 +817,44 @@
 
     .footer {
       margin-top: var(--spacing-8);
-      padding-top: var(--spacing-6);
-      border-top: 1px solid var(--color-neutral-200);
+      padding: var(--spacing-6);
+      background: var(--gradient-glass);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-xl);
       text-align: center;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gradient-brand-accent);
     }
 
     .footer-text {
+      font-family: var(--font-body);
       font-size: 11px;
-      color: var(--color-neutral-400);
-      line-height: 1.4;
+      color: var(--color-neutral-500);
+      line-height: 1.5;
+      font-weight: 500;
     }
 
     .version {
+      font-family: var(--font-ui);
       font-size: 10px;
-      color: var(--color-neutral-300);
+      color: var(--color-accent-600);
       margin-top: var(--spacing-2);
-      font-weight: 500;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.8;
     }
 
     /* Scrollbar styling */
@@ -580,7 +878,7 @@
 </head>
 <body>
   <div class="header">
-    <h1>🏠 House Design System</h1>
+    <h1>House Design System</h1>
     <p class="subtitle">Luxury Automotive Aesthetics</p>
     <p class="description">Create sophisticated components with comprehensive design tokens</p>
   </div>
@@ -592,7 +890,6 @@
       
       <div class="component-item" onclick="createComponent('create-button')">
         <div class="component-title">
-          <span class="component-icon">🔘</span>
           Button
         </div>
         <div class="component-description">Primary action button with luxury styling and multiple variants</div>
@@ -604,7 +901,6 @@
       
       <div class="component-item" onclick="createComponent('create-input')">
         <div class="component-title">
-          <span class="component-icon">📝</span>
           Input Field
         </div>
         <div class="component-description">Text input with refined borders and typography</div>
@@ -616,10 +912,15 @@
       
       <div class="component-item" onclick="createComponent('create-card')">
         <div class="component-title">
-          <span class="component-icon">🃏</span>
           Card
         </div>
         <div class="component-description">Content container with elegant shadows and typography hierarchy</div>
+        <div class="component-example">
+          <div class="example-card">
+            <div class="example-card-title">Premium Card</div>
+            <div class="example-card-content">Luxury automotive styling with premium finishes</div>
+          </div>
+        </div>
         <div class="component-meta">Large Radius • Base Shadow • Mixed Typography</div>
       </div>
     </div>
@@ -630,19 +931,23 @@
       
       <div class="component-item" onclick="createComponent('create-badge')">
         <div class="component-title">
-          <span class="component-icon">🏷️</span>
           Badge
         </div>
         <div class="component-description">Status indicator with pill styling and brand colors</div>
+        <div class="component-example">
+          <div class="example-badge">Premium</div>
+        </div>
         <div class="component-meta">Full Radius • UI Font • Extra Small</div>
       </div>
       
       <div class="component-item" onclick="createComponent('create-alert')">
         <div class="component-title">
-          <span class="component-icon">⚠️</span>
           Alert
         </div>
         <div class="component-description">Information notification with proper color semantics</div>
+        <div class="component-example">
+          <div class="example-alert">System notification with luxury styling</div>
+        </div>
         <div class="component-meta">Base Radius • Border • Heading Font</div>
       </div>
     </div>
@@ -653,7 +958,6 @@
       
       <div class="component-item" onclick="createComponent('create-typography-specimen')">
         <div class="component-title">
-          <span class="component-icon">📖</span>
           Typography Specimen
         </div>
         <div class="component-description">Complete showcase of font families and typography scale</div>
@@ -670,7 +974,6 @@
       
       <div class="component-item" onclick="createComponent('create-color-palette')">
         <div class="component-title">
-          <span class="component-icon">🎨</span>
           Color Palette
         </div>
         <div class="component-description">Complete design system color swatches with hex values and usage guidelines</div>
@@ -694,7 +997,6 @@
       
       <div class="component-item" onclick="createComponent('create-accordion')">
         <div class="component-title">
-          <span class="component-icon">📋</span>
           Accordion
         </div>
         <div class="component-description">Collapsible content sections with expand/collapse functionality</div>
@@ -714,7 +1016,6 @@
 
       <div class="component-item" onclick="createComponent('create-dialog')">
         <div class="component-title">
-          <span class="component-icon">💬</span>
           Dialog
         </div>
         <div class="component-description">Modal window with overlay for confirmations and forms</div>
@@ -734,7 +1035,6 @@
 
       <div class="component-item" onclick="createComponent('create-tabs')">
         <div class="component-title">
-          <span class="component-icon">📑</span>
           Tabs
         </div>
         <div class="component-description">Tabbed navigation interface with content switching</div>
@@ -753,7 +1053,6 @@
 
       <div class="component-item" onclick="createComponent('create-dropdown')">
         <div class="component-title">
-          <span class="component-icon">⬇️</span>
           Dropdown Menu
         </div>
         <div class="component-description">Contextual menu with multiple selectable options</div>
@@ -761,9 +1060,9 @@
           <div class="example-dropdown">
             <div class="example-dropdown-trigger">Options ▼</div>
             <div class="example-dropdown-menu">
-              <div class="example-dropdown-item">⚡ Performance</div>
-              <div class="example-dropdown-item">✨ Luxury</div>
-              <div class="example-dropdown-item">🏎️ Sport</div>
+              <div class="example-dropdown-item">Performance</div>
+              <div class="example-dropdown-item">Luxury</div>
+              <div class="example-dropdown-item">Sport</div>
             </div>
           </div>
         </div>
@@ -772,7 +1071,6 @@
 
       <div class="component-item" onclick="createComponent('create-progress')">
         <div class="component-title">
-          <span class="component-icon">📊</span>
           Progress Bar
         </div>
         <div class="component-description">Loading indicator showing completion status</div>
@@ -790,7 +1088,6 @@
 
       <div class="component-item" onclick="createComponent('create-switch')">
         <div class="component-title">
-          <span class="component-icon">🔄</span>
           Switch
         </div>
         <div class="component-description">Toggle control for binary on/off states</div>
@@ -877,8 +1174,8 @@
       }
     });
     
-    console.log('🏠 House Design System UI loaded');
-    console.log('📊 Available components: Button, Input, Card, Badge, Alert, Typography Specimen');
+    console.log('House Design System UI loaded');
+    console.log('Available components: Button, Input, Card, Badge, Alert, Typography Specimen, Color Palette');
   </script>
 </body>
 </html>
