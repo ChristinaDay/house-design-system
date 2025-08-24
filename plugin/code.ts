@@ -60,19 +60,19 @@ const typographyScale = {
 const fontFamilies = {
   display: {
     name: "Display",
-    description: "Luxury, stylized text for hero content",
+    description: "Strong, architectural headings",
     fonts: [
-      { family: "Inter", style: "Bold" },               // Modern, strong
-      { family: "SF Pro Display", style: "Bold" },      // macOS system
-      { family: "Arial", style: "Bold" },               // Universal fallback
+      { family: "Microgramma D Extended", style: "Bold" },  // Swapped: Now Microgramma for display
+      { family: "Inter", style: "Extrabold" },              // Strong fallback
+      { family: "Arial", style: "Bold" },                   // Universal fallback
     ]
   },
   heading: {
     name: "Heading", 
-    description: "Strong, architectural headings",
+    description: "Luxury, stylized text for hero content",
     fonts: [
-      { family: "MicrogrammaEF Extend", style: "Medium" },  // Actual Microgramma
-      { family: "Inter", style: "Extrabold" },              // Strong fallback
+      { family: "Eurostile", style: "BoldItalic" },         // Swapped: Now Eurostile for headings
+      { family: "Inter", style: "Bold" },                   // Strong fallback
       { family: "Arial", style: "Bold" },                   // Universal fallback
     ]
   },
@@ -101,7 +101,7 @@ const spacing = {
   0: 0, px: 1, 0.5: 2, 1: 4, 1.5: 6, 2: 8, 2.5: 10, 3: 12, 3.5: 14,
   4: 16, 5: 20, 6: 24, 7: 28, 8: 32, 9: 36, 10: 40, 11: 44, 12: 48,
   14: 56, 16: 64, 20: 80, 24: 96, 28: 112, 32: 128, 36: 144, 40: 160,
-  44: 176, 48: 192, 52: 208, 56: 224, 60: 240, 64: 256, 72: 288, 80: 320, 96: 384
+  44: 176, 48: 192, 52: 208, 56: 224
 };
 
 // Border Radius - All values from tokens.css
@@ -151,20 +151,20 @@ async function loadSystemFonts(): Promise<void> {
   
   // Step 2: Load your custom House Design System fonts (matching exact file names)
   const customFonts = [
-    // Eurostile variants (Display) - Luxury automotive
-    { family: "Eurostile Extd", style: "Regular Italic" },
+    // Microgramma variants (Display) - Architectural strength
+    { family: "Microgramma D Extended", style: "Bold" },
+    { family: "Microgramma", style: "Regular" },
+    { family: "Microgramma", style: "Medium" },
+    { family: "Microgramma", style: "Bold" },
+    
+    // Eurostile variants (Heading) - Luxury automotive
+    { family: "Eurostile", style: "Regular Italic" },
     { family: "Eurostile", style: "Medium Italic" },
     { family: "Eurostile", style: "BoldItalic" },
     
-    // Microgramma variants (Heading) - Architectural strength  
-    { family: "Microgram DB", style: "Regular" },
-    { family: "MicrogrammaEF Extend", style: "Medium" },
-    { family: "MicrogrammaEF Extend", style: "Bold" },
-    
-    // Futura Std variants (UI) - Clean interface
-    { family: "Futura Std", style: "Book" },
-    { family: "Futura Std", style: "Medium" },
-    { family: "Futura Std", style: "Bold" },
+    // Futura variants (UI) - Clean interface
+    { family: "Futura", style: "Regular" },
+    { family: "Futura", style: "Medium" },
   ];
   
   let customFontsLoaded = 0;
@@ -196,7 +196,21 @@ async function applyFont(
   
   switch (fontType) {
     case "display":
-      // Use Eurostile for display text (luxury automotive)
+      // Use Microgramma for display text (architectural strength)
+      if (weight === "bold" || weight === "extrabold") {
+        customFontName = "Microgramma D Extended";
+        customStyle = "Bold";
+      } else if (weight === "medium" || weight === "semibold") {
+        customFontName = "Microgramma D Extended";
+        customStyle = "Bold";
+      } else {
+        customFontName = "Microgramma D Extended";
+        customStyle = "Bold";
+      }
+      break;
+      
+    case "heading":
+      // Use Eurostile variants for headings (luxury automotive)
       if (weight === "bold" || weight === "extrabold") {
         customFontName = "Eurostile";
         customStyle = "BoldItalic";
@@ -206,20 +220,6 @@ async function applyFont(
       } else {
         customFontName = "Eurostile Extd";
         customStyle = "Regular Italic";
-      }
-      break;
-      
-    case "heading":
-      // Use Microgramma variants for headings (architectural strength)
-      if (weight === "bold" || weight === "extrabold") {
-        customFontName = "MicrogrammaEF Extend";
-        customStyle = "Bold";
-      } else if (weight === "medium" || weight === "semibold") {
-        customFontName = "MicrogrammaEF Extend";
-        customStyle = "Medium";
-      } else {
-        customFontName = "Microgram DB";
-        customStyle = "Regular";
       }
       break;
       
@@ -236,16 +236,16 @@ async function applyFont(
       break;
       
     case "ui":
-      // Use Futura Std for UI text (clean interface)
+      // Use Futura for UI text (clean interface)
       if (weight === "bold" || weight === "extrabold") {
-        customFontName = "Futura Std";
-        customStyle = "Bold";
+        customFontName = "Futura";
+        customStyle = "Medium";
       } else if (weight === "medium" || weight === "semibold") {
-        customFontName = "Futura Std";
+        customFontName = "Futura";
         customStyle = "Medium";
       } else {
-        customFontName = "Futura Std";
-        customStyle = "Book";
+        customFontName = "Futura";
+        customStyle = "Regular";
       }
       break;
   }
@@ -1419,9 +1419,9 @@ async function createTypographySpecimen(): Promise<void> {
     
     // Display samples - all weights and sizes
     const displaySamples = [
-      { text: "Eurostile Bold Display", size: "4xl", weight: "bold" },
-      { text: "Eurostile Medium Display", size: "3xl", weight: "medium" },
-      { text: "Eurostile Regular Display", size: "2xl", weight: "normal" }
+              { text: "Microgramma Bold Display", size: "4xl", weight: "bold" },
+        { text: "Microgramma Medium Display", size: "3xl", weight: "medium" },
+        { text: "Microgramma Regular Display", size: "2xl", weight: "normal" }
     ];
     
     for (const sample of displaySamples) {
@@ -1429,6 +1429,7 @@ async function createTypographySpecimen(): Promise<void> {
       textElement.characters = sample.text;
       textElement.x = leftMargin;
       textElement.y = currentY;
+      textElement.textCase = "UPPER";
       
       await applyFont(textElement, "display", sample.weight as keyof typeof typographyScale.fontWeight);
       applyTypography(textElement, sample.size as keyof typeof typographyScale.fontSize, sample.weight as keyof typeof typographyScale.fontWeight, "tight", "normal");
@@ -1455,9 +1456,9 @@ async function createTypographySpecimen(): Promise<void> {
     
     // Heading samples
     const headingSamples = [
-      { text: "Microgramma Bold Heading", size: "2xl", weight: "bold" },
-      { text: "Microgramma Medium Heading", size: "xl", weight: "medium" },
-      { text: "Microgramma Regular Heading", size: "lg", weight: "normal" }
+              { text: "Eurostile Bold Heading", size: "2xl", weight: "bold" },
+        { text: "Eurostile Medium Heading", size: "xl", weight: "medium" },
+        { text: "Eurostile Regular Heading", size: "lg", weight: "normal" }
     ];
     
     for (const sample of headingSamples) {
@@ -1465,6 +1466,7 @@ async function createTypographySpecimen(): Promise<void> {
       textElement.characters = sample.text;
       textElement.x = leftMargin;
       textElement.y = currentY;
+      textElement.textCase = "UPPER";
       
       await applyFont(textElement, "heading", sample.weight as keyof typeof typographyScale.fontWeight);
       applyTypography(textElement, sample.size as keyof typeof typographyScale.fontSize, sample.weight as keyof typeof typographyScale.fontWeight, "normal", "normal");
@@ -1567,6 +1569,8 @@ async function createTypographySpecimen(): Promise<void> {
     
     // Typography scale samples showing all sizes
     const scaleSamples = [
+      { size: "6xl", label: "6XL • 56px" },
+      { size: "5xl", label: "5XL • 48px" },
       { size: "4xl", label: "4XL • 36px" },
       { size: "3xl", label: "3XL • 30px" },
       { size: "2xl", label: "2XL • 24px" },
@@ -1689,6 +1693,211 @@ async function createEditorialHeadline(): Promise<void> {
   }
 }
 
+async function createMainHeading(): Promise<void> {
+  console.log("🏠 Creating Main Heading Style Component...");
+  
+  try {
+    const heading = figma.createFrame();
+    heading.name = "Main Heading Style • House Design System";
+    heading.resize(600, 400);
+    heading.cornerRadius = 8;
+    heading.fills = [{ 
+      type: "SOLID", 
+      color: hexToRgb(colors.neutral[50]) 
+    }];
+    
+    // Add subtle border
+    heading.strokeWeight = 1;
+    heading.strokes = [{ 
+      type: "SOLID", 
+      color: hexToRgb(colors.neutral[200])
+    }];
+    
+    // Main heading text "HOUSE DESIGN"
+    const mainHeading = figma.createText();
+    mainHeading.characters = "HOUSE DESIGN";
+    mainHeading.x = 40;
+    mainHeading.y = 40;
+    mainHeading.textCase = "UPPER";
+    
+    await applyFont(mainHeading, "display", "extrabold");
+    applyTypography(mainHeading, "3xl", "extrabold", "none", "wider");
+    mainHeading.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[950]) }];
+    
+    // Add red and orange drop shadows to the left
+    mainHeading.effects = [
+      { type: "DROP_SHADOW", color: { r: 0.976, g: 0.455, b: 0.086, a: 1 }, offset: { x: -4, y: 0 }, radius: 0, visible: true, blendMode: "NORMAL" }, // Red-Orange (behind)
+      { type: "DROP_SHADOW", color: { r: 0.86, g: 0.15, b: 0.15, a: 1 }, offset: { x: -2, y: 0 }, radius: 0, visible: true, blendMode: "NORMAL" }  // Deep Red (on top)
+    ];
+    
+    heading.appendChild(mainHeading);
+    
+    // Sub heading text "SYSTEM" in black
+    const subHeading = figma.createText();
+    subHeading.characters = "SYSTEM";
+    subHeading.x = 40;
+    subHeading.y = 40 + typographyScale.fontSize["3xl"] + 2; // 2px below main heading
+    subHeading.textCase = "UPPER";
+    
+    // Use Eurostile Bold, 20pt, 1px letter spacing
+    subHeading.fontName = { family: "Eurostile", style: "BoldItalic" };
+    subHeading.fontSize = 20;
+    subHeading.letterSpacing = { value: 1, unit: "PIXELS" };
+    subHeading.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[950]) }];
+    
+    heading.appendChild(subHeading);
+    
+    // Create gradient underline for "SYSTEM"
+    const underline = figma.createRectangle();
+    underline.name = "System Underline";
+    underline.resize(subHeading.width, 3); // 3px height for the underline
+    underline.x = 40;
+    underline.y = 40 + typographyScale.fontSize["3xl"] + 2 + typographyScale.fontSize.xl + 4; // Position below text with 4px gap
+    
+    // Transparent to sky blue to royal blue gradient
+    underline.fills = [{
+      type: "GRADIENT_LINEAR",
+      gradientTransform: [
+        [1, 0, 0],
+        [0, 0, 0]
+      ],
+      gradientStops: [
+        { position: 0, color: { r: 0.12, g: 0.25, b: 0.67, a: 0 } }, // Transparent royal blue
+        { position: 0.5, color: { r: 0.055, g: 0.647, b: 0.914, a: 1 } }, // Sky blue
+        { position: 1, color: { r: 0.12, g: 0.25, b: 0.67, a: 1 } }  // Solid royal blue
+      ]
+    }];
+    
+    heading.appendChild(underline);
+    
+    // Second copy with blue/sky blue shadows and yellow-orange-red underline
+    const mainHeading2 = figma.createText();
+    mainHeading2.characters = "HOUSE DESIGN";
+    mainHeading2.x = 40;
+    mainHeading2.y = 40 + typographyScale.fontSize["3xl"] + 2 + typographyScale.fontSize.xl + 4 + 3 + 40; // Position below first underline with 40px gap
+    mainHeading2.textCase = "UPPER";
+    
+    await applyFont(mainHeading2, "display", "extrabold");
+    applyTypography(mainHeading2, "3xl", "extrabold", "none", "wider");
+    mainHeading2.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[950]) }];
+    
+    // Add blue and sky blue drop shadows to the left
+    mainHeading2.effects = [
+      { type: "DROP_SHADOW", color: { r: 0.055, g: 0.647, b: 0.914, a: 1 }, offset: { x: -4, y: 0 }, radius: 0, visible: true, blendMode: "NORMAL" }, // Sky Blue (behind)
+      { type: "DROP_SHADOW", color: { r: 0.12, g: 0.25, b: 0.67, a: 1 }, offset: { x: -2, y: 0 }, radius: 0, visible: true, blendMode: "NORMAL" }  // Royal Blue (on top)
+    ];
+    
+    heading.appendChild(mainHeading2);
+    
+    // Second sub heading text "SYSTEM" in black
+    const subHeading2 = figma.createText();
+    subHeading2.characters = "SYSTEM";
+    subHeading2.x = 40;
+    subHeading2.y = mainHeading2.y + typographyScale.fontSize["3xl"] + 2; // 2px below main heading
+    subHeading2.textCase = "UPPER";
+    
+    // Use Eurostile Bold, 20pt, 1px letter spacing
+    subHeading2.fontName = { family: "Eurostile", style: "BoldItalic" };
+    subHeading2.fontSize = 20;
+    subHeading2.letterSpacing = { value: 1, unit: "PIXELS" };
+    subHeading2.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[950]) }];
+    
+    heading.appendChild(subHeading2);
+    
+    // Create second gradient underline for "SYSTEM" - transparent to yellow to orange to red
+    const underline2 = figma.createRectangle();
+    underline2.name = "System Underline 2";
+    underline2.resize(subHeading2.width, 3); // 3px height for the underline
+    underline2.x = 40;
+    underline2.y = subHeading2.y + typographyScale.fontSize.xl + 4; // Position below text with 4px gap
+    
+    // Transparent to yellow to orange to red gradient
+    underline2.fills = [{
+      type: "GRADIENT_LINEAR",
+      gradientTransform: [
+        [1, 0, 0],
+        [0, 0, 0]
+      ],
+      gradientStops: [
+        { position: 0, color: { r: 0.984, g: 0.749, b: 0.141, a: 0 } }, // Transparent yellow
+        { position: 0.33, color: { r: 0.984, g: 0.749, b: 0.141, a: 1 } }, // Yellow
+        { position: 0.66, color: { r: 0.976, g: 0.455, b: 0.086, a: 1 } }, // Orange
+        { position: 1, color: { r: 0.86, g: 0.15, b: 0.15, a: 1 } }  // Red
+      ]
+    }];
+    
+    heading.appendChild(underline2);
+    
+    // Third copy with 42pt font and -3px letter spacing
+    const mainHeading3 = figma.createText();
+    mainHeading3.characters = "HOUSE DESIGN";
+    mainHeading3.x = 40;
+    mainHeading3.y = mainHeading2.y + 80; // Simple 80px gap below second version
+    mainHeading3.textCase = "UPPER";
+    
+    await applyFont(mainHeading3, "display", "extrabold");
+    mainHeading3.fontSize = 42; // 42pt font size
+    mainHeading3.letterSpacing = { value: -3, unit: "PIXELS" }; // -3px letter spacing
+    mainHeading3.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[950]) }];
+    
+    // No drop shadows - let the rainbow gradient be the star
+    mainHeading3.effects = [];
+    
+    heading.appendChild(mainHeading3);
+    
+    // Third sub heading text "SYSTEM" in black
+    const subHeading3 = figma.createText();
+    subHeading3.characters = "SYSTEM";
+    subHeading3.x = 40;
+    subHeading3.y = mainHeading2.y + 80 + typographyScale.fontSize["3xl"] + 2; // 2px below the letter group
+    subHeading3.textCase = "UPPER";
+    
+    // Use Eurostile Bold, 20pt, 1px letter spacing
+    subHeading3.fontName = { family: "Eurostile", style: "BoldItalic" };
+    subHeading3.fontSize = 20;
+    subHeading3.letterSpacing = { value: 1, unit: "PIXELS" };
+    subHeading3.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[950]) }];
+    
+    heading.appendChild(subHeading3);
+    
+    // Create third gradient underline for "SYSTEM" - rainbow that fades to transparent on left
+    const underline3 = figma.createRectangle();
+    underline3.name = "System Underline 3";
+    underline3.resize(subHeading3.width, 3); // 3px height for the underline
+    underline3.x = 40;
+    underline3.y = subHeading3.y + typographyScale.fontSize.xl + 4; // Position below text with 4px gap
+    
+    // Rainbow gradient that fades to transparent on the left
+    underline3.fills = [{
+      type: "GRADIENT_LINEAR",
+      gradientTransform: [
+        [1, 0, 0],
+        [0, 0, 0]
+      ],
+      gradientStops: [
+        { position: 0, color: { r: 1, g: 0, b: 0, a: 0 } },     // Transparent red
+        { position: 0.2, color: { r: 1, g: 0, b: 0, a: 1 } },    // Red (extended)
+        { position: 0.45, color: { r: 1, g: 0.5, b: 0, a: 1 } }, // Orange (more extended)
+        { position: 0.7, color: { r: 1, g: 1, b: 0, a: 1 } },    // Yellow (much more extended)
+        { position: 0.85, color: { r: 0, g: 1, b: 0, a: 1 } },   // Green (compressed by half)
+        { position: 0.925, color: { r: 0, g: 0, b: 1, a: 1 } },  // Blue (compressed by half)
+        { position: 1, color: { r: 0.5, g: 0, b: 1, a: 1 } }     // Purple (compressed by half)
+      ]
+    }];
+    
+    heading.appendChild(underline3);
+    
+    // Center the frame in the viewport
+    figma.viewport.scrollAndZoomIntoView([heading]);
+    
+    console.log("✅ Main heading style created successfully!");
+    
+  } catch (error) {
+    console.error("❌ Main heading error:", error);
+    figma.notify(`❌ Error creating main heading: ${error instanceof Error ? error.message : "Unknown error"}`);
+  }
+}
+
 // =============================================================================
 // PLUGIN INITIALIZATION & MESSAGE HANDLING
 // =============================================================================
@@ -1750,6 +1959,12 @@ figma.ui.onmessage = async (msg) => {
         figma.notify("Creating editorial headline...");
         await createEditorialHeadline();
         figma.notify("✅ Editorial headline created!");
+        break;
+        
+      case "create-main-heading":
+        figma.notify("Creating main heading style...");
+        await createMainHeading();
+        figma.notify("✅ Main heading style created!");
         break;
         
       case "create-accordion":

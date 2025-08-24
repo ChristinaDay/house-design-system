@@ -1,29 +1,5 @@
 /* Local Font Declarations */
 @font-face {
-  font-family: 'Eurostile';
-  src: url('/fonts/Eurostile-Regular-Italic.woff2') format('woff2');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Eurostile';
-  src: url('/fonts/Eurostile-Medium-Italic-webfont.woff2') format('woff2');
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Eurostile';
-  src: url('/fonts/Eurostile-Bold-Italic.woff2') format('woff2');
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
   font-family: 'Microgramma';
   src: url('/fonts/Microgramma-Regular.woff2') format('woff2');
   font-weight: 400;
@@ -44,6 +20,30 @@
   src: url('/fonts/Microgramma-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Eurostile';
+  src: url('/fonts/Eurostile-Regular-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Eurostile';
+  src: url('/fonts/Eurostile-Medium-Italic-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Eurostile';
+  src: url('/fonts/Eurostile-Bold-Italic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
   font-display: swap;
 }
 

@@ -194,13 +194,14 @@
     
     .header h1 {
       font-family: var(--font-display);
-      font-size: 24px;
+      font-size: 48px;
       font-weight: 800;
       margin: 0;
       color: var(--color-neutral-950);
       text-transform: uppercase;
       letter-spacing: 0.1em;
       line-height: 1.1;
+      text-shadow: -4px 0px 0px #1E40AF, -6px 0px 0px #0EA5E9, 4px 0px 0px #DC2626, 6px 0px 0px #F59E0B;
     }
     
     .header .subtitle {
@@ -871,6 +872,41 @@
       font-weight: 500;
     }
 
+    /* Main Heading Style Example */
+    .example-main-heading {
+      text-align: left;
+      width: 100%;
+      padding: 8px;
+      background: linear-gradient(135deg, var(--color-neutral-50) 0%, var(--color-neutral-100) 100%);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-neutral-200);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .example-main-heading-text {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--color-neutral-950);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      line-height: 1.1;
+      margin: 0 0 2px 0;
+      text-shadow: -2px 0px 0px #1E40AF, -3px 0px 0px #0EA5E9, 2px 0px 0px #DC2626, 3px 0px 0px #F59E0B;
+    }
+    
+    .example-main-heading-sub {
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-neutral-950);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+      margin: 0;
+    }
+
     .footer {
       margin-top: var(--spacing-8);
       padding: var(--spacing-6);
@@ -1041,6 +1077,20 @@
           </div>
         </div>
         <div class="component-meta">Eurostile • Microgramma • 80s Aesthetic</div>
+      </div>
+      
+      <div class="component-item" onclick="createComponent('create-main-heading')">
+        <div class="component-title">
+          Main Heading Style
+        </div>
+        <div class="component-description">Plugin header typography with quad-layered drop shadows and tight spacing</div>
+        <div class="component-example">
+          <div class="example-main-heading">
+            <div class="example-main-heading-text">HOUSE DESIGN</div>
+            <div class="example-main-heading-sub">SYSTEM</div>
+          </div>
+        </div>
+        <div class="component-meta">Quad Shadows • Tight Spacing • Premium Typography</div>
       </div>
       
       <div class="component-item" onclick="createComponent('create-color-palette')">
