@@ -1386,6 +1386,67 @@ async function createEditorialHeadline() {
         figma.notify(`❌ Error creating editorial headline: ${error instanceof Error ? error.message : "Unknown error"}`);
     }
 }
+async function createSystemDisplay() {
+    console.log("🔧 Creating System Display Component...");
+    try {
+        const systemDisplay = figma.createFrame();
+        systemDisplay.name = "System Display • House Design System";
+        systemDisplay.resize(600, 200);
+        systemDisplay.cornerRadius = radius.lg;
+        systemDisplay.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[0]) }];
+        // Add subtle border
+        systemDisplay.strokes = [{ type: "SOLID", color: hexToRgb(colors.neutral[200]) }];
+        systemDisplay.strokeWeight = 1;
+        // Create the "SYSTEM" subheading on top
+        const systemText = figma.createText();
+        systemText.characters = "SYSTEM";
+        systemText.x = spacing[6];
+        systemText.y = spacing[6];
+        await applyFont(systemText, "ui", "semibold");
+        applyTypography(systemText, "xs", "semibold", "normal", "wide");
+        systemText.fills = [{ type: "SOLID", color: hexToRgb(colors.brand[500]) }];
+        systemText.textCase = "UPPER";
+        systemDisplay.appendChild(systemText);
+        // Create the display heading below
+        const displayText = figma.createText();
+        displayText.characters = "DISPLAY";
+        displayText.x = spacing[6];
+        displayText.y = spacing[6] + 30; // Position below SYSTEM
+        await applyFont(displayText, "display", "extrabold");
+        applyTypography(displayText, "2xl", "extrabold", "tight", "wide");
+        displayText.fills = [{ type: "SOLID", color: hexToRgb(colors.neutral[900]) }];
+        displayText.textCase = "UPPER";
+        systemDisplay.appendChild(displayText);
+        // Add a subtle background accent bar on the left
+        const accentBar = figma.createRectangle();
+        accentBar.x = 0;
+        accentBar.y = 0;
+        accentBar.resize(4, systemDisplay.height);
+        accentBar.cornerRadius = 0;
+        accentBar.fills = [{
+                type: "GRADIENT_LINEAR",
+                gradientTransform: [
+                    [1, 0, 0],
+                    [0, 1, 0]
+                ],
+                gradientStops: [
+                    { position: 0, color: { ...hexToRgb(colors.brand[500]), a: 1 } },
+                    { position: 1, color: { ...hexToRgb(colors.accent[500]), a: 1 } }
+                ]
+            }];
+        systemDisplay.appendChild(accentBar);
+        // Position the component
+        systemDisplay.x = 100;
+        systemDisplay.y = 100;
+        figma.currentPage.appendChild(systemDisplay);
+        figma.viewport.scrollAndZoomIntoView([systemDisplay]);
+        console.log("✅ System Display component created");
+    }
+    catch (error) {
+        console.error("❌ Error creating system display:", error);
+        figma.notify("❌ Failed to create system display");
+    }
+}
 async function createMainHeading() {
     console.log("🏠 Creating Main Heading Style Component...");
     try {
@@ -1607,6 +1668,11 @@ figma.ui.onmessage = async (msg) => {
                 figma.notify("Creating editorial headline...");
                 await createEditorialHeadline();
                 figma.notify("✅ Editorial headline created!");
+                break;
+            case "create-system-display":
+                figma.notify("Creating system display...");
+                await createSystemDisplay();
+                figma.notify("✅ System display created!");
                 break;
             case "create-main-heading":
                 figma.notify("Creating main heading style...");

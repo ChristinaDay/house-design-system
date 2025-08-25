@@ -983,6 +983,41 @@
       font-weight: 500;
     }
 
+    /* System Display Example */
+    .example-system-display {
+      text-align: left;
+      width: 100%;
+      padding: 8px;
+      background: linear-gradient(135deg, var(--color-neutral-50) 0%, var(--color-neutral-100) 100%);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-neutral-200);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .example-system-text {
+      font-family: var(--font-ui);
+      font-size: 8px;
+      font-weight: 600;
+      color: var(--color-brand-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+      margin: 0 0 4px 0;
+      opacity: 0.8;
+    }
+    
+    .example-display-text {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--color-neutral-950);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      line-height: 1.1;
+      margin: 0;
+    }
+
     /* Main Heading Style Example */
     .example-main-heading {
       text-align: left;
@@ -1213,6 +1248,20 @@
           </div>
         </div>
         <div class="component-meta">Eurostile • Microgramma • 80s Aesthetic</div>
+      </div>
+      
+      <div class="component-item" onclick="createComponent('create-system-display')">
+        <div class="component-title">
+          System Display
+        </div>
+        <div class="component-description">System subheading above display font, perfect for section headers</div>
+        <div class="component-example">
+          <div class="example-system-display">
+            <div class="example-system-text">System</div>
+            <div class="example-display-text">DISPLAY</div>
+          </div>
+        </div>
+        <div class="component-meta">Typography • System • Hierarchy</div>
       </div>
       
       <div class="component-item" onclick="createComponent('create-main-heading')">
